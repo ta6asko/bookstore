@@ -8,6 +8,14 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
   end
 
+  def home
+    @books = Book.all
+  end
+
+  def shop
+    @books = Book.all
+  end
+
   def new
     @book = Book.new
   end

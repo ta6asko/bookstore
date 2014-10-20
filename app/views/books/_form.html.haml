@@ -1,29 +1,9 @@
-= form_for @book do |f|
-  .field
-    = f.label :title
-    %br 
-    = f.text_field :title
-  .field
-    = f.label :short_description
-    %br 
-    = f.text_area :short_description
-  .field
-    = f.label :full_description
-    %br 
-    = f.text_area :full_description
-  .field
-    = f.label :price
-    %br 
-    = f.text_field :price 
-  .actions
-    = f.submit
-
-
-
-
-
-
-
-
-
-
+.top
+  .name
+    The Bookstore
+  .loc
+    = link_to 'HOME', home_books_path 
+    |
+    = link_to 'SHOP', shop_books_path
+  .cart
+    CART:

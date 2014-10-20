@@ -1,9 +1,12 @@
--@books.each do |b|
-  %p
-    %strong
-      title
+= render "form"
+-@books.each do |book|
+  .book_show
+    = book.title
+    by
+    = book.author
     %br
-    = b.title
-    = link_to 'Show details', book_path(b)
-%p
-  = link_to 'Add book', new_book_path
+    = image_tag(book.image, size: "270x150", class: "cover")
+    = book.full_description
+    %br
+    $ #{book.price}
+    = link_to 'ADD TO CART', books_path
