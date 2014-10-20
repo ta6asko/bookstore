@@ -1,0 +1,23 @@
+%p
+  %strong
+    title
+  %br
+  = @book.title
+%p
+  %strong
+    short_description
+  %br
+  = @book.short_description
+%p
+  %strong
+    full_description
+  %br
+  = @book.full_description
+%p
+  %strong
+    price
+  %br
+  = @book.price
+= link_to 'Edit', edit_book_path(@book)
+= link_to 'Delete', books_path
+= link_to 'Back', books_path

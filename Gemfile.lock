@@ -232,7 +232,7 @@ DEPENDENCIES
   pg
   rails (= 4.1.6)
   rails-i18n (~> 4.0.0)
-  rails_admin (~> 0.6.5)
+  rails_admin
   rspec
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)

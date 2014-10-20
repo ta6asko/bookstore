@@ -1,0 +1,9 @@
+-@books.each do |b|
+  %p
+    %strong
+      title
+    %br
+    = b.title
+    = link_to 'Show details', book_path(b)
+%p
+  = link_to 'Add book', new_book_path

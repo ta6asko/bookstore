@@ -27,7 +27,7 @@ gem 'rails-i18n', '~> 4.0.0' # For 4.0.x
 gem 'spring',        group: :development
 gem 'omniauth'
 gem 'omniauth-facebook'
-gem 'rails_admin', '~> 0.6.5'
+gem 'rails_admin'
 gem "cancancan"
 gem 'kaminari'
 gem 'carrierwave'
