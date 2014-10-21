@@ -3,7 +3,7 @@ development:
   encoding: unicode
   database: bookstore_development
   pool: 5
-  username: user
+  username: postgres
   password: root
 
 test:
@@ -11,5 +11,5 @@ test:
   encoding: unicode
   database: bookstore_test
   pool: 5
-  username: user
+  username: postgres
   password: root

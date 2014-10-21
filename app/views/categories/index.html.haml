@@ -1,7 +1,4 @@
 .shop_content
-  -# .current_path
-  -#   = link_to 'home', books_path
-  -#   = link_to 'shop', categories_path
   -@books.each do |book|
     %ul
       %li 
@@ -15,5 +12,5 @@
     SHOP BY CATEGORIES
   -@categories.each do |category|
     = link_to "#{category.name}", categories_path
-  %br
+    %br
  
