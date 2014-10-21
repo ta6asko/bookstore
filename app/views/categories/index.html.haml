@@ -1,0 +1,19 @@
+.shop_content
+  -# .current_path
+  -#   = link_to 'home', books_path
+  -#   = link_to 'shop', categories_path
+  -@books.each do |book|
+    %ul
+      %li 
+        = image_tag(book.image, size: "270x150", class: "cover")
+        %br
+        = link_to "#{book.title}", books_path
+        %br
+        #{book.price}
+.shop_right_bar
+  %h3
+    SHOP BY CATEGORIES
+  -@categories.each do |category|
+    = link_to "#{category.name}", categories_path
+  %br
+ 
