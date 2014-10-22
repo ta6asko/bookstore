@@ -1,26 +1,22 @@
-.book_show
-  = @book.title
-  by
-  - book.authors.each do |author|
-    %strong
-      by #{author.first_name} #{author.last_name}
-    %br
-  = image_tag(@book.image, size: "270x150", class: "cover")
-  = @book.full_description
-  %br
-  = @book.price
-  = link_to 'ADD TO CART', books_path
-= render "welcome"
--# -@books.each do |book|
--#   .book_show
--#     = book.title
--#     by
--#     - book.authors.each do |author|
--#       %strong
--#         by #{author.first_name} #{author.last_name}
--#     %br
--#     = image_tag(book.image, size: "270x150", class: "cover")
--#     = book.full_description
--#     %br
--#     $ #{book.price}
--#     = link_to 'ADD TO CART', books_path
+.container-fluid
+  .row-fluid
+    %h2
+      = @book.title
+    .col-md-3
+      = image_tag(@book.image, size: "270x150", class: "cover")
+    .col-md-10
+      .row
+        .col-md-12
+          $ #{@books.price}
+        .col-md-12
+          $ #{@books.last.price}
+  -# by
+  -# - book.authors.each do |author|
+  -#   %strong
+  -#     by #{author.first_name} #{author.last_name}
+  -#   %br
+  -# 
+  -# = @book.full_description
+  -# %br
+  -# = @book.price
+  -# = link_to 'ADD TO CART', books_path
