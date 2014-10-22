@@ -14,3 +14,28 @@
  *= require_tree .
  *= require_self
  */
+
+#homeCarousel{
+  margin: 40px auto;
+  width: 800px;
+  padding: 0 70px;
+}
+.media-object {
+  padding-top: 5px;
+  padding-right: 15px;
+  padding-bottom: 10px;
+  float: left;
+}
+.category{
+  float: right;
+  width: 300px;
+}
+.shop{
+  width: 800px;
+}
+.shop_list{
+  width: 270px;
+}
+.cart_li{
+  padding-left: 50px;
+}

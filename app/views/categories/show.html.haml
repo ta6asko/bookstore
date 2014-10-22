@@ -1,8 +1,12 @@
 .container-fluid
+  %ol.breadcrumb
+    %li= link_to "HOME", books_path
+    %li= link_to "SHOP", categories_path
+    %li.active #{@category.name}
   .row-fluid
     .col-md-9
       %h2
-        shop
+        Categories - #{@category.name}
       .row
         - @books.each do |book|
           .col-md-5
