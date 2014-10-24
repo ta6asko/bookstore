@@ -6,7 +6,7 @@ class CreateBooks < ActiveRecord::Migration
 			t.text 		:full_description
       t.string  :image
 			t.float 	:price
- 
+      t.integer :category_id
       t.timestamps
     end
   end

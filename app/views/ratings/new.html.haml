@@ -7,11 +7,14 @@
   .row-fluid
     .col-md-12
       Rating:
-  .row-fluid
     .col-md-12
-      / = form_for @rating, url: book_ratings_path(@book) do |f|   
-      /   = f.label :text
-      /     = f.text_area :text
-      /     = f.submit 'ADD', class: "btn btn-default"
-      /     or
-      /     = link_to "Cancel", book_path(@book)
+      = form_for :rating do |f|
+        .col-md-12
+          Text review:
+        .col-md-12
+          = f.text_area :comment, class: "comment_text_field"
+        .col-md-12
+          = f.submit 'ADD', class: "btn btn-default"
+          or
+          = link_to "Cancel", book_path(@book), class: "btn btn-default"
+    

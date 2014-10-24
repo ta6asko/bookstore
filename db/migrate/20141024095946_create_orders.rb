@@ -5,6 +5,7 @@ class CreateOrders < ActiveRecord::Migration
       t.string    :in_queue
       t.string    :in_delivery
       t.string    :delivered
+      t.integer   :user_id
       t.timestamps
     end
   end

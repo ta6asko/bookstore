@@ -39,3 +39,8 @@
 .cart_li{
   padding-left: 50px;
 }
+.comment_text_field{
+  height: 150px;
+  width: 700px;
+  resize: none;
+}
