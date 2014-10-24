@@ -1,0 +1,26 @@
+.container-fluid
+  .row-fluid
+    .col-md-3
+    .col-md-3
+    .col-md-3
+      BOOK
+    .col-md-1
+      PRICE
+    .col-md-1
+      QTY
+    .col-md-1
+      TOTAL
+  .row-fluid
+    - @books.each do |book|
+      .col-md-12
+        .col-md-3
+          = image_tag(book.image, size: "100x100")
+        .col-md-6
+          .col-md-9
+            book.title
+        .col-md-1
+          $ #{book.price}
+        .col-md-1
+          / = number_field(:books_count, :count, in: 1..10, step: 1)
+        .col-md-1
+          / $ #{order.sum_price}
