@@ -10,7 +10,7 @@ class Book < ActiveRecord::Base
   belongs_to :rating
 
   validates :price, numericality: { greater_then: 0, allow_nil: true }
-  validates :title, :short_description, :full_description, presence: true 
-
+  validates :title, :short_description, :full_description, :author, :image, presence: true 
+  validates :title, uniqueness: true
   mount_uploader :image, AvatarUploader
 end

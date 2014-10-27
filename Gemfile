@@ -32,10 +32,7 @@ gem "cancancan"
 gem 'kaminari'
 gem 'carrierwave'
 gem 'mini_magick'
-gem 'rspec'
-gem 'capybara'
-gem 'shoulda-matchers'
-gem 'database_cleaner'
+
 gem "therubyracer"
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
@@ -51,3 +48,19 @@ gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootst
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'shoulda-matchers'
+  gem 'faker'
+  gem 'database_cleaner'
+end
+
+# group :development, :test do
+#   gem 'rspec-rails', '~> 3.0.0'
+#   gem 'capybara'
+#   gem 'shoulda-matchers'
+#   gem 'factory_girl_rails'
+#   gem 'database_cleaner'
+# end
