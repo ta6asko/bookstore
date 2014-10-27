@@ -7,12 +7,15 @@ Rails.application.routes.draw do
     resources :ratings
   end
   resources :categories
-  resources :cart
-
-  
-  
-  
-  
+  resources :carts
+  resources :orders do
+    collection do
+      get 'delivery'
+      get 'payment'
+      get 'confirm'
+      get 'complete'
+    end
+  end
 
   root 'books#index'
 

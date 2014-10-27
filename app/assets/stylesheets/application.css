@@ -44,3 +44,9 @@
   width: 700px;
   resize: none;
 }
+.dashed_line{
+  border-bottom-style: dashed;
+}
+.margin_top{
+  margin-top: 10px;
+}

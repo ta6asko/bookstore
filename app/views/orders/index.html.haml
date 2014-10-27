@@ -1,0 +1,38 @@
+.container
+  .row
+    .col-md-3
+      %h3
+        checkout
+    .col-md-9
+      %h4
+        %u
+          ADDRESS
+        DELIVERY
+        PAYMENT
+        CONFIRM
+        COMPLETE
+  .row
+    %h4
+      .col-md-4
+        BILLING ADDRESS
+      .col-md-4
+        SHIPPING ADDRESS
+      .col-md-4
+        ORDER SUMMARY
+  .row
+    .col-md-4.margin_top
+      -# = form_for  do |f| 
+      -#   %p= f.text_field :first_name, placeholder: "First name"
+      -#   %p= f.text_field :last_name, placeholder: "Last name"
+      -#   %p= f.text_field :address, placeholder: "Street Address"
+      -#   %p= f.text_field :city, placeholder: "City"
+      -#   %p= f.collection_select 
+      -#   %p= f.text_field :zip_code, placeholder: "Zip"
+      -#   %p= f.telephone_field :phone, placeholder: "Phone"
+      -#   %p= f.submit 'SAVE AND CONTINUE', class: "btn btn-default"
+    .col-md-4.margin_top
+      = check_box_tag ''
+      Use Billing Address
+    .col-md-4.margin_top
+      %p ITEM TOTAL: $sum
+      %p ITEM TOTAL: $sum
