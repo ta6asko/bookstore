@@ -1,4 +1,7 @@
 class LineItemsController < ApplicationController
+  include CurrentCart
+
+  before_action :set_cart, only: [:create]
   before_action :set_line_item, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -19,9 +22,18 @@ class LineItemsController < ApplicationController
   end
 
   def create
-    @line_item = LineItem.new(line_item_params)
-    @line_item.save
-    respond_with(@line_item)
+    book = Book.find(params[:book_id])
+    @line_item = @cart.line_items.build(book: book)
+    respond_to do |format|
+
+      if @line_item.save
+        format.html { redirect_to carts_path, notice: 'Line item was successfully created.' }
+        format.json { render action: 'index', status: :created, location: @line_item }
+      else
+        format.html { render action: 'new' }
+        format.json { render json: @line_item.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def update
