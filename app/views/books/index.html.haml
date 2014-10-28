@@ -10,7 +10,7 @@
           = image_tag(@books.last.image, size: "200x150", class: "media-object")
           %p= @books.last.full_description
           %h4
-            $ #{@books.last.price}
+            #{number_to_currency(@books.last.price)}
     - @books.each do |book|
       .item
         %h3.media-heading= book.title
@@ -21,6 +21,6 @@
           = image_tag(book.image, size: "200x150", class: "media-object")
           %p= book.full_description
           %h4
-            $ #{book.price}
+            #{number_to_currency(book.price)}
   %a.carousel-control.left{"data-slide" => "prev", href: "#carousel"} ‹
   %a.carousel-control.right{"data-slide" => "next", href: "#carousel"} ›

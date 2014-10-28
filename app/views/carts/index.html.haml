@@ -19,7 +19,7 @@
           .col-md-9
             book.title
         .col-md-1
-          $ #{book.price}
+          #{number_to_currency(book.price)}
         .col-md-1
           -# = f.text_field :quantity, value: 1, class: ""
           / = number_field(:books_count, :count, in: 1..10, step: 1)

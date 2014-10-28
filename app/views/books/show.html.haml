@@ -8,7 +8,7 @@
       .col-md-9
         .col-md-3
           %h4
-            $ #{@book.price}
+            #{number_to_currency(@book.price)}
         .col-md-3
           / = form_for @, url: books_path, html: {} do |f|
           /   = f.text_field :, value: 1, class: ""
