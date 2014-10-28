@@ -32,10 +32,19 @@
           %ul.nav.navbar-nav
             %li= link_to "HOME", books_path
             %li= link_to "SHOP", categories_path
-        .col-md-3
+        .col-md-2
           %ul.nav.navbar-nav
             %li.cart_li= link_to "CART", carts_path
-        .col-md-3
+        .col-md-4
+          - if user_signed_in?
+            %ul.nav.navbar-nav
+              %li= link_to 'Settings', edit_user_registration_path
+              %li= link_to 'Orders', edit_user_registration_path
+              %li= link_to 'Sing out', destroy_user_session_path, :method => :delete
+          - else
+            %ul.nav.navbar-nav
+              %li= link_to 'Sing in', new_user_session_path
+              %li= link_to 'Sing up', new_user_registration_path
     .container
       = bootstrap_flash
       = yield

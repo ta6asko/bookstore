@@ -4,11 +4,12 @@
       %h3
         shop
       .row
-        .col-md-3
+        .col-md-9
           - @books.each do |book|
-            = image_tag(book.image, size: "270x150")
-            %p.book_title= link_to book.title, book_path(book) 
-            %p.book_price $ #{book.price} 
+            .col-md-4
+              = image_tag(book.image, size: "150x100")
+              %p.book_title= link_to book.title, book_path(book) 
+              %p.book_price $ #{book.price} 
     .col-md-3
       %h2  
         Categories

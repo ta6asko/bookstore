@@ -1,56 +1,26 @@
-.book_show
-  = @books.last.title
-  by
-  - @books.last.authors.each do |author|
-    %strong
-      by #{author.first_name} #{author.last_name}
-  %br
-  = image_tag(@books.last.image, size: "270x150", class: "cover")
-  = @books.last.full_description
-  %br
-  $ #{@books.last.price}
-  = link_to 'ADD TO CART', books_path
-
--# #homeCarousel.carousel.slide{"data-ride" => "carousel"}
--#   .carousel-inner
--#     .item.active
--#       %h3.media-heading= @books.last.title
--#       - @books.last.authors.each do |author|
--#         %strong
--#           by #{author.first_name} #{author.last_name}
--#       .media-body
--#         = image_tag(@books.last.image, size: "200x150", class: "media-object")
--#         %p= @books.last.short_description
--#         %h4
--#           $ #{@books.last.price}
--#     - @books.each do |book|
--#     .item
--#       %h3.media-heading= book.title
--#       - book.authors.each do |author|
--#         %strong
--#           by #{author.first_name} #{author.last_name}
--#       .media-body
--#         = image_tag(book.image, size: "200x150", class: "media-object")
--#         %p= book.short_description
--#         %h4
--#           $ #{book.price}
--#   %a.left.carousel-control{:href => "#slide-images", :data => {:slide => "prev"}}
--#     %span.glyphicon.glyphicon-chevron-left
--#   %a.right.carousel-control{:href => "#slide-images", :data => {:slide => "next"}}
--#     %span.glyphicon.glyphicon-chevron-right
--# -#   %ol
--# -#     %li.active{:data => {:target => "slide-images", :slide_to => "0"}}
--#     %li{:data => {:target => "slide-images", :slide_to => "1"}}
--#     %li{:data => {:target => "slide-images", :slid1_to => "2"}}
--#   .carousel-inner
--#     .item.active
--#       %img{:src => "@path slider1.jpg", :alt => ""}/
--#     .item
--#       %img{:src => "@path slider2.jpg", :alt => ""}/
--#     .item
--#       %img{:src => "@path slider3.jpg", :alt => ""}/
--#     .item
--#       %img{:src => "@path slider4.jpg", :alt => ""}/
--#     .item
--#       %img{:src => "@path slider5.jpg", :alt => ""}/
--#   
+#carousel.carousel.slide
+  .carousel-inner
+    .active.item
+      .media
+        %h3.media-heading= @books.last.title
+        - @books.last.authors.each do |author|
+          %strong
+            by #{author.first_name} #{author.last_name}
+        .media-body
+          = image_tag(@books.last.image, size: "200x150", class: "media-object")
+          %p= @books.last.full_description
+          %h4
+            $ #{@books.last.price}
+    - @books.each do |book|
+      .item
+        %h3.media-heading= book.title
+        - book.authors.each do |author|
+          %strong
+            by #{author.first_name} #{author.last_name}
+        .media-body
+          = image_tag(book.image, size: "200x150", class: "media-object")
+          %p= book.full_description
+          %h4
+            $ #{book.price}
+  %a.carousel-control.left{"data-slide" => "prev", href: "#carousel"} ‹
+  %a.carousel-control.right{"data-slide" => "next", href: "#carousel"} ›

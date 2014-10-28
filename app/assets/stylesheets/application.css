@@ -50,3 +50,23 @@
 .margin_top{
   margin-top: 10px;
 }
+.mail{
+  width: 50px;
+}
+
+.carousel_control{
+   padding-bottom: 50px;
+   @extend .carousel-control
+}
+
+
+
+#carousel{
+  width: 900px;
+  margin: 40px auto;
+  padding: 0 70px;
+}
+.book_list{
+  margin-left: 20px;
+  @extend .col-md-3
+}

@@ -31,9 +31,11 @@ gem 'rails_admin'
 gem "cancancan"
 gem 'kaminari'
 gem 'carrierwave'
+gem 'bootstrap-slider-rails'
 gem 'mini_magick'
-
+gem 'foundation-rails'
 gem "therubyracer"
+gem 'bootstrap-sass'
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 # Use ActiveModel has_secure_password
