@@ -11,6 +11,7 @@ class BillingAddressesController < ApplicationController
   end
 
   def new
+     @cart = Cart.find(session[:cart_id])
     @billing_address = BillingAddress.new
   end
 
