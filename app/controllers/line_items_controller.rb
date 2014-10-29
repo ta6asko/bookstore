@@ -23,12 +23,12 @@ class LineItemsController < ApplicationController
 
   def create
     book = Book.find(params[:book_id])
-    @line_item = @cart.line_items.build(book: book)
+    @line_item = @cart.add_book(book.id)
     respond_to do |format|
 
       if @line_item.save
-        format.html { redirect_to carts_path, notice: 'Line item was successfully created.' }
-        format.json { render action: 'index', status: :created, location: @line_item }
+        format.html { redirect_to @line_item.cart }
+        format.json { render action: 'show', status: :created, location: @line_item }
       else
         format.html { render action: 'new' }
         format.json { render json: @line_item.errors, status: :unprocessable_entity }
@@ -52,6 +52,6 @@ class LineItemsController < ApplicationController
     end
 
     def line_item_params
-      params.require(:line_item).permit(:book_id, :cart_id)
+      params.require(:line_item).permit(:book_id)
     end
 end

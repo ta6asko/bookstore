@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141028151743) do
+ActiveRecord::Schema.define(version: 20141029144823) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,18 @@ ActiveRecord::Schema.define(version: 20141028151743) do
   create_table "authors_books", id: false, force: true do |t|
     t.integer "book_id",   null: false
     t.integer "author_id", null: false
+  end
+
+  create_table "billing_addresses", force: true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "street_address"
+    t.string   "city"
+    t.string   "country"
+    t.string   "zip"
+    t.string   "phone"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "books", force: true do |t|
@@ -57,22 +69,31 @@ ActiveRecord::Schema.define(version: 20141028151743) do
     t.datetime "updated_at"
   end
 
+  create_table "deliveries", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "line_items", force: true do |t|
     t.integer  "book_id"
     t.integer  "cart_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "quantity",   default: 1
+    t.integer  "order_id"
   end
 
   add_index "line_items", ["book_id"], name: "index_line_items_on_book_id", using: :btree
   add_index "line_items", ["cart_id"], name: "index_line_items_on_cart_id", using: :btree
+  add_index "line_items", ["order_id"], name: "index_line_items_on_order_id", using: :btree
 
   create_table "orders", force: true do |t|
-    t.string   "in_progress"
-    t.string   "in_queue"
-    t.string   "in_delivery"
-    t.string   "delivered"
-    t.integer  "user_id"
+    t.integer  "number"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "payments", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -90,6 +111,18 @@ ActiveRecord::Schema.define(version: 20141028151743) do
     t.integer  "book_id"
     t.string   "title"
     t.text     "comment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "shipping_addresses", force: true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "street_address"
+    t.string   "city"
+    t.string   "country"
+    t.string   "zip"
+    t.string   "phone"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

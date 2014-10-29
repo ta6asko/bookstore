@@ -1,6 +1,16 @@
 Rails.application.routes.draw do
   
 
+  resources :payments
+
+  resources :deliveries
+
+  resources :shipping_addresses
+
+  resources :billing_addresses
+
+  resources :addresses
+
   resources :line_items
 
   devise_for :users

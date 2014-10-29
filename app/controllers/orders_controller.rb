@@ -1,5 +1,7 @@
 class OrdersController < ApplicationController
+  include CurrentCart
   before_filter :authenticate_user!, except => [:show, :index]
+  before_action :set_cart, only: [:index, :new, :create]
   def index
 
   end

@@ -1,0 +1,49 @@
+.container
+  .row
+    .col-md-3
+    .col-md-3
+    .col-md-3
+      BOOK
+    .col-md-1
+      PRICE
+    .col-md-1
+      QTY
+    .col-md-1
+      TOTAL
+  .row
+    %ul
+      - @cart.line_items.each do |order| 
+        %li
+        %li.col-md-12.margin_top
+          .col-md-3
+            = image_tag(order.book.image, size: "100x100")
+          .col-md-6
+            .col-md-12
+              %h4
+                = order.book.title
+            .col-md-12
+              = order.book.full_description.first(200)
+          .col-md-1
+            #{number_to_currency(order.book.price)}
+          .col-md-1
+            = order.quantity
+          .col-md-1
+            #{number_to_currency(order.total_price)}
+  .row.margin_top
+    .col-md-12.dashed_line
+    .col-md-12.margin_top
+      .col-md-9
+      .col-md-3
+        SUBTOTAL:
+        #{number_to_currency(@cart.total_price)}
+    .col-md-12.margin_top
+      .col-md-1
+      .col-md-6
+        = button_to 'EMPTY CART', @cart, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default"
+        = link_to 'CONTINUE SHOPPING', categories_path, class: "btn btn-default"
+      
+      .col-md-1
+        -# = f.text_field :quantity, value: 1, class: ""
+      .col-md-4
+        = link_to 'UPDATE', carts_path, class: "btn btn-default"
+        = button_to "CHECKOUT", billing_address_path(@cart.total_price), class: "btn btn-default"
