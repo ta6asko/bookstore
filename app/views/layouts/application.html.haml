@@ -34,7 +34,7 @@
             %li= link_to "SHOP", categories_path
         .col-md-2
           %ul.nav.navbar-nav
-            %li.cart_li= link_to "CART", carts_path
+            %li.cart_li= link_to "CART", cart_path(session[:cart_id])
         .col-md-4
           - if user_signed_in?
             %ul.nav.navbar-nav
