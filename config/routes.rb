@@ -19,7 +19,11 @@ Rails.application.routes.draw do
     resources :ratings
   end
   resources :categories
-  resources :carts
+  resources :carts do
+    collection do
+      get 'set_cart_to_user'
+    end
+  end
   resources :orders do
     collection do
       get 'delivery'

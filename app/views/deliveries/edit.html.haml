@@ -1,7 +1,26 @@
-%h1 Editing delivery
-
-= render 'form'
-
-= link_to 'Show', @delivery
-\|
-= link_to 'Back', deliveries_path
+.container
+  .row
+    .col-md-3
+      %h3
+        Checkout
+    .col-md-9
+      %h4
+        = link_to 'ADDRESS', edit_billing_address_path(session[:cart_id])    
+        %u
+          DELIVERY
+        PAYMENT
+        CONFIRM
+        COMPLETE
+  .row
+    %h4
+      .col-md-8
+        SHIPPING ADDRESS
+      .col-md-4
+        ORDER SUMMARY
+  .row
+    .col-md-8.margin_top
+      = button_to 'SAVE AND CONTINUE', new_payment_path, method: :get, class: "btn btn-default"
+    .col-md-4.margin_top
+      %p ITEM TOTAL: #{number_to_currency(@cart.total_price)}
+      %p SIPPING: #{number_to_currency(@cart.total_price)}
+      %p ORDER TOTAL: #{number_to_currency(@cart.total_price)}

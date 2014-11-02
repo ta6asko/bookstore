@@ -3,35 +3,36 @@ class DeliveriesController < ApplicationController
 
   def index
     @deliveries = Delivery.all
-    respond_with(@deliveries)
+
   end
 
   def show
-    respond_with(@delivery)
+
   end
 
   def new
-    @delivery = Delivery.new
-    respond_with(@delivery)
+    @order = Order.new
+    @deliveries = Delivery.all
+    @cart = Cart.find(session[:cart_id])
   end
 
   def edit
+    @cart = Cart.find(session[:cart_id])
   end
 
   def create
-    @delivery = Delivery.new(delivery_params)
-    @delivery.save
-    respond_with(@delivery)
+    @order = Order.new
+    @order.update(order_params)
+    redirect_to new_payment_path
   end
 
   def update
     @delivery.update(delivery_params)
-    respond_with(@delivery)
   end
 
   def destroy
     @delivery.destroy
-    respond_with(@delivery)
+ 
   end
 
   private
@@ -42,4 +43,8 @@ class DeliveriesController < ApplicationController
     def delivery_params
       params[:delivery]
     end
+
+  def order_params
+    params.require(:order).permit(:delivery_id)
+  end
 end

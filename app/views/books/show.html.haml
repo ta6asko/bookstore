@@ -1,32 +1,25 @@
-.container-fluid
-  .row-fluid
-    %h2
-      = @book.title
-    .col-md-3
-      = image_tag(@book.image, size: "270x150", class: "cover")
-    .col-md-9
-      .col-md-9
-        .col-md-3
-          %h4
-            #{number_to_currency(@book.price)}
-        .col-md-3
-          = button_to 'Add to Cart', line_items_path(book_id: @book), class: "btn btn-default"
-      .col-md-9
-        = @book.full_description
-  .row-fluid
+.container
+  .row
     .col-md-12
-      Reviews
-      = link_to 'Add review for this book', new_book_rating_path(@book)
-  .row-fluid
-    .col-md-4
-      stars
-    .col-md-4
-      comment_title
-    .col-md-4
-      comment_date
-  .row-fluid
+      %h2
+        = @book.title
+    .row
+      .col-md-12
+        .col-md-4
+          = image_tag(@book.image, size: "330x250", class: "cover")
+        .col-md-8
+          .row
+            .col-md-7
+              %h4
+                #{number_to_currency(@book.price)}
+            .col-md-1
+              = button_to 'Add to Cart', line_items_path(book_id: @book), class: "btn btn-default"
+        .col-md-6
+          = @book.full_description.first(500) + '...'
+  .row
     .col-md-12
-      BY comment_author
-  .row-fluid
-    .col-md-12
-      comment
+      .margin_top_20
+        %h4
+          Reviews
+          = link_to 'Add review for this book', new_book_rating_path(@book)
+          

@@ -1,22 +1,23 @@
-.container-fluid
-  %ol.breadcrumb
-    %li= link_to "HOME", books_path
-    %li= link_to "SHOP", categories_path
-    %li.active #{@category.name}
-  .row-fluid
+.container
+  .row
     .col-md-9
-      %h2
+      %ol.breadcrumb
+        %li= link_to "HOME", books_path
+        %li= link_to "SHOP", categories_path
+        %li.active #{@category.name}
+      %h3
         Categories - #{@category.name}
       .row
-        .col-md-9
-          - @books.each do |book|
-            .col-md-4
-              = image_tag(book.image, size: "150x100")
-              %p.book_title= link_to book.title, book_path(book) 
-              %p.book_price #{number_to_currency(book.price)} 
+        .row
+          %ul
+            - @books.each do |book| 
+              %li.li_shop
+                = image_tag(book.image, size: "150x100")
+                %p.book_title= link_to book.title, book_path(book) 
+                %p.book_price #{number_to_currency(book.price)} 
     .col-md-3
-      %h2  
-        Categories
+      %h4  
+        SHOP BY CATEGORIES
       %ul
         - @categories.each do |category|
           %li

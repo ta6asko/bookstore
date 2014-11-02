@@ -1,5 +1,5 @@
 class BillingAddressesController < ApplicationController
-  before_action :set_billing_address, only: [:show, :edit, :update, :destroy]
+  before_action :check_auth
 
   def index
     @billing_addresses = BillingAddress.all
@@ -11,16 +11,29 @@ class BillingAddressesController < ApplicationController
   end
 
   def new
-     @cart = Cart.find(session[:cart_id])
+    @cart = Cart.find(session[:cart_id])
     @billing_address = BillingAddress.new
+    @shipping_address = ShippingAddress.new
   end
 
   def edit
+    @cart = Cart.find(session[:cart_id])
+    @billing_address = BillingAddress.new
+    @delivery.update(billing_address_params)
   end
 
   def create
-    @billing_address = BillingAddress.new(billing_address_params)
-    @billing_address.save
+    @billing_address = BillingAddress.create(billing_address_params)
+    if @billing_address.save
+      if @billing_address.shipping == true
+        @shipping_address = ShippingAddress.create(shipping_address_params)
+        redirect_to new_delivery_path
+      else
+        redirect_to new_shipping_address_path
+      end
+    else
+      render 'new'
+    end 
   end
 
   def update
@@ -29,7 +42,12 @@ class BillingAddressesController < ApplicationController
 
   def destroy
     @billing_address.destroy
-    respond_with(@billing_address)
+  end
+
+  def check_auth
+    unless user_signed_in?
+      redirect_to new_user_registration_path
+    end
   end
 
   private
@@ -38,6 +56,9 @@ class BillingAddressesController < ApplicationController
     end
 
     def billing_address_params
-      params[:billing_address]
+      params[:billing_address].permit(:first_name, :last_name, :street_address, :city, :country_id, :zip, :phone, :shipping)
+    end
+    def shipping_address_params
+      params[:billing_address].permit(:first_name, :last_name, :street_address, :city, :country_id, :zip, :phone)
     end
 end

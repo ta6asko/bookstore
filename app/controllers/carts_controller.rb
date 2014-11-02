@@ -17,10 +17,17 @@ class CartsController < ApplicationController
     @cart = Cart.find(session[:cart_id])
     @cart.destroy if @cart.id == session[:cart_id]
     session[:cart_id] = nil
-    respond_to do |format|
-      format.html { redirect_to categories_path,
-      notice: 'Теперь ваша корзина пуста!' }
-      format.json { head :no_content }
+    redirect_to categories_path,
+    notice: 'Теперь ваша корзина пуста!' 
+  end
+
+  def set_cart_to_user
+    @cart = Cart.find(session[:cart_id])
+    if @cart.id == session[:cart_id]
+      render action: 'show'
+    else
+      @cart.id = session[:cart_id]
+      render action: 'show' 
     end
   end
 

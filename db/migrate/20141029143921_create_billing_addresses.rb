@@ -5,9 +5,10 @@ class CreateBillingAddresses < ActiveRecord::Migration
       t.string :last_name
       t.string :street_address
       t.string :city
-      t.string :country
+      t.string :country_id
       t.string :zip
       t.string :phone
+      t.boolean :shipping
       t.timestamps
     end
   end

@@ -46,9 +46,24 @@
 }
 .dashed_line{
   border-bottom-style: dashed;
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-bottom: 10px;
 }
 .margin_top{
   margin-top: 10px;
+}
+.margin_top_5{
+  margin-top: 5px;
+}
+.margin_bot_10{
+  margin-bottom: 10px;
+}
+.in_line{
+  display: inline-block;
+}
+.float_r{
+  float: right;
 }
 .mail{
   width: 50px;
@@ -69,4 +84,19 @@
 .book_list{
   margin-left: 20px;
   @extend .col-md-3
+}
+li {
+  list-style-type: none;
+}
+.li_shop {
+  width: 270px;
+  height: 200px;
+  float: left;
+}
+.margin_top_20{
+  margin-top: 20px; 
+
+}
+.padding{
+  padding: 20px;
 }

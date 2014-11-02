@@ -1,49 +1,41 @@
 .container
   .row
-    .col-md-3
-    .col-md-3
-    .col-md-3
-      BOOK
-    .col-md-1
-      PRICE
-    .col-md-1
-      QTY
-    .col-md-1
-      TOTAL
-  .row
-    %ul
-      - @cart.line_items.each do |order| 
-        %li
-        %li.col-md-12.margin_top
-          .col-md-3
-            = image_tag(order.book.image, size: "100x100")
-          .col-md-6
-            .col-md-12
+    .col-md-12
+      .col-md-9
+        BOOK
+      .col-md-1
+        PRICE
+      .col-md-1
+        QTY
+      .col-md-1
+        TOTAL
+    .row
+      .col-md-12.margin_top_10
+        - @cart.line_items.each do |order| 
+          .col-md-12.margin_bot_10
+            .col-md-2
+              = image_tag(order.book.image, size: "150x100")
+            .col-md-7
               %h4
                 = order.book.title
-            .col-md-12
-              = order.book.full_description.first(200)
-          .col-md-1
-            #{number_to_currency(order.book.price)}
-          .col-md-1
-            = order.quantity
-          .col-md-1
-            #{number_to_currency(order.total_price)}
-  .row.margin_top
-    .col-md-12.dashed_line
-    .col-md-12.margin_top
-      .col-md-9
-      .col-md-3
-        SUBTOTAL:
-        #{number_to_currency(@cart.total_price)}
-    .col-md-12.margin_top
-      .col-md-1
-      .col-md-6
-        = button_to 'EMPTY CART', @cart, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default"
-        = link_to 'CONTINUE SHOPPING', categories_path, class: "btn btn-default"
-      
-      .col-md-1
-        -# = f.text_field :quantity, value: 1, class: ""
-      .col-md-4
-        = link_to 'UPDATE', carts_path, class: "btn btn-default"
-        = button_to "CHECKOUT", new_billing_address_path, method: :get, class: "btn btn-default"
+              = order.book.full_description.first(200) + '...'
+            .col-md-1
+              #{number_to_currency(order.book.price)}
+            .col-md-1
+              = order.quantity
+            .col-md-1
+              #{number_to_currency(order.total_price)}          
+      .col-md-12
+        .dashed_line.margin_top_20
+        .col-md-12.margin_top_5
+          .col-md-10
+          .col-md-2
+            SUBTOTAL:
+            #{number_to_currency(@cart.total_price)}
+        .col-md-12.margin_top_20
+          .col-md-9
+            .in_line= button_to 'EMPTY CART', @cart, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default"
+            .in_line= button_to 'CONTINUE SHOPPING', new_billing_address_path, method: :get, class: "btn btn-default"
+          .col-md-3
+            .in_line= button_to 'UPDATE', new_billing_address_path, method: :get, class: "btn btn-default"
+            .in_line= button_to "CHECKOUT", new_billing_address_path, method: :get, class: "btn btn-default"

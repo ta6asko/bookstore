@@ -1,45 +1,27 @@
 class PaymentsController < ApplicationController
-  before_action :set_payment, only: [:show, :edit, :update, :destroy]
-
-  def index
-    @payments = Payment.all
-    respond_with(@payments)
-  end
-
-  def show
-    respond_with(@payment)
-  end
 
   def new
+    @cart = Cart.find(session[:cart_id])
     @payment = Payment.new
-    respond_with(@payment)
   end
 
   def edit
+    @delivery.update(delivery_params)
   end
 
   def create
-    @payment = Payment.new(payment_params)
-    @payment.save
-    respond_with(@payment)
+    @payment = Payment.new
+    @payment = @payment.update(payment_params)
+    redirect_to confirm_orders_path
   end
 
   def update
     @payment.update(payment_params)
-    respond_with(@payment)
-  end
-
-  def destroy
-    @payment.destroy
-    respond_with(@payment)
   end
 
   private
-    def set_payment
-      @payment = Payment.find(params[:id])
-    end
 
     def payment_params
-      params[:payment]
+      params.require(:payment).permit(:number, :card_code, :expiration_date)
     end
 end

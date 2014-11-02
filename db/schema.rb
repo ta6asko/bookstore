@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141029144823) do
+ActiveRecord::Schema.define(version: 20141102113621) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,11 +34,17 @@ ActiveRecord::Schema.define(version: 20141029144823) do
     t.string   "last_name"
     t.string   "street_address"
     t.string   "city"
-    t.string   "country"
+    t.string   "country_id"
     t.string   "zip"
     t.string   "phone"
+    t.boolean  "shipping"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "billing_addresses_orders", id: false, force: true do |t|
+    t.integer "billing_address_id"
+    t.integer "order_id"
   end
 
   create_table "books", force: true do |t|
@@ -69,7 +75,15 @@ ActiveRecord::Schema.define(version: 20141029144823) do
     t.datetime "updated_at"
   end
 
+  create_table "countries", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "deliveries", force: true do |t|
+    t.string   "name"
+    t.integer  "price"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -89,11 +103,15 @@ ActiveRecord::Schema.define(version: 20141029144823) do
 
   create_table "orders", force: true do |t|
     t.integer  "number"
+    t.integer  "delivery_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "payments", force: true do |t|
+    t.integer  "number"
+    t.date     "expiration_date"
+    t.integer  "card_code"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -120,11 +138,16 @@ ActiveRecord::Schema.define(version: 20141029144823) do
     t.string   "last_name"
     t.string   "street_address"
     t.string   "city"
-    t.string   "country"
+    t.string   "country_id"
     t.string   "zip"
     t.string   "phone"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "shipping_addresses_orders", id: false, force: true do |t|
+    t.integer "shipping_address_id"
+    t.integer "order_id"
   end
 
   create_table "users", force: true do |t|

@@ -1,25 +1,28 @@
 class OrdersController < ApplicationController
   include CurrentCart
-  before_filter :authenticate_user!, except => [:show, :index]
-  before_action :set_cart, only: [:index, :new, :create]
+
   def index
 
   end
-
-  def delivery
-
-  end
-
-  def payment
-
+  
+  def create 
+    
   end
 
   def confirm
-
+    @cart = Cart.find(session[:cart_id])
+    @shipping_address = ShippingAddress.first
+    @billing_address = BillingAddress.first
   end
 
   def complete
-
+    @cart = Cart.find(session[:cart_id])
   end
-  
+
+  private 
+
+  def shipping_address_params
+    params[:shipping_address].permit(:first_name, :last_name, :street_address, :city, :country_id, :zip, :phone)
+  end
+
 end
