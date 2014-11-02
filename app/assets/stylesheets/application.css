@@ -10,6 +10,93 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ *= require bootstrap_and_overrides
  *= require_tree .
  *= require_self
  */
+
+#homeCarousel{
+  margin: 40px auto;
+  width: 800px;
+  padding: 0 70px;
+}
+.media-object {
+  padding-top: 5px;
+  padding-right: 15px;
+  padding-bottom: 10px;
+  float: left;
+}
+.category{
+  float: right;
+  width: 300px;
+}
+.shop{
+  width: 800px;
+}
+.shop_list{
+  width: 270px;
+}
+.cart_li{
+  padding-left: 50px;
+}
+.comment_text_field{
+  height: 150px;
+  width: 700px;
+  resize: none;
+}
+.dashed_line{
+  border-bottom-style: dashed;
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-bottom: 10px;
+}
+.margin_top{
+  margin-top: 10px;
+}
+.margin_top_5{
+  margin-top: 5px;
+}
+.margin_bot_10{
+  margin-bottom: 10px;
+}
+.in_line{
+  display: inline-block;
+}
+.float_r{
+  float: right;
+}
+.mail{
+  width: 50px;
+}
+
+.carousel_control{
+   padding-bottom: 50px;
+   @extend .carousel-control
+}
+
+
+
+#carousel{
+  width: 900px;
+  margin: 40px auto;
+  padding: 0 70px;
+}
+.book_list{
+  margin-left: 20px;
+  @extend .col-md-3
+}
+li {
+  list-style-type: none;
+}
+.li_shop {
+  width: 270px;
+  height: 200px;
+  float: left;
+}
+.margin_top_20{
+  margin-top: 20px; 
+
+}
+.padding{
+  padding: 20px;
+}

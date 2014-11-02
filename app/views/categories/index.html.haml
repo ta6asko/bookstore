@@ -1,0 +1,21 @@
+.container
+  .row
+    .col-md-9
+      %h4
+        Shop
+      .row
+        %ul
+          - @books.each do |book| 
+            %li.li_shop
+              = image_tag(book.image, size: "150x100")
+              %p.book_title= link_to book.title, book_path(book) 
+              %p.book_price #{number_to_currency(book.price)} 
+    .col-md-3
+      %h4  
+        SHOP BY CATEGORIES
+      %ul
+        - @categories.each do |category|
+          %li
+            %p= link_to category.name, category_path(category)
+
+   

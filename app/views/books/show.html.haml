@@ -1,0 +1,25 @@
+.container
+  .row
+    .col-md-12
+      %h2
+        = @book.title
+    .row
+      .col-md-12
+        .col-md-4
+          = image_tag(@book.image, size: "330x250", class: "cover")
+        .col-md-8
+          .row
+            .col-md-7
+              %h4
+                #{number_to_currency(@book.price)}
+            .col-md-1
+              = button_to 'Add to Cart', line_items_path(book_id: @book), class: "btn btn-default"
+        .col-md-6
+          = @book.full_description.first(500) + '...'
+  .row
+    .col-md-12
+      .margin_top_20
+        %h4
+          Reviews
+          = link_to 'Add review for this book', new_book_rating_path(@book)
+          

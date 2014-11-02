@@ -1,0 +1,33 @@
+.container
+  .row
+    .col-md-3
+      %h3
+        Checkout
+    .col-md-9
+      %h4
+        %u
+          ADDRESS
+        DELIVERY
+        PAYMENT
+        CONFIRM
+        COMPLET
+  .row
+    %h4
+      .col-md-8
+        SHIPPING ADDRESS
+      .col-md-4
+        ORDER SUMMARY
+  .row
+    .col-md-8.margin_top
+      = form_for @shipping_address do |f| 
+        %p= f.text_field :first_name, placeholder: "First name"
+        %p= f.text_field :last_name, placeholder: "Last name"
+        %p= f.text_field :street_address, placeholder: "Street Address"
+        %p= f.text_field :city, placeholder: "City"
+        %p= f.collection_select :country_id, Country.all, :id, :name, placeholder: "Country" 
+        %p= f.text_field :zip, placeholder: "Zip"
+        %p= f.telephone_field :phone, placeholder: "Phone"
+        %p= f.submit 'SAVE AND CONTINUE', class: "btn btn-default"
+    .col-md-4.margin_top
+      %p ITEM TOTAL: #{number_to_currency(@cart.total_price)}
+      %p ORDER TOTAL: #{number_to_currency(@cart.total_price)}

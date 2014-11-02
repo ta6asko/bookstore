@@ -11,7 +11,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer',  platforms: :ruby
-gem 'haml'
+gem 'haml-rails'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -27,15 +27,17 @@ gem 'rails-i18n', '~> 4.0.0' # For 4.0.x
 gem 'spring',        group: :development
 gem 'omniauth'
 gem 'omniauth-facebook'
-gem 'rails_admin', '~> 0.6.5'
+gem 'rails_admin'
 gem "cancancan"
 gem 'kaminari'
 gem 'carrierwave'
+gem 'bootstrap-slider-rails'
 gem 'mini_magick'
-gem 'rspec'
-gem 'capybara'
-gem 'shoulda-matchers'
-gem 'database_cleaner'
+gem 'foundation-rails'
+gem "therubyracer"
+gem 'bootstrap-sass'
+gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
+gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -48,3 +50,19 @@ gem 'database_cleaner'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'shoulda-matchers'
+  gem 'faker'
+  gem 'database_cleaner'
+end
+
+# group :development, :test do
+#   gem 'rspec-rails', '~> 3.0.0'
+#   gem 'capybara'
+#   gem 'shoulda-matchers'
+#   gem 'factory_girl_rails'
+#   gem 'database_cleaner'
+# end

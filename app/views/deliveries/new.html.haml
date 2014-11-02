@@ -1,0 +1,32 @@
+.container
+  .row
+    .col-md-3
+      %h3
+        DELIVERY
+    .col-md-9
+      %h4
+        = link_to 'ADDRESS', edit_billing_address_path(session[:cart_id])    
+        %u
+          DELIVERY
+        PAYMENT
+        CONFIRM
+        COMPLETE
+  .row
+    %h4
+      .col-md-8
+        SHIPPING ADDRESS
+      .col-md-4
+        ORDER SUMMARY
+  .row
+    .col-md-8.margin_top
+      = form_for :order, url: deliveries_path do |f|
+        - @deliveries.each do |delivery|
+          = f.radio_button :delivery_id, delivery.id
+          #{delivery.name} + #{number_to_currency(delivery.price)}
+          %br
+        %p= f.submit 'SAVE AND CONTINUE', class: "btn btn-default"
+
+    .col-md-4.margin_top
+      %p ITEM TOTAL: #{number_to_currency(@cart.total_price)}
+      %p SIPPING: #{number_to_currency(@cart.total_price)}
+      %p ORDER TOTAL: #{number_to_currency(@cart.total_price)}

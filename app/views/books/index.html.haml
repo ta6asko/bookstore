@@ -1,0 +1,26 @@
+#carousel.carousel.slide
+  .carousel-inner
+    .active.item
+      .media
+        %h3.media-heading= @books.last.title
+        - @books.last.authors.each do |author|
+          %strong
+            by #{author.first_name} #{author.last_name}
+        .media-body
+          = image_tag(@books.last.image, size: "200x150", class: "media-object")
+          %p= @books.last.full_description
+          %h4
+            #{number_to_currency(@books.last.price)}
+    - @books.each do |book|
+      .item
+        %h3.media-heading= book.title
+        - book.authors.each do |author|
+          %strong
+            by #{author.first_name} #{author.last_name}
+        .media-body
+          = image_tag(book.image, size: "200x150", class: "media-object")
+          %p= book.full_description
+          %h4
+            #{number_to_currency(book.price)}
+  %a.carousel-control.left{"data-slide" => "prev", href: "#carousel"} ‹
+  %a.carousel-control.right{"data-slide" => "next", href: "#carousel"} ›

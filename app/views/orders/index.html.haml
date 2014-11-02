@@ -1,0 +1,26 @@
+.container
+  .row
+    .col-md-3
+      %h3
+        Checkout
+    .col-md-9
+      %h4
+        = link_to 'ADDRESS', new_delivery_path   
+        = link_to 'DELIVERY', new_delivery_path   
+        = link_to 'PAYMENT', new_delivery_path   
+        CONFIRM
+        COMPLETE
+  .row
+    %h4
+      .col-md-8
+        SHIPPING ADDRESS
+      .col-md-4
+        ORDER SUMMARY
+  .row
+    .col-md-8.margin_top
+      = button_to 'SAVE AND CONTINUE', order_path, method: :get, class: "btn btn-default"
+    .col-md-4.margin_top
+      %p ITEM TOTAL: #{number_to_currency(@cart.total_price)}
+      %p SIPPING: #{number_to_currency(@cart.total_price)}
+      %p ORDER TOTAL: #{number_to_currency(@cart.total_price)}
+
