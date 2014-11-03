@@ -1,7 +1,7 @@
 class CreateUsers < ActiveRecord::Migration
   def change
     create_table :users do |t|
-      t.string :login
+      t.boolean :check_del
       t.timestamps
     end
   end

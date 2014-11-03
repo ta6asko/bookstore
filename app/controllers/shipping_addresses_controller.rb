@@ -1,13 +1,12 @@
 class ShippingAddressesController < ApplicationController
 
-
   def new
     @shipping_address = ShippingAddress.new
     @cart = Cart.find(session[:cart_id])
   end
 
   def edit
-    @delivery.update(delivery_params)
+    @shipping_address = ShippingAddress.find(params[:id])
   end
 
   def create
@@ -20,7 +19,12 @@ class ShippingAddressesController < ApplicationController
   end
 
   def update
-    @shipping_address.update(shipping_address_params)
+    @shipping_address = ShippingAddress.find(params[:id])
+    if @shipping_address.update(shipping_address_params)
+      redirect_to confirm_orders_path
+    else
+      render 'edit'
+    end 
   end
 
   private

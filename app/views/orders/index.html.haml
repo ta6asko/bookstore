@@ -1,26 +1,80 @@
 .container
-  .row
-    .col-md-3
+  .col-md-12
+    .row
       %h3
-        Checkout
-    .col-md-9
-      %h4
-        = link_to 'ADDRESS', new_delivery_path   
-        = link_to 'DELIVERY', new_delivery_path   
-        = link_to 'PAYMENT', new_delivery_path   
-        CONFIRM
-        COMPLETE
+        .col-md-12
+          Settings
+    .col-md-5.margin_top_20
+      .row
+        .solid_line
+          %h4
+            BILLING ADDRESS
+      .row
+        .row
+          .col-md-5.margin_top_20
+            = form_for @shipping_address do |f| 
+              %p= f.text_field :first_name, placeholder: "First name"
+              %p= f.text_field :last_name, placeholder: "Last name"
+              %p= f.text_field :street_address, placeholder: "Street Address"
+              %p= f.text_field :city, placeholder: "City"
+              %p= f.collection_select :country_id, Country.all, :id, :name, placeholder: "Country"
+              %p= f.text_field :zip, placeholder: "Zip"
+              %p= f.telephone_field :phone, placeholder: "Phone"
+              %p= f.submit 'SAVE', class: "btn btn-default"
+    .col-md-2
+    .col-md-5.margin_top_20
+      .row
+        .solid_line
+          %h4
+            SHIPPING ADDRESS
+      .row
+        .row
+          .col-md-5.margin_top_20
+            = form_for @shipping_address do |f| 
+              %p= f.text_field :first_name, placeholder: "First name"
+              %p= f.text_field :last_name, placeholder: "Last name"
+              %p= f.text_field :street_address, placeholder: "Street Address"
+              %p= f.text_field :city, placeholder: "City"
+              %p= f.collection_select :country_id, Country.all, :id, :name, placeholder: "Country" 
+              %p= f.text_field :zip, placeholder: "Zip"
+              %p= f.telephone_field :phone, placeholder: "Phone"
+              %p= f.submit 'SAVE', class: "btn btn-default"
+  .col-md-12
+    .col-md-5
+      .row
+        .solid_line
+          %h4
+            EMAIL
+      .row
+        .row
+          .col-md-5.margin_top_20
+            = form_for @shipping_address do |f| 
+              %p= f.text_field :first_name, placeholder: "First name"
+              %p= f.submit 'SAVE', class: "btn btn-default"
+    .col-md-2
+    .col-md-5
+      .row
+        .solid_line
+          %h4
+            PASSWORD
+      .row
+        .row
+          .col-md-5.margin_top_20
+            = form_for @shipping_address do |f| 
+              Old password
+              %p= f.text_field :first_name, placeholder: "First name"
+              New password
+              %p= f.text_field :first_name, placeholder: "First name"
+              %p= f.submit 'SAVE', class: "btn btn-default"
+  .col-md-12
+    .row
+      .solid_line
+        %h4
+          PASSWORD
   .row
-    %h4
-      .col-md-8
-        SHIPPING ADDRESS
-      .col-md-4
-        ORDER SUMMARY
-  .row
-    .col-md-8.margin_top
-      = button_to 'SAVE AND CONTINUE', order_path, method: :get, class: "btn btn-default"
-    .col-md-4.margin_top
-      %p ITEM TOTAL: #{number_to_currency(@cart.total_price)}
-      %p SIPPING: #{number_to_currency(@cart.total_price)}
-      %p ORDER TOTAL: #{number_to_currency(@cart.total_price)}
+    .col-md-12.height.margin_top_20
+      = link_to 'PLEASE REMOVE MY ACCOUNT', '', class: "btn btn-default"
+      = check_box_tag ""
+      I understand that all data will be lost
+
 

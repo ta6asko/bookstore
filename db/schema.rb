@@ -104,12 +104,15 @@ ActiveRecord::Schema.define(version: 20141102113621) do
   create_table "orders", force: true do |t|
     t.integer  "number"
     t.integer  "delivery_id"
+    t.string   "in_progress"
+    t.string   "in_queue"
+    t.string   "in_delivery"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "payments", force: true do |t|
-    t.integer  "number"
+    t.decimal  "number"
     t.date     "expiration_date"
     t.integer  "card_code"
     t.datetime "created_at"
@@ -151,7 +154,7 @@ ActiveRecord::Schema.define(version: 20141102113621) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "login"
+    t.boolean  "check_del"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "email",                  default: "", null: false

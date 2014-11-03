@@ -100,3 +100,19 @@ li {
 .padding{
   padding: 20px;
 }
+.margin_confirm{
+  margin-top: 40px;
+}
+.float_left{
+  float: left;
+}
+.float_right{
+  float: right;
+}
+.solid_line{
+  border-bottom: solid;
+  margin-top: 10px;
+}
+.height{
+  height: 300px; 
+}

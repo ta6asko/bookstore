@@ -1,14 +1,4 @@
 class DeliveriesController < ApplicationController
-  before_action :set_delivery, only: [:show, :edit, :update, :destroy]
-
-  def index
-    @deliveries = Delivery.all
-
-  end
-
-  def show
-
-  end
 
   def new
     @order = Order.new
@@ -17,7 +7,8 @@ class DeliveriesController < ApplicationController
   end
 
   def edit
-    @cart = Cart.find(session[:cart_id])
+    @order = Order.find(params[:id])
+    @deliveries = Delivery.all
   end
 
   def create
@@ -27,22 +18,12 @@ class DeliveriesController < ApplicationController
   end
 
   def update
-    @delivery.update(delivery_params)
-  end
-
-  def destroy
-    @delivery.destroy
- 
+    @order = Order.find(params[:id])
+    @order.update(order_params)
+    redirect_to confirm_orders_path
   end
 
   private
-    def set_delivery
-      @delivery = Delivery.find(params[:id])
-    end
-
-    def delivery_params
-      params[:delivery]
-    end
 
   def order_params
     params.require(:order).permit(:delivery_id)

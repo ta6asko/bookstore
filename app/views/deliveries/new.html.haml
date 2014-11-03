@@ -13,10 +13,8 @@
         COMPLETE
   .row
     %h4
-      .col-md-8
-        SHIPPING ADDRESS
-      .col-md-4
-        ORDER SUMMARY
+      .col-md-12
+        DELIVERY
   .row
     .col-md-8.margin_top
       = form_for :order, url: deliveries_path do |f|
@@ -25,7 +23,6 @@
           #{delivery.name} + #{number_to_currency(delivery.price)}
           %br
         %p= f.submit 'SAVE AND CONTINUE', class: "btn btn-default"
-
     .col-md-4.margin_top
       %p ITEM TOTAL: #{number_to_currency(@cart.total_price)}
       %p SIPPING: #{number_to_currency(@cart.total_price)}

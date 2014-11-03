@@ -6,17 +6,22 @@ class PaymentsController < ApplicationController
   end
 
   def edit
-    @delivery.update(delivery_params)
+    @payment = Payment.find(params[:id])
   end
 
   def create
     @payment = Payment.new
-    @payment = @payment.update(payment_params)
-    redirect_to confirm_orders_path
+    if @payment = @payment.update(payment_params)
+      redirect_to confirm_orders_path
+    else
+      rander "new"
+    end
   end
 
   def update
+    @payment = Payment.find(params[:id])
     @payment.update(payment_params)
+    redirect_to confirm_orders_path
   end
 
   private

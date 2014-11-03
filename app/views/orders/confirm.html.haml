@@ -5,9 +5,9 @@
         Checkout
     .col-md-9
       %h4
-        = link_to 'ADDRESS', edit_billing_address_path(session[:cart_id])   
-        = link_to 'DELIVERY', edit_delivery_path(session[:cart_id])   
-        = link_to 'PAYMENT', edit_payment_path(session[:cart_id])   
+        = link_to 'ADDRESS', edit_billing_address_path(@billing_address)   
+        = link_to 'DELIVERY', edit_delivery_path(@order)   
+        = link_to 'PAYMENT', edit_payment_path(@payment)  
         %u
           CONFIRM
         COMPLETE
@@ -19,24 +19,106 @@
     .col-md-3.margin_top
       %b
         Shipping Address
-      = link_to "(edit)"
+      = link_to "(edit)", edit_shipping_address_path(@shipping_address)
       %br
       = @shipping_address.first_name
       = @shipping_address.last_name
       %br
       = @shipping_address.street_address
+      %br
       = @shipping_address.city
-      = @shipping_address.
-      = @shipping_address.
+      = @shipping_address.zip
+      %br
+      = @country_b
+      %br
+      Phone + #{@shipping_address.phone}
     .col-md-3.margin_top
       %b
         Billing Address
-      = link_to "(edit)"
+      = link_to "(edit)", edit_billing_address_path(@billing_address)
+      %br
+      = @billing_address.first_name
+      = @billing_address.last_name
+      %br
+      = @billing_address.street_address
+      %br
+      = @billing_address.city
+      = @billing_address.zip
+      %br
+      = @country_sh
+      %br
+      Phone +#{@billing_address.phone}
     .col-md-3.margin_top
       %b
         Shipments
-      = link_to "(edit)"
+      = link_to "(edit)", edit_delivery_path(@order)
+      %br
+      = @delivery_name
     .col-md-3.margin_top
       %b
         Payment Information
-      = link_to "(edit)"
+      = link_to "(edit)", edit_payment_path(@payment)
+      %br
+      **** **** **** #{@numb}
+      %br
+      = @payment.expiration_date.strftime("%m/%Y")
+      %br
+.row
+  .col-md-12.margin_confirm
+    .col-md-5
+    .col-md-4
+      BOOK
+    .col-md-1
+      PRICE
+    .col-md-1
+      QTY
+    .col-md-1
+      TOTAL
+  .row
+    .col-md-12.margin_top_10
+      - @cart.line_items.each do |order| 
+        .col-md-12.margin_bot_10
+          .col-md-2
+            = image_tag(order.book.image, size: "150x100")
+          .col-md-7
+            %h4
+              = order.book.title
+            = order.book.full_description.first(200) + '...'
+          .col-md-1
+            #{number_to_currency(order.book.price)}
+          .col-md-1
+            = order.quantity
+          .col-md-1
+            #{number_to_currency(order.total_price)}          
+    .col-md-12
+      .dashed_line.margin_top_20
+      .col-md-12.margin_top_5
+        .col-md-8
+        .col-md-2
+          .float_right
+            SUBTOTAL:
+        .col-md-1
+          .float_left
+            #{number_to_currency(@cart.total_price)}
+      .col-md-12
+        .col-md-8
+        .col-md-2
+          .float_right
+            SHIPPING:
+        .col-md-1
+          .float_left
+            #{number_to_currency(@delivery_price)}
+        .col-md-1
+    .col-md-12
+      .dashed_line.margin_top_20
+      .col-md-12.margin_top_5
+        .col-md-8
+        .col-md-2
+          .float_right
+            ORDER TOTAL:
+        .col-md-1
+          .float_left
+            #{number_to_currency(@order_total)}
+  .col-md-12.margin_top_20
+    .col-md-9
+      = link_to 'PLACE ORDER', complete_orders_path, method: :get, class: "btn btn-default"

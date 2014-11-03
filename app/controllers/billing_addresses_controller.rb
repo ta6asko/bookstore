@@ -1,25 +1,14 @@
 class BillingAddressesController < ApplicationController
   before_action :check_auth
 
-  def index
-    @billing_addresses = BillingAddress.all
-    
-  end
-
-  def show
-
-  end
-
   def new
-    @cart = Cart.find(session[:cart_id])
     @billing_address = BillingAddress.new
     @shipping_address = ShippingAddress.new
+    @cart = Cart.find(session[:cart_id])
   end
 
   def edit
-    @cart = Cart.find(session[:cart_id])
-    @billing_address = BillingAddress.new
-    @delivery.update(billing_address_params)
+    @billing_address = BillingAddress.find(params[:id])
   end
 
   def create
@@ -37,11 +26,12 @@ class BillingAddressesController < ApplicationController
   end
 
   def update
-    @billing_address.update(billing_address_params)
-  end
-
-  def destroy
-    @billing_address.destroy
+    @billing_address = BillingAddress.find(params[:id])
+    if @billing_address.update(billing_address_params)
+      redirect_to edit_shipping_address_path
+    else
+      render 'edit'
+    end 
   end
 
   def check_auth
