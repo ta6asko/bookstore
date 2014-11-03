@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   resources :addresses
 
   resources :line_items
-  devise_for :users, :controllers => { :sessions => "sessions" }
+  devise_for :users
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   resources :books do

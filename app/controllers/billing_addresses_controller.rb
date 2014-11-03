@@ -2,7 +2,7 @@ class BillingAddressesController < ApplicationController
   before_action :check_auth
 
   def new
-    @billing_address = BillingAddress.new
+    @billing_address = current_user.billingaddress.new
     @shipping_address = ShippingAddress.new
     @cart = Cart.find(session[:cart_id])
   end
@@ -41,9 +41,6 @@ class BillingAddressesController < ApplicationController
   end
 
   private
-    def set_billing_address
-      @billing_address = BillingAddress.find(params[:id])
-    end
 
     def billing_address_params
       params[:billing_address].permit(:first_name, :last_name, :street_address, :city, :country_id, :zip, :phone, :shipping)
