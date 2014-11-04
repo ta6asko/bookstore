@@ -1,9 +1,13 @@
 class CartsController < ApplicationController
 
   include CurrentCart
+  include SetAddress
   
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
-  
+
+  before_action :set_billing_address, only: [:set_cart_to_user]
+  before_action :set_shipping_address, only: [:set_cart_to_user]
+    
   def index
     @books = Book.all
     @cart = Cart.find(session[:cart_id])
@@ -35,7 +39,7 @@ class CartsController < ApplicationController
 
   def invalid_cart
     logger.error "Attempt to access invalid cart #{params[:id]}"
-    redirect_to categories_path, notice: 'Invalid cart'
+    redirect_to categories_path, notice: 'Корзина пуста'
   end
 
 end

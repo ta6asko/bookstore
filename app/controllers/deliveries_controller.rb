@@ -1,4 +1,14 @@
 class DeliveriesController < ApplicationController
+  
+  include SetOrder
+  
+  before_action :set_order, only: [:set_delivery]
+
+  def set_delivery
+    @order = Order.new
+    @deliveries = Delivery.all
+    @cart = Cart.find(session[:cart_id])
+  end
 
   def new
     @order = Order.new

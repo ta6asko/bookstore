@@ -1,34 +1,23 @@
 class BillingAddressesController < ApplicationController
   before_action :check_auth
 
-  def new
-    @billing_address = current_user.billingaddress.new
-    @shipping_address = ShippingAddress.new
+  def edit
+    @user = current_user
+    @billing_address = @user.billing_address
     @cart = Cart.find(session[:cart_id])
   end
 
-  def edit
-    @billing_address = BillingAddress.find(params[:id])
-  end
-
-  def create
-    @billing_address = BillingAddress.create(billing_address_params)
-    if @billing_address.save
-      if @billing_address.shipping == true
-        @shipping_address = ShippingAddress.create(shipping_address_params)
-        redirect_to new_delivery_path
-      else
-        redirect_to new_shipping_address_path
-      end
-    else
-      render 'new'
-    end 
-  end
-
   def update
-    @billing_address = BillingAddress.find(params[:id])
+    @user = current_user
+    @billing_address = @user.billing_address
     if @billing_address.update(billing_address_params)
-      redirect_to edit_shipping_address_path
+      if @billing_address.shipping == true
+        @shipping_address = @user.shipping_address
+        @shipping_address.update(shipping_address_params)
+        redirect_to set_delivery_deliveries_path
+      else
+        edit_shipping_address_path
+      end
     else
       render 'edit'
     end 

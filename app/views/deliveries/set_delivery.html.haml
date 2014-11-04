@@ -22,7 +22,7 @@
           = f.radio_button :delivery_id, delivery.id
           #{delivery.name} + #{number_to_currency(delivery.price)}
           %br
-        %p= f.submit 'SAVE AND CONTINUE', class: "btn btn-default"
+        %p= f.submit 'SAVE AND CONTINUE', method: :get, class: "btn btn-default"
     .col-md-4.margin_top
       %p ITEM TOTAL: #{number_to_currency(@cart.total_price)}
       %p SIPPING: #{number_to_currency(@cart.total_price)}

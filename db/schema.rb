@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20141102113621) do
     t.string   "zip"
     t.string   "phone"
     t.boolean  "shipping"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -102,11 +103,9 @@ ActiveRecord::Schema.define(version: 20141102113621) do
   add_index "line_items", ["order_id"], name: "index_line_items_on_order_id", using: :btree
 
   create_table "orders", force: true do |t|
-    t.integer  "number"
     t.integer  "delivery_id"
-    t.string   "in_progress"
-    t.string   "in_queue"
-    t.string   "in_delivery"
+    t.integer  "progress_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -144,6 +143,7 @@ ActiveRecord::Schema.define(version: 20141102113621) do
     t.string   "country_id"
     t.string   "zip"
     t.string   "phone"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

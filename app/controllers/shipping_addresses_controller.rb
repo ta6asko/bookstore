@@ -1,27 +1,15 @@
 class ShippingAddressesController < ApplicationController
 
-  def new
-    @shipping_address = ShippingAddress.new
+  def edit
+    @user = current_user
+    @shipping_address = @user.shipping_address
     @cart = Cart.find(session[:cart_id])
   end
 
-  def edit
-    @shipping_address = ShippingAddress.find(params[:id])
-  end
-
-  def create
-    @shipping_address = ShippingAddress.create(shipping_address_params)
-    if @shipping_address.save
-      redirect_to new_delivery_path
-    else
-      render 'new'
-    end
-  end
-
   def update
-    @shipping_address = ShippingAddress.find(params[:id])
+    @shipping_address = @user.shipping_address
     if @shipping_address.update(shipping_address_params)
-      redirect_to confirm_orders_path
+      redirect_to set_delivery_deliveries_path
     else
       render 'edit'
     end 
