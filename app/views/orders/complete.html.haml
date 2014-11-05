@@ -2,7 +2,7 @@
   .row
     %h4
       .col-md-12
-        Order R
+        ORDER R000#{@order.id} 
   .row
     .col-md-3.margin_top
       %b
@@ -16,7 +16,7 @@
       = @shipping_address.city
       = @shipping_address.zip
       %br
-      = @country_b
+      = @country_shipping
       %br
       Phone + #{@shipping_address.phone}
     .col-md-3.margin_top
@@ -31,7 +31,7 @@
       = @billing_address.city
       = @billing_address.zip
       %br
-      = @country_sh
+      = @country_billing
       %br
       Phone +#{@billing_address.phone}
     .col-md-3.margin_top
@@ -105,4 +105,4 @@
             #{number_to_currency(@order_total)}
   .col-md-12.margin_top_20
     .col-md-9
-      = link_to 'GO BACK TO STORE', orders_path,class: "btn btn-default"
+      = link_to 'GO BACK TO STORE', categories_path,class: "btn btn-default"

@@ -7,9 +7,9 @@ class ShippingAddressesController < ApplicationController
   end
 
   def update
-    @shipping_address = @user.shipping_address
+    @shipping_address = current_user.shipping_address
     if @shipping_address.update(shipping_address_params)
-      redirect_to set_delivery_deliveries_path
+      redirect_to edit_delivery_path
     else
       render 'edit'
     end 

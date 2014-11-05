@@ -16,7 +16,7 @@ class BillingAddressesController < ApplicationController
         @shipping_address.update(shipping_address_params)
         redirect_to edit_delivery_path
       else
-        edit_shipping_address_path
+        redirect_to edit_shipping_address_path(current_user)
       end
     else
       render 'edit'

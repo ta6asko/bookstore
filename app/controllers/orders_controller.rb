@@ -1,35 +1,35 @@
 class OrdersController < ApplicationController
   include CurrentCart
 
-  def index
-
-  end
+  before_action :up_order, only: [:complete]
 
   def confirm
     @cart = Cart.find(session[:cart_id])
-    @shipping_address = ShippingAddress.first
-    @billing_address = BillingAddress.first
-    @payment = Payment.first
-    @order = Order.first
+    @shipping_address = current_user.shipping_address
+    @billing_address = current_user.billing_address
+    @order = current_user.orders.find_by(progress_id: '1')
+    @payment = @order.payment
     @delivery_name = @order.delivery.name
     @delivery_price = @order.delivery.price
-    @country_sh = @shipping_address.country.name
-    @country_b = @shipping_address.country.name
-    @numb = @payment.number.to_s.length <= 4 ? number : @payment.number.to_s.slice(-6..-3)
+    @country = Country.all
+    # @country_billing = @country.billing_address.find(params[:country_id])
+    # @country_shipping = @shipping_address.country.name
+    @numb = @payment.number.to_s.slice(-6..-3)
     @order_total = (@cart.total_price)+(@delivery_price)
   end
 
   def complete
     @cart = Cart.find(session[:cart_id])
-    @shipping_address = ShippingAddress.first
-    @billing_address = BillingAddress.first
-    @payment = Payment.first
-    @order = Order.first
+    @shipping_address = current_user.shipping_address
+    @billing_address = current_user.billing_address
+    @order = current_user.orders.find_by(progress_id: '1')
+    @payment = @order.payment
     @delivery_name = @order.delivery.name
     @delivery_price = @order.delivery.price
-    @country_sh = @shipping_address.country.name
-    @country_b = @shipping_address.country.name
-    @numb = @payment.number.to_s.length <= 4 ? number : @payment.number.to_s.slice(-6..-3)
+    @country = Country.all
+    # @country_billing = @country.billing_address.find(params[:country_id])
+    # @country_shipping = @shipping_address.country.name
+    @numb = @payment.number.to_s.slice(-6..-3)
     @order_total = (@cart.total_price)+(@delivery_price)
   end
 
@@ -37,6 +37,15 @@ class OrdersController < ApplicationController
     @order = current_user.orders.find_by(progress_id: '1')
     @order.update(params.require(:order).permit(:delivery_id))
     redirect_to edit_payment_path
+  end
+
+  def up_order
+    @order = current_user.orders.find_by(progress_id: '1')
+    @order.progress_id = 2
+    @cart = Cart.find(session[:cart_id])
+    @cart.destroy if @cart.id == session[:cart_id]
+    @cart = Cart.create
+    @cart.id = session[:cart_id]
   end
 
   private 

@@ -1,10 +1,10 @@
-class PaymentsController < ApplicationController
+class PaymentsController < ApplicationController 
 
   before_action :set_payment, only: [:edit]
 
   def set_payment
     @order = current_user.orders.find_by(progress_id: '1')
-    @order.create_payment unless @order.payment == nil
+    @order.create_payment if @order.payment == nil
   end
 
   def edit 
@@ -16,6 +16,7 @@ class PaymentsController < ApplicationController
   def update
     @order = current_user.orders.find_by(progress_id: '1')
     @payment = @order.payment.update(payment_params)
+    redirect_to confirm_orders_path
   end
 
   private
