@@ -14,7 +14,7 @@ class BillingAddressesController < ApplicationController
       if @billing_address.shipping == true
         @shipping_address = @user.shipping_address
         @shipping_address.update(shipping_address_params)
-        redirect_to set_delivery_deliveries_path
+        redirect_to edit_delivery_path
       else
         edit_shipping_address_path
       end

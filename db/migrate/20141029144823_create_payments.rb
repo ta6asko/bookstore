@@ -4,7 +4,7 @@ class CreatePayments < ActiveRecord::Migration
       t.decimal    :number
       t.date       :expiration_date
       t.integer    :card_code
-
+      t.integer    :order_id
       t.timestamps
     end
   end

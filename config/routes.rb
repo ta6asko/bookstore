@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   
-
-  resources :payments
+  resources :payments do
+    collection do
+      get 'set_payment'
+    end
+  end
 
   resources :shipping_addresses
 

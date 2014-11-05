@@ -2,8 +2,7 @@ class OrdersController < ApplicationController
   include CurrentCart
 
   def index
-    @billing_address = BillingAddress.first
-    @shipping_address = ShippingAddress.first
+
   end
 
   def confirm
@@ -32,6 +31,12 @@ class OrdersController < ApplicationController
     @country_b = @shipping_address.country.name
     @numb = @payment.number.to_s.length <= 4 ? number : @payment.number.to_s.slice(-6..-3)
     @order_total = (@cart.total_price)+(@delivery_price)
+  end
+
+  def update
+    @order = current_user.orders.find_by(progress_id: '1')
+    @order.update(params.require(:order).permit(:delivery_id))
+    redirect_to edit_payment_path
   end
 
   private 

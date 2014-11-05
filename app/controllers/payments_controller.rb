@@ -1,27 +1,21 @@
 class PaymentsController < ApplicationController
 
-  def new
+  before_action :set_payment, only: [:edit]
+
+  def set_payment
+    @order = current_user.orders.find_by(progress_id: '1')
+    @order.create_payment unless @order.payment == nil
+  end
+
+  def edit 
     @cart = Cart.find(session[:cart_id])
-    @payment = Payment.new
-  end
-
-  def edit
-    @payment = Payment.find(params[:id])
-  end
-
-  def create
-    @payment = Payment.new
-    if @payment = @payment.update(payment_params)
-      redirect_to confirm_orders_path
-    else
-      rander "new"
-    end
+    @order = current_user.orders.find_by(progress_id: '1')
+    @payment = @order.payment
   end
 
   def update
-    @payment = Payment.find(params[:id])
-    @payment.update(payment_params)
-    redirect_to confirm_orders_path
+    @order = current_user.orders.find_by(progress_id: '1')
+    @payment = @order.payment.update(payment_params)
   end
 
   private

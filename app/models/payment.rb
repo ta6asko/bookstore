@@ -1,3 +1,3 @@
 class Payment < ActiveRecord::Base
-  belogs_to :order
+  belongs_to :order
 end

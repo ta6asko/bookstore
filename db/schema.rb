@@ -103,8 +103,8 @@ ActiveRecord::Schema.define(version: 20141102113621) do
   add_index "line_items", ["order_id"], name: "index_line_items_on_order_id", using: :btree
 
   create_table "orders", force: true do |t|
-    t.integer  "delivery_id"
-    t.integer  "progress_id"
+    t.integer  "delivery_id", default: 1
+    t.integer  "progress_id", default: 1
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -114,6 +114,7 @@ ActiveRecord::Schema.define(version: 20141102113621) do
     t.decimal  "number"
     t.date     "expiration_date"
     t.integer  "card_code"
+    t.integer  "order_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
