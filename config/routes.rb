@@ -5,7 +5,7 @@ Rails.application.routes.draw do
       get 'set_payment'
     end
   end
-
+  resources :ratings
   resources :shipping_addresses
 
   resources :billing_addresses

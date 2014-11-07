@@ -292,6 +292,7 @@ DEPENDENCIES
   haml-rails
   jbuilder (~> 2.0)
   jquery-rails
+  jquery-ui-rails
   kaminari
   kaminari-bootstrap (~> 3.0.1)
   less-rails
