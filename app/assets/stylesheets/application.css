@@ -13,6 +13,7 @@
  *= require bootstrap_and_overrides
  *= require_tree .
  *= require_self
+ *= require jquery-ui
  */
 
 #homeCarousel{
@@ -115,4 +116,26 @@ li {
 }
 .height{
   height: 300px; 
+}
+
+.rating_submit { 
+  display: none; 
+}
+form.rating_ballot input.rating_button { 
+  display: none; 
+}
+form.rating_ballot label.rating { 
+  cursor: pointer; display: block; height: 16px; width: 16px; float: left; 
+}
+form.rating_ballot label.rating span { 
+  display: none; 
+}
+form.rating_ballot label.rating { 
+  background-image: url(star-dim.png); 
+}
+form.rating_ballot label.rating.bright { 
+  background-image: url(star-bright.png); 
+}
+form.rating_ballot label.rating.glow { 
+  background-image: url(star-glow.png); 
 }

@@ -7,7 +7,8 @@ class Book < ActiveRecord::Base
   has_many :line_items
   
   belongs_to :category
-  belongs_to :rating
+  has_many :ratings
+  has_many :raters, :through => :ratings, :source => :users
 
   validates :price, numericality: { greater_then: 0, allow_nil: true }
   validates :title, :short_description, :full_description, presence: true 
@@ -27,5 +28,15 @@ class Book < ActiveRecord::Base
       return false
     end
   end
+
+  def average_rating
+    @value = 0
+    self.ratings.each do |rating|
+        @value = @value + rating.value
+    end
+    @total = self.ratings.size
+    @value.to_f / @total.to_f
+  end
+  
 end
 

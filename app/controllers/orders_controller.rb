@@ -29,8 +29,8 @@ class OrdersController < ApplicationController
     @delivery_name = @order.delivery.name
     @delivery_price = @order.delivery.price
     @country = Country.all
-    # @country_billing = @country.billing_address.find(params[:country_id])
-    # @country_shipping = @shipping_address.country.name
+    @country_billing = @billing_address.country.name
+    @country_shipping = @shipping_address.country.name
     @numb = @payment.number.to_s.slice(-6..-3)
     @order_total = (@cart.total_price)+(@delivery_price)
   end
