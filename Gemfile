@@ -30,6 +30,8 @@ gem 'omniauth-facebook'
 gem 'rails_admin'
 gem "cancancan"
 gem 'kaminari'
+gem 'kaminari-bootstrap', '~> 3.0.1'
+gem 'bootstrap-kaminari-views'
 gem 'carrierwave'
 gem 'bootstrap-slider-rails'
 gem 'mini_magick'

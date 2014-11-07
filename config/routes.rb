@@ -41,9 +41,11 @@ Rails.application.routes.draw do
     collection do
       get 'confirm'
       get 'complete'
+      patch 'settings_update_billing_address' 
+      patch 'settings_update_shipping_address'
     end
   end
-
+ 
   root 'books#index'
 
   

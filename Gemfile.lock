@@ -39,6 +39,9 @@ GEM
       tzinfo (~> 1.1)
     arel (5.0.1.20140414130214)
     bcrypt (3.1.7)
+    bootstrap-kaminari-views (0.0.5)
+      kaminari (>= 0.13)
+      rails (>= 3.1)
     bootstrap-sass (3.2.0.2)
       sass (~> 3.2)
     bootstrap-slider-rails (1.9.0)
@@ -119,6 +122,9 @@ GEM
     kaminari (0.16.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
+    kaminari-bootstrap (3.0.1)
+      kaminari (>= 0.13.0)
+      rails
     less (2.5.1)
       commonjs (~> 0.2.7)
     less-rails (2.5.0)
@@ -271,6 +277,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bootstrap-kaminari-views
   bootstrap-sass
   bootstrap-slider-rails
   cancancan
@@ -286,6 +293,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   kaminari
+  kaminari-bootstrap (~> 3.0.1)
   less-rails
   mini_magick
   omniauth

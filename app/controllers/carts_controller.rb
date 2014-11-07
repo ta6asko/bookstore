@@ -7,6 +7,8 @@ class CartsController < ApplicationController
 
   before_action :set_billing_address, only: [:set_cart_to_user]
   before_action :set_shipping_address, only: [:set_cart_to_user]
+  before_action :destroy_cart, only: [:destroy]
+
     
   def index
     @books = Book.all
@@ -18,9 +20,6 @@ class CartsController < ApplicationController
   end
 
   def destroy
-    @cart = Cart.find(session[:cart_id])
-    @cart.destroy if @cart.id == session[:cart_id]
-    session[:cart_id] = nil
     redirect_to categories_path,
     notice: 'Теперь ваша корзина пуста!' 
   end
@@ -30,7 +29,7 @@ class CartsController < ApplicationController
     if @cart.id == session[:cart_id]
       render action: 'show'
     else
-      @cart.id = session[:cart_id]
+      session[:cart_id] = @cart.id
       render action: 'show' 
     end
   end
