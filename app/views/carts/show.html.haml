@@ -35,7 +35,7 @@
         .col-md-12.margin_top_20
           .col-md-9
             .in_line= button_to 'EMPTY CART', @cart, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default"
-            .in_line= button_to 'CONTINUE SHOPPING', '', method: :get, class: "btn btn-default"
+            .in_line= button_to 'CONTINUE SHOPPING', categories_path, method: :get, class: "btn btn-default"
           .col-md-3
             .in_line= button_to 'UPDATE', '', method: :get, class: "btn btn-default"
             - if user_signed_in?

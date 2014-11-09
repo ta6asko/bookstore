@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
   
+  post '/rate' => 'rater#create', :as => 'rate'
   resources :payments do
     collection do
       get 'set_payment'
     end
   end
-  resources :ratings
   resources :shipping_addresses
 
   resources :billing_addresses
@@ -19,7 +19,11 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   
   resources :books do
-    resources :ratings
+    resources :comments do
+      collection do
+        get 'set_comment'
+      end
+    end
   end
 
   resources :categories

@@ -1,11 +1,15 @@
 class BooksController < ApplicationController
   include BooksHelper
+  include CurrentCart
+  
+  before_action :set_cart, only: [:index]
   def index
   	@books = Book.all
   end
 
   def show
     @book = Book.find(params[:id])
+    @comment = @book.comments
   end
 
   def new

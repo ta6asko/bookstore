@@ -5,11 +5,10 @@ class Book < ActiveRecord::Base
   has_many :positions
   has_many :carts, through: :positions
   has_many :line_items
+  has_many :comments
   
   belongs_to :category
-  has_many :ratings
-  has_many :raters, :through => :ratings, :source => :users
-
+  
   validates :price, numericality: { greater_then: 0, allow_nil: true }
   validates :title, :short_description, :full_description, presence: true 
   validates :title, uniqueness: true

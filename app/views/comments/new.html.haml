@@ -1,0 +1,18 @@
+.container
+  .row
+    .col-md-12
+      %h3
+        New review for 
+        = link_to @book.title, book_path(@book)
+    .col-md-12.margin_top
+      = form_for @comment, url: book_comments_path do |f|
+        %p Name:
+        %p= f.text_field :user_name
+        %p Title:
+        %p= f.text_field :title
+        %p Text review:
+        %p= f.text_field :comment
+        .in_line= f.submit 'ADD', class: "btn btn-default"
+        .in_line or
+        .in_line= link_to 'Cancel', book_path(@book)
+   

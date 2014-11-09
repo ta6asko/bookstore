@@ -8,7 +8,7 @@ class CartsController < ApplicationController
   before_action :set_billing_address, only: [:set_cart_to_user]
   before_action :set_shipping_address, only: [:set_cart_to_user]
   before_action :destroy_cart, only: [:destroy]
-
+  
     
   def index
     @books = Book.all

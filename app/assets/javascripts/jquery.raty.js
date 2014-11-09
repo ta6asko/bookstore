@@ -59,7 +59,7 @@
     },
 
     _adjustCallback: function() {
-      var options = ['number', 'readOnly', 'score', 'scoreName', 'target', 'path'];
+      var options = ['number', 'readOnly', 'score', 'scoreName', 'target'];
 
       for (var i = 0; i < options.length; i++) {
         if (typeof this.opt[options[i]] === 'function') {

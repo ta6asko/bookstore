@@ -1,0 +1,7 @@
+.container
+  .row
+    .col-md-12
+      Rating: 
+      = rating_for @comment, "title", :disable_after_rate => true     
+    .col-md-12
+      = link_to 'Save', book_path(@book), class: "btn btn-default"
