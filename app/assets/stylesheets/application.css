@@ -117,4 +117,9 @@ li {
 .height{
   height: 300px; 
 }
-
+#cart_book_count {
+  width: 50px;
+}
+.cart_quantity{
+  width: 50px;
+}

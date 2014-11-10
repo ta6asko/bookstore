@@ -14,6 +14,12 @@ Rails.application.routes.draw do
 
   resources :line_items
 
+  resources :users do
+    collection do
+      get 'check_coupon'
+    end
+  end
+
   devise_for :users
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'

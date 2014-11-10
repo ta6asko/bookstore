@@ -5,6 +5,7 @@ class BooksController < ApplicationController
   before_action :set_cart, only: [:index]
   def index
   	@books = Book.all
+    @line_item = LineItem.new
   end
 
   def show

@@ -34,6 +34,13 @@ class CartsController < ApplicationController
     end
   end
 
+  def check_coupon
+    @user_coupon = currnt_user.coupon.create
+    @coupon = Coupon.find_by(number: num)
+    if @coupon
+
+  end
+
   private
 
   def invalid_cart

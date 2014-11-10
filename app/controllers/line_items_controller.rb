@@ -2,19 +2,11 @@ class LineItemsController < ApplicationController
   include CurrentCart
 
   before_action :set_cart, only: [:create]
-  before_action :set_line_item, only: [:show, :edit, :update, :destroy]
-
-  def index
-    @line_items = LineItem.all
-  end
-
-  def new
-    @line_item = LineItem.new
-  end
+  before_action :set_line_item, only: [:show, :edit, :update]
 
   def create
-    book = Book.find(params[:book_id])
-    @line_item = @cart.add_book(book.id)
+    book = Book.find(params[:book_id]) 
+    @line_item = @cart.add_book(book.id, params[:line_item][:quantity])
     if @line_item.save
       redirect_to @line_item.cart 
     else
@@ -23,7 +15,9 @@ class LineItemsController < ApplicationController
   end
 
   def destroy
-    @line_item.destroy
+    current_item = LineItem.find(params[:id])
+    current_item.destroy
+    redirect_to cart_path
   end
 
   private
