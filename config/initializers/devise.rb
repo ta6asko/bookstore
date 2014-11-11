@@ -4,14 +4,14 @@ Devise.setup do |config|
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
-  # config.secret_key = 'e44c7ac42d25ffc94747ffee5b171c17dffdb39ec0391957155c745e35f576cf769bafec346386543f516f8fb9cd61b7ed24f391b50f03b8d6017b184d1c2dda'
+  # config.secret_key = 'ae9e8ffb358897bdfce0713ce2232099584edb00ac3e85d0b612c2a03c2551fdb69629789074308fda3c8eccaee8a063b3da0819ca4bda895544cb416405d249'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
   config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
-  
+
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
 
@@ -97,7 +97,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 10
 
   # Setup a pepper to generate the encrypted password.
-  # config.pepper = '5d44bbc74c569cb9ec8b46c4140af46389492c76312cb89bc24b6e0bf4d96e840e2c2bb461cd27dbe77faf27acacf276e2684e82f44b0f470f00afe68278ca42'
+  # config.pepper = 'd14e3fc3ef23f247ef98eb2feedd11bae6e4192a193cba8863879c793cd4b67c995c109d908b167e5ffc0c5cfaea5f2eb3e775ae227242d20adee385ce23cbde'
 
   # ==> Configuration for :confirmable
   # A period that the user is allowed to access the website even without
@@ -228,7 +228,7 @@ Devise.setup do |config|
 
   # The default HTTP method used to sign out a resource. Default is :delete.
   config.sign_out_via = :delete
-  config.sign_out_all_scopes = false
+
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.

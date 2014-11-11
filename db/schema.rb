@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 20141110151902) do
 
   create_table "carts", force: true do |t|
     t.integer  "user_id"
-    t.integer  "discount"
+    t.integer  "discount",      default: 0
     t.integer  "coupon_number"
     t.datetime "created_at"
     t.datetime "updated_at"

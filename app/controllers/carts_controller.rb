@@ -21,24 +21,26 @@ class CartsController < ApplicationController
   end
 
   def destroy
-    redirect_to categories_path,
-    notice: 'Теперь ваша корзина пуста!' 
+    redirect_to categories_path, notice: 'Теперь ваша корзина пуста!' 
   end
 
   def set_cart_to_user
     @cart = Cart.find(session[:cart_id])
-    if @cart.id == session[:cart_id]
-      render action: 'show'
-    else
-      session[:cart_id] = @cart.id
-      render action: 'show' 
-    end
+    session[:cart_id] = @cart.id unless @cart.id == session[:cart_id]
+    render action: 'show' 
   end
 
   def check_coupon  
     @cart = Cart.find(session[:cart_id])
-    @coupon = Coupon.search(params[:search])
-    redirect_to carts_path
+    @coupon = Coupon.find_by(number: params[:search].to_i)
+    if @coupon
+      @cart.discount += @coupon.discount
+      @cart.save
+      @coupon.destroy
+      redirect_to cart_path(@cart), notice: "You coupon has successfully"
+    else
+      redirect_to cart_path(@cart), notice: "Invalid coupon number"
+    end
   end
 
   private

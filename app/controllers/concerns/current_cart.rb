@@ -13,5 +13,7 @@ module CurrentCart
     def destroy_line_items
       @cart = Cart.find(session[:cart_id])
       @cart.line_items.destroy_all
+      @cart.discount = 0
+      @cart.save
     end
 end
