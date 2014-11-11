@@ -37,6 +37,7 @@ Rails.application.routes.draw do
   resources :carts do
     collection do
       get 'set_cart_to_user'
+      get 'check_coupon'
     end
   end
   

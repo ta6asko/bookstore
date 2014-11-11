@@ -37,5 +37,23 @@ class Book < ActiveRecord::Base
     @value.to_f / @total.to_f
   end
   
-end
 
+
+ rails_admin do
+    edit do
+      field :title
+      field :full_description
+      field :image
+      field :price
+      field :category
+    end
+
+    show do
+      field :title
+      field :full_description
+      field :image
+      field :price
+      field :category
+    end
+  end
+end

@@ -120,6 +120,9 @@ li {
 #cart_book_count {
   width: 50px;
 }
-.cart_quantity{
+#line_item_quantity{
   width: 50px;
+}
+.cart_coupon {
+  width: 150px;
 }

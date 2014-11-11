@@ -9,11 +9,13 @@
           = image_tag(@book.image, size: "330x250", class: "cover")
         .col-md-8
           .row
-            .col-md-7
+            .col-md-2
               %h4
                 #{number_to_currency(@book.price)}
-            .col-md-1
-              = button_to 'Add to Cart', line_items_path(book_id: @book), class: "btn btn-default"
+            .col-md-6
+              = form_for @line_item, url: line_items_path(book_id: @book.id) do |f|
+                .col-md-3.item_count_input= f.text_field :quantity, :value => '1'
+                .col-md-3= f.submit 'Add to Cart', class: "btn btn-default"
         .col-md-6
           = @book.full_description.first(500) + '...'
   .row

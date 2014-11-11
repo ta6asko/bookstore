@@ -70,6 +70,8 @@ ActiveRecord::Schema.define(version: 20141110151902) do
 
   create_table "carts", force: true do |t|
     t.integer  "user_id"
+    t.integer  "discount"
+    t.integer  "coupon_number"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -201,7 +203,6 @@ ActiveRecord::Schema.define(version: 20141110151902) do
 
   create_table "users", force: true do |t|
     t.boolean  "check_del"
-    t.integer  "coupon"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "email",                  default: "", null: false

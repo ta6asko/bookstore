@@ -7,7 +7,7 @@ class CartsController < ApplicationController
 
   before_action :set_billing_address, only: [:set_cart_to_user]
   before_action :set_shipping_address, only: [:set_cart_to_user]
-  before_action :destroy_cart, only: [:destroy]
+  before_action :destroy_line_items, only: [:destroy]
   
     
   def index
@@ -17,6 +17,7 @@ class CartsController < ApplicationController
 
   def show
     @cart = Cart.find(session[:cart_id])
+
   end
 
   def destroy
@@ -34,11 +35,10 @@ class CartsController < ApplicationController
     end
   end
 
-  def check_coupon
-    @user_coupon = currnt_user.coupon.create
-    @coupon = Coupon.find_by(number: num)
-    if @coupon
-
+  def check_coupon  
+    @cart = Cart.find(session[:cart_id])
+    @coupon = Coupon.search(params[:search])
+    redirect_to carts_path
   end
 
   private

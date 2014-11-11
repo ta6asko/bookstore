@@ -10,10 +10,8 @@ module CurrentCart
       session[:cart_id] = @cart.id
     end
 
-    def destroy_cart
+    def destroy_line_items
       @cart = Cart.find(session[:cart_id])
-      @cart.destroy if @cart.id == session[:cart_id]
-      @cart = Cart.create
-      session[:cart_id] = @cart.id
+      @cart.line_items.destroy_all
     end
 end
