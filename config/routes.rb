@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   
   post '/rate' => 'rater#create', :as => 'rate'
+  
   resources :payments do
     collection do
       get 'set_payment'
@@ -14,7 +15,12 @@ Rails.application.routes.draw do
 
   resources :line_items
 
-  devise_for :users
+  devise_for :users do
+    collection do
+      get 'check_coupon'
+    end
+  end
+
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   
@@ -31,6 +37,7 @@ Rails.application.routes.draw do
   resources :carts do
     collection do
       get 'set_cart_to_user'
+      get 'check_coupon'
     end
   end
   

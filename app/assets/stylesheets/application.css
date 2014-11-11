@@ -117,4 +117,12 @@ li {
 .height{
   height: 300px; 
 }
-
+#cart_book_count {
+  width: 50px;
+}
+#line_item_quantity{
+  width: 50px;
+}
+.cart_coupon {
+  width: 150px;
+}

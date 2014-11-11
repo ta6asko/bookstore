@@ -19,49 +19,49 @@
     .col-md-3.margin_top
       %b
         Shipping Address
-      = link_to "(edit)", edit_shipping_address_path(@shipping_address)
+      = link_to "(edit)", edit_shipping_address_path(current_user.shipping_address)
       %br
-      = @shipping_address.first_name
-      = @shipping_address.last_name
+      = current_user.shipping_address.first_name
+      = current_user.shipping_address.last_name
       %br
-      = @shipping_address.street_address
+      = current_user.shipping_address.street_address
       %br
-      = @shipping_address.city
-      = @shipping_address.zip
+      = current_user.shipping_address.city
+      = current_user.shipping_address.zip
       %br
-      = @country_shipping
+      = current_user.shipping_address.country.name
       %br
-      Phone + #{@shipping_address.phone}
+      Phone + #{current_user.shipping_address.phone}
     .col-md-3.margin_top
       %b
         Billing Address
-      = link_to "(edit)", edit_billing_address_path(@billing_address)
+      = link_to "(edit)", edit_billing_address_path(current_user.billing_address)
       %br
-      = @billing_address.first_name
-      = @billing_address.last_name
+      = current_user.billing_address.first_name
+      = current_user.billing_address.last_name
       %br
-      = @billing_address.street_address
+      = current_user.billing_address.street_address
       %br
-      = @billing_address.city
-      = @billing_address.zip
+      = current_user.billing_address.city
+      = current_user.billing_address.zip
       %br
-      = @country_billing
+      = current_user.billing_address.country.name
       %br
-      Phone +#{@billing_address.phone}
+      Phone +#{current_user.billing_address.phone}
     .col-md-3.margin_top
       %b
         Shipments
       = link_to "(edit)", edit_delivery_path(@order)
       %br
-      = @delivery_name
+      = @order.delivery.name
     .col-md-3.margin_top
       %b
         Payment Information
-      = link_to "(edit)", edit_payment_path(@payment)
+      = link_to "(edit)", edit_payment_path(@order.payment)
       %br
-      **** **** **** #{@numb}
+      **** **** **** #{@order.payment.number.to_s.slice(-6..-3)}
       %br
-      = @payment.expiration_date.strftime("%m/%Y")
+      = @order.payment.expiration_date.strftime("%m/%Y")
       %br
 .row
   .col-md-12.margin_confirm
@@ -107,7 +107,7 @@
             SHIPPING:
         .col-md-1
           .float_left
-            #{number_to_currency(@delivery_price)}
+            #{number_to_currency(@order.delivery.price)}
         .col-md-1
     .col-md-12
       .dashed_line.margin_top_20
