@@ -10,7 +10,6 @@ class PaymentsController < ApplicationController
   def edit 
     @cart = Cart.find(session[:cart_id])
     @order = current_user.orders.find_by(progress_id: '1')
-    @payment = @order.payment
   end
 
   def update

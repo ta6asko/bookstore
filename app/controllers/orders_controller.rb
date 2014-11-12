@@ -1,47 +1,19 @@
 class OrdersController < ApplicationController
+  
   include CurrentCart
+  include SetOrder
 
   before_action :up_order, only: [:complete]
-  after_action :destroy_cart, only: [:complete]
-  before_action :set_cart, only: [:index]
-
-  def index
-    @cart = Cart.find(session[:cart_id])
-    @shipping_address = current_user.shipping_address
-    @billing_address = current_user.billing_address
-  end
+  after_action :destroy_line_items, only: [:complete]
 
   def confirm
     @cart = Cart.find(session[:cart_id])
     @order = current_user.orders.find_by(progress_id: '1')
-    @order_total = (@cart.total_price)+(@order.delivery.price)
   end
 
   def complete
     @cart = Cart.find(session[:cart_id])
-    @shipping_address = current_user.shipping_address
-    @billing_address = current_user.billing_address
     @order = current_user.orders.last
-    @payment = @order.payment
-    @delivery_name = @order.delivery.name
-    @delivery_price = @order.delivery.price
-    @country = Country.all
-    @numb = @payment.number.to_s.slice(-6..-3)
-    @order_total = (@cart.total_price)+(@delivery_price)
-  end
-
-  def settings_update_billing_address
-    @billing_address = current_user.billing_address
-    if @billing_address.update(billing_address_params)
-      render :nothing
-    end 
-  end
-
-  def settings_update_shipping_address
-    @shipping_address = current_user.shipping_address
-    if @shipping_address.update(shipping_address_params)
-      render :nothing
-    end 
   end
 
   def update
@@ -61,4 +33,7 @@ class OrdersController < ApplicationController
     params[:shipping_address].permit(:first_name, :last_name, :street_address, :city, :country_id, :zip, :phone)
   end
 
+  def billing_address_params
+    params[:billing_address].permit(:first_name, :last_name, :street_address, :city, :country_id, :zip, :phone)
+  end
 end

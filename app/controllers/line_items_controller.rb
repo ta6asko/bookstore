@@ -2,7 +2,6 @@ class LineItemsController < ApplicationController
   include CurrentCart
 
   before_action :set_cart, only: [:create]
-  before_action :set_line_item, only: [:show, :edit, :update]
 
   def create
     book = Book.find(params[:book_id]) 
@@ -21,9 +20,6 @@ class LineItemsController < ApplicationController
   end
 
   private
-    def set_line_item
-      @line_item = LineItem.find(params[:id])
-    end
 
     def line_item_params
       params.require(:line_item).permit(:book_id)

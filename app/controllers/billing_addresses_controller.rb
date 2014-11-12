@@ -2,18 +2,13 @@ class BillingAddressesController < ApplicationController
   before_action :check_auth
 
   def edit
-    @user = current_user
-    @billing_address = @user.billing_address
     @cart = Cart.find(session[:cart_id])
   end
 
   def update
-    @user = current_user
-    @billing_address = @user.billing_address
-    if @billing_address.update(billing_address_params)
-      if @billing_address.shipping == true
-        @shipping_address = @user.shipping_address
-        @shipping_address.update(shipping_address_params)
+    if current_user.billing_address.update(billing_address_params)
+      if current_user.billing_address.shipping == true
+        current_user.shipping_address.update(shipping_address_params)
         redirect_to edit_delivery_path
       else
         redirect_to edit_shipping_address_path(current_user)
@@ -24,9 +19,7 @@ class BillingAddressesController < ApplicationController
   end
 
   def check_auth
-    unless user_signed_in?
-      redirect_to new_user_registration_path
-    end
+    redirect_to new_user_registration_path unless user_signed_in?
   end
 
   private

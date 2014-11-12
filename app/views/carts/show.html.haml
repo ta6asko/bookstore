@@ -33,7 +33,7 @@
           .col-md-10
           .col-md-2
             SUBTOTAL:
-            #{number_to_currency(@cart.total_price)}
+            #{number_to_currency(@cart.subtotal(@cart.discount))}
         .col-md-12.margin_top_20
           .col-md-8
             .in_line= button_to 'EMPTY CART', @cart, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default"
@@ -43,7 +43,8 @@
               = form_tag check_coupon_carts_path, method: :get do |f|
                 = text_field_tag :search, params[:search], placeholder: "Coupon code", class: 'cart_coupon'
                 .in_line= submit_tag "UPDATE", :name => nil, class: "btn btn-default"
-            - if user_signed_in?
-              .in_line= button_to "CHECKOUT", edit_billing_address_path(current_user), method: :get, class: "btn btn-default"
-            - else
-              .in_line= button_to "CHECKOUT", new_user_registration_path, method: :get, class: "btn btn-default"
+            - if @cart.line_items.any?
+              - if user_signed_in?
+                .in_line= button_to "CHECKOUT", edit_billing_address_path(current_user), method: :get, class: "btn btn-default"
+              - else
+                .in_line= button_to "CHECKOUT", new_user_registration_path, method: :get, class: "btn btn-default"

@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  
   def index
     @book = Book.find(params[:book_id])
     @comment = @book.comments.last

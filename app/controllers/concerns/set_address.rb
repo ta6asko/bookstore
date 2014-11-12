@@ -3,17 +3,11 @@ module SetAddress
   
   private
 
-    def set_billing_address
-      @billing_address = current_user.billing_address
-      if @billing_address == nil
-        @billing_address = current_user.create_billing_address
+    def set_address
+      if user_signed_in?
+        current_user.billing_address = current_user.create_billing_address if @billing_address == nil
+        current_user.shipping_address = current_user.create_shipping_address if @shipping_address == nil
       end
     end
 
-    def set_shipping_address
-      @shipping_address = current_user.shipping_address
-      if @shipping_address == nil
-        @shipping_address = current_user.create_shipping_address
-      end
-    end
 end

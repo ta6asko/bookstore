@@ -17,7 +17,7 @@
         EDIT SIPPING ADDRESS 
   .row
     .col-md-8.margin_top
-      = form_for @shipping_address do |f| 
+      = form_for current_user.shipping_address do |f| 
         %p= f.text_field :first_name, placeholder: "First name"
         %p= f.text_field :last_name, placeholder: "Last name"
         %p= f.text_field :street_address, placeholder: "Street Address"
@@ -27,3 +27,5 @@
         %p= f.telephone_field :phone, placeholder: "Phone"
         %p= f.submit 'SAVE AND CONTINUE', class: "btn btn-default"
     .col-md-4.margin_top
+      %p ITEM TOTAL: #{number_to_currency(@cart.total)}
+      %p ORDER TOTAL: #{number_to_currency(@cart.subtotal(@cart.discount))}

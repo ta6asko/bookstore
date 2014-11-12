@@ -14,7 +14,7 @@
   .row
     %h4
       .col-md-12
-        CONFIRM
+        CONFIRM 
   .row
     .col-md-3.margin_top
       %b
@@ -99,7 +99,7 @@
             SUBTOTAL:
         .col-md-1
           .float_left
-            #{number_to_currency(@cart.total_price)}
+            #{number_to_currency(@cart.subtotal(@cart.discount))}
       .col-md-12
         .col-md-8
         .col-md-2
@@ -118,7 +118,7 @@
             ORDER TOTAL:
         .col-md-1
           .float_left
-            #{number_to_currency(@order_total)}
+            #{number_to_currency(@cart.subtotal(@cart.discount)+@order.delivery.price)}
   .col-md-12.margin_top_20
     .col-md-9
       = link_to 'PLACE ORDER', complete_orders_path, method: :get, class: "btn btn-default"

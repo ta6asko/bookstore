@@ -18,12 +18,11 @@
   .row
     .col-md-8.margin_top
       = form_for @order, url: order_path, method: :patch do |f|
-        - @deliveries.each do |delivery|
+        - Delivery.all.each do |delivery|
           = f.radio_button :delivery_id, delivery.id
           #{delivery.name} + #{number_to_currency(delivery.price)}
           %br
         %p= f.submit 'SAVE AND CONTINUE', class: "btn btn-default"
     .col-md-4.margin_top
-      %p ITEM TOTAL: #{number_to_currency(@cart.total_price)}
-      %p SIPPING: #{number_to_currency(@cart.total_price)}
-      %p ORDER TOTAL: #{number_to_currency(@cart.total_price)}
+      %p ITEM TOTAL: #{number_to_currency(@cart.total)}
+      %p ORDER TOTAL: #{number_to_currency(@cart.subtotal(@cart.discount))}

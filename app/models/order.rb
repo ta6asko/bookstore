@@ -4,5 +4,6 @@ class Order < ActiveRecord::Base
   belongs_to :delivery
   has_one    :payment
 
+
 end
 

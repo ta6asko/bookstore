@@ -7,14 +7,19 @@ class Cart < ActiveRecord::Base
     count = count.to_i
     if current_item
       current_item.quantity += count
-        else
+    else
       current_item = line_items.build(book_id: book_id, quantity: count)
     end
-    
     current_item
   end
 
-  def total_price
+  def subtotal(discount)
+    subtotal = line_items.to_a.sum { |item| item.total_price }
+    subtotal -= discount if discount > 0
+    subtotal
+  end
+
+  def total
     line_items.to_a.sum { |item| item.total_price }
   end
 

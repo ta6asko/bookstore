@@ -20,7 +20,7 @@
       %h4  
         SHOP BY CATEGORIES
       %ul
-        - @categories.each do |category|
+        - Category.all.each do |category|
           %li
             %p= link_to category.name, category_path(category)
 

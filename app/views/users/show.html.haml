@@ -12,7 +12,7 @@
       .row
         .row
           .col-md-5.margin_top_20
-            = form_for @billing_address, url: settings_update_billing_address_orders_path do |f| 
+            = form_for current_user.billing_address, url: user_settings_update_billing_address_path(current_user) do |f| 
               %p= f.text_field :first_name, placeholder: "First name"
               %p= f.text_field :last_name, placeholder: "Last name"
               %p= f.text_field :street_address, placeholder: "Street Address"
@@ -30,7 +30,7 @@
       .row
         .row
           .col-md-5.margin_top_20
-            = form_for @shipping_address do |f| 
+            = form_for current_user.shipping_address, url: user_settings_update_shipping_address_path(current_user) do |f| 
               %p= f.text_field :first_name, placeholder: "First name"
               %p= f.text_field :last_name, placeholder: "Last name"
               %p= f.text_field :street_address, placeholder: "Street Address"
@@ -48,8 +48,8 @@
       .row
         .row
           .col-md-5.margin_top_20
-            = form_for @shipping_address do |f| 
-              %p= f.text_field :first_name, placeholder: "First name"
+            = form_for current_user, url: user_update_email_path(current_user) do |f| 
+              %p= f.text_field :email
               %p= f.submit 'SAVE', class: "btn btn-default"
     .col-md-2
     .col-md-5
@@ -60,11 +60,11 @@
       .row
         .row
           .col-md-5.margin_top_20
-            = form_for @shipping_address do |f| 
+            = form_for current_user, url: user_update_password_path(current_user) do |f| 
               Old password
-              %p= f.text_field :first_name, placeholder: "First name"
+              %p= f.password_field :password, :autocomplete => "off", placeholder: "type old password"
               New password
-              %p= f.text_field :first_name, placeholder: "First name"
+              %p= f.password_field :password_confirmation, placeholder: "type new password"
               %p= f.submit 'SAVE', class: "btn btn-default"
   .col-md-12
     .row
