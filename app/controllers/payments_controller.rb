@@ -1,5 +1,8 @@
 class PaymentsController < ApplicationController 
 
+  include SetOrder
+  
+  before_action :set_order, only: [:edit]
   before_action :set_payment, only: [:edit]
 
   def set_payment

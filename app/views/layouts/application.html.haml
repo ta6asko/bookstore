@@ -34,12 +34,12 @@
             %li= link_to "SHOP", categories_path
         .col-md-2
           %ul.nav.navbar-nav
-            %li.cart_li= link_to "CART", cart_path(session[:cart_id])
+            %li.cart_li= link_to "CART", cart_orders_path
         .col-md-4
           - if user_signed_in?
             %ul.nav.navbar-nav
               %li= link_to 'Settings', user_path(current_user)
-              %li= link_to 'Orders', edit_user_registration_path
+              %li= link_to 'Orders', orders_path
               %li= link_to 'Sing out', destroy_user_session_path, :method => :delete
           - else
             %ul.nav.navbar-nav

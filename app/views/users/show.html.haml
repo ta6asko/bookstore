@@ -73,8 +73,9 @@
           PASSWORD
   .row
     .col-md-12.height.margin_top_20
-      = link_to 'PLEASE REMOVE MY ACCOUNT', '', class: "btn btn-default"
-      = check_box_tag ""
-      I understand that all data will be lost
+      = form_for current_user, url: user_destroy_user_path(current_user) do |f| 
+        = f.submit 'PLEASE REMOVE MY ACCOUNT', class: "btn btn-default"
+        = f.check_box :check_del
+        I understand that all data will be lost
 
 

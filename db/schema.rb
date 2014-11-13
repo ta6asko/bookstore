@@ -52,11 +52,6 @@ ActiveRecord::Schema.define(version: 20141110151902) do
     t.datetime "updated_at"
   end
 
-  create_table "billing_addresses_orders", id: false, force: true do |t|
-    t.integer "billing_address_id"
-    t.integer "order_id"
-  end
-
   create_table "books", force: true do |t|
     t.string   "title"
     t.text     "short_description"
@@ -64,14 +59,6 @@ ActiveRecord::Schema.define(version: 20141110151902) do
     t.string   "image"
     t.float    "price"
     t.integer  "category_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "carts", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "discount",      default: 0
-    t.integer  "coupon_number"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -114,21 +101,21 @@ ActiveRecord::Schema.define(version: 20141110151902) do
 
   create_table "line_items", force: true do |t|
     t.integer  "book_id"
-    t.integer  "cart_id"
+    t.integer  "order_id"
+    t.integer  "quantity",   default: 1
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "quantity",   default: 1
-    t.integer  "order_id"
   end
 
   add_index "line_items", ["book_id"], name: "index_line_items_on_book_id", using: :btree
-  add_index "line_items", ["cart_id"], name: "index_line_items_on_cart_id", using: :btree
   add_index "line_items", ["order_id"], name: "index_line_items_on_order_id", using: :btree
 
   create_table "orders", force: true do |t|
-    t.integer  "delivery_id", default: 1
-    t.integer  "progress_id", default: 1
+    t.integer  "delivery_id",   default: 1
+    t.string   "progress",      default: "in_progress"
     t.integer  "user_id"
+    t.integer  "discount",      default: 0
+    t.integer  "coupon_number"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -146,14 +133,6 @@ ActiveRecord::Schema.define(version: 20141110151902) do
     t.date     "expiration_date"
     t.integer  "card_code"
     t.integer  "order_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "positions", force: true do |t|
-    t.integer  "cart_id"
-    t.integer  "book_id"
-    t.integer  "quantity"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -194,11 +173,6 @@ ActiveRecord::Schema.define(version: 20141110151902) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "shipping_addresses_orders", id: false, force: true do |t|
-    t.integer "shipping_address_id"
-    t.integer "order_id"
   end
 
   create_table "users", force: true do |t|

@@ -114,6 +114,10 @@ li {
   border-bottom: solid;
   margin-top: 10px;
 }
+.border_line{
+  border-bottom: solid;
+  margin-top: 10px;
+}
 .height{
   height: 300px; 
 }

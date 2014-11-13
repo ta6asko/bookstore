@@ -1,13 +1,13 @@
 class LineItemsController < ApplicationController
-  include CurrentCart
+  include CurrentOrder
 
-  before_action :set_cart, only: [:create]
+  before_action :set_order, only: [:create]
 
   def create
     book = Book.find(params[:book_id]) 
-    @line_item = @cart.add_book(book.id, params[:line_item][:quantity])
+    @line_item = @order.add_book(book.id, params[:line_item][:quantity])
     if @line_item.save
-      redirect_to @line_item.cart 
+      redirect_to cart_orders_path
     else
       render action: 'new'
     end
@@ -16,7 +16,7 @@ class LineItemsController < ApplicationController
   def destroy
     current_item = LineItem.find(params[:id])
     current_item.destroy
-    redirect_to cart_path
+    redirect_to cart_orders_path
   end
 
   private
