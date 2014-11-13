@@ -17,7 +17,7 @@
         EDIT CREDIT CARD
   .row
     .col-md-8.margin_top
-      = form_for @payment do |f|
+      = form_for @order.payment do |f|
         %p= f.text_field :number, placeholder: "Card Number"
         Expiration Date:
         %p= f.date_select :expiration_date, {order: [:month, :year], discard_day: true, prompt: {month: 'Month', year: 'Year'}}

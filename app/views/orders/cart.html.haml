@@ -40,7 +40,7 @@
             .in_line= button_to 'CONTINUE SHOPPING', categories_path, method: :get, class: "btn btn-default"
           .col-md-4
             .in_line
-              = form_tag check_coupon_carts_path, method: :get do |f|
+              = form_tag check_coupon_orders_path, method: :get do |f|
                 = text_field_tag :search, params[:search], placeholder: "Coupon code", class: 'cart_coupon'
                 .in_line= submit_tag "UPDATE", :name => nil, class: "btn btn-default"
             - if @cart.line_items.any?

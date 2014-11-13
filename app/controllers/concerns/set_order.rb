@@ -10,7 +10,6 @@ module SetOrder
       else
         @order = current_user.orders.create
       end
-      @order
     end
 
 end

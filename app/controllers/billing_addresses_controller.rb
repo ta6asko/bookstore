@@ -1,8 +1,9 @@
 class BillingAddressesController < ApplicationController
+  
   before_action :check_auth
 
   def edit
-    @cart = Cart.find(session[:cart_id])
+    @cart = Order.find(session[:cart_id])
   end
 
   def update

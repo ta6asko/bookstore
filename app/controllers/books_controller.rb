@@ -1,7 +1,7 @@
 class BooksController < ApplicationController
 
-  include CurrentCart
-  before_action :set_cart, only: [:index, :show]
+  include CurrentOrder
+  before_action :set_order
 
   def index
   	@books = Book.all

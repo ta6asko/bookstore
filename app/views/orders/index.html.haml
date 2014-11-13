@@ -1,0 +1,46 @@
+.container
+  .row
+    .col-md-12
+      %h3
+        Orders
+    .col-md-12.border_line
+      %h4
+        IN PROGRESS
+    .col-md-12
+      .col-md-5
+      .col-md-4
+        BOOK
+      .col-md-1
+        PRICE
+      .col-md-1
+        QTY
+      .col-md-1
+        TOTAL
+    .col-md-12.border_line
+      %h4
+        WAITING FOR PROCESSING
+    .row
+      .col-md-12
+        - @orders.each do |order| 
+          .col-md-12.dashed_line
+            .col-md-2
+              = image_tag(order.book.image, size: "150x100")
+            .col-md-7
+              %h4
+                = order.book.title
+              = order.book.full_description.first(200) + '...'
+            .col-md-1
+              #{number_to_currency(order.book.price)}
+            .col-md-1
+              = order.quantity
+            .col-md-1
+              #{number_to_currency(order.total_price)}
+      .row
+        .col-md-12 
+      .col-md-12        
+    .col-md-12.border_line
+      %h4
+        IN DELIVERY
+    .col-md-12.border_line
+      %h4
+        DELIVERED
