@@ -24,5 +24,5 @@
           %br
         %p= f.submit 'SAVE AND CONTINUE', class: "btn btn-default"
     .col-md-4.margin_top
-      %p ITEM TOTAL: #{number_to_currency(@cart.total)}
-      %p ORDER TOTAL: #{number_to_currency(@cart.subtotal(@cart.discount))}
+      %p ITEM TOTAL: #{number_to_currency(@order.total)}
+      %p ORDER TOTAL: #{number_to_currency(@order.subtotal(@order.discount))}

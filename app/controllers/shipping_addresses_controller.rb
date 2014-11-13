@@ -1,7 +1,7 @@
 class ShippingAddressesController < ApplicationController
 
   def edit
-    @cart = Cart.find(session[:cart_id])
+    @cart = Order.find(session[:cart_id])
   end
 
   def update

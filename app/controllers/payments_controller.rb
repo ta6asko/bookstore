@@ -1,22 +1,21 @@
 class PaymentsController < ApplicationController 
 
-  include SetOrder
+  include CurrentOrder
   
   before_action :set_order, only: [:edit]
   before_action :set_payment, only: [:edit]
 
   def set_payment
-    @order = current_user.orders.find_by(progress_id: '1')
+    @order = Order.find(session[:cart_id])
     @order.create_payment if @order.payment == nil
   end
 
   def edit 
-    @cart = Cart.find(session[:cart_id])
-    @order = current_user.orders.find_by(progress_id: '1')
+    @order = Order.find(session[:cart_id])
   end
 
   def update
-    @order = current_user.orders.find_by(progress_id: '1')
+    @order = Order.find(session[:cart_id])
     @payment = @order.payment.update(payment_params)
     redirect_to confirm_orders_path
   end

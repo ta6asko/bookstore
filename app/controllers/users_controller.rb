@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   
   include SetAddress
-  include CurrentCart
+  include CurrentOrder
 
   before_action :set_cart, only: [:show]
   before_action :set_address, only: [:settings_update_billing_address, :settings_update_shipping_address, :show]

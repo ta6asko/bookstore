@@ -11,7 +11,7 @@
         TOTAL
     .row
       .col-md-12.margin_top_10
-        - @cart.line_items.each do |item| 
+        - @order.line_items.each do |item| 
           .col-md-12.margin_bot_10
             .col-md-2
               = image_tag(item.book.image, size: "150x100")
@@ -33,17 +33,17 @@
           .col-md-10
           .col-md-2
             SUBTOTAL:
-            #{number_to_currency(@cart.subtotal(@cart.discount))}
+            #{number_to_currency(@order.subtotal(@order.discount))}
         .col-md-12.margin_top_20
           .col-md-8
-            .in_line= button_to 'EMPTY CART', @cart, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default"
+            .in_line= button_to 'EMPTY CART', @order, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default"
             .in_line= button_to 'CONTINUE SHOPPING', categories_path, method: :get, class: "btn btn-default"
           .col-md-4
             .in_line
               = form_tag check_coupon_orders_path, method: :get do |f|
                 = text_field_tag :search, params[:search], placeholder: "Coupon code", class: 'cart_coupon'
                 .in_line= submit_tag "UPDATE", :name => nil, class: "btn btn-default"
-            - if @cart.line_items.any?
+            - if @order.line_items.any?
               - if user_signed_in?
                 .in_line= button_to "CHECKOUT", edit_billing_address_path(current_user), method: :get, class: "btn btn-default"
               - else

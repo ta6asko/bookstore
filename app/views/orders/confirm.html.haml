@@ -76,7 +76,7 @@
       TOTAL
   .row
     .col-md-12.margin_top_10
-      - @cart.line_items.each do |order| 
+      - @order.line_items.each do |order| 
         .col-md-12.margin_bot_10
           .col-md-2
             = image_tag(order.book.image, size: "150x100")
@@ -99,7 +99,7 @@
             SUBTOTAL:
         .col-md-1
           .float_left
-            #{number_to_currency(@cart.subtotal(@cart.discount))}
+            #{number_to_currency(@order.subtotal(@order.discount))}
       .col-md-12
         .col-md-8
         .col-md-2
@@ -118,7 +118,7 @@
             ORDER TOTAL:
         .col-md-1
           .float_left
-            #{number_to_currency(@cart.subtotal(@cart.discount)+@order.delivery.price)}
+            #{number_to_currency(@order.subtotal(@order.discount)+@order.delivery.price)}
   .col-md-12.margin_top_20
     .col-md-9
       = link_to 'PLACE ORDER', complete_orders_path, method: :get, class: "btn btn-default"
