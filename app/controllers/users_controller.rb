@@ -12,12 +12,6 @@ class UsersController < ApplicationController
     @cart = Cart.find(session[:cart_id])
   end
 
-  def update_email
-    @user = User.find(current_user.id)
-    current_user.update(user_params)
-    redirect_to user_path(current_user), notice: "Saved" if @user.save
-  end
-
   def settings_update_billing_address
     if current_user.billing_address.update(billing_address_params)
       redirect_to user_path(current_user), notice: "Saved" 
@@ -32,10 +26,16 @@ class UsersController < ApplicationController
     logger.error "Not saved"
   end
 
+  def update_email
+    @user = User.find(current_user.id)
+    current_user.update(user_params)
+    redirect_to user_path(current_user), notice: "Saved" if @user.save
+  end
+
   def update_password
     @user = User.find(current_user.id)
-    if @user.update(user_params)
-      sign_in @user, :bypass => true
+    if @user.update_with_password(user_params)
+      sign_in @user, :bypass => true  
       redirect_to root_path
     else
       render "show"
@@ -45,7 +45,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.required(:user).permit(:password, :password_confirmation)
+    params.required(:user).permit(:password, :current_password)
   end
 
 end

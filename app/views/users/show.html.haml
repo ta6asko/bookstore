@@ -60,11 +60,11 @@
       .row
         .row
           .col-md-5.margin_top_20
-            = form_for current_user, url: user_update_password_path(current_user) do |f| 
+            = form_for @user, url: user_update_password_path(@user) do |f| 
               Old password
-              %p= f.password_field :password, :autocomplete => "off", placeholder: "type old password"
+              %p= f.password_field :current_password, placeholder: "type old password"
               New password
-              %p= f.password_field :password_confirmation, placeholder: "type new password"
+              %p= f.password_field :password, placeholder: "type new password"
               %p= f.submit 'SAVE', class: "btn btn-default"
   .col-md-12
     .row
