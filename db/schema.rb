@@ -111,9 +111,9 @@ ActiveRecord::Schema.define(version: 20141110151902) do
   add_index "line_items", ["order_id"], name: "index_line_items_on_order_id", using: :btree
 
   create_table "orders", force: true do |t|
+    t.integer  "user_id"
     t.integer  "delivery_id",   default: 1
     t.string   "progress",      default: "in_progress"
-    t.integer  "user_id"
     t.integer  "discount",      default: 0
     t.integer  "coupon_number"
     t.datetime "created_at"

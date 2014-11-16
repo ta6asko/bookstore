@@ -11,7 +11,7 @@ class PaymentsController < ApplicationController
   end
 
   def edit 
-    @order = Order.find(session[:cart_id])
+    @cart = Order.find(session[:cart_id])
   end
 
   def update

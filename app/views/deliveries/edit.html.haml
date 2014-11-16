@@ -2,19 +2,14 @@
   .row
     .col-md-3
       %h3
-        DELIVERY
+        = t("addresses.checkout")
     .col-md-9
       %h4
-        ADDRESS   
-        %u
-          DELIVERY
-        PAYMENT
-        CONFIRM
-        COMPLETE
-  .row
-    %h4
-      .col-md-12
-        DELIVERY
+        = t("addresses.add")
+        %u= t("addresses.delivered")
+        = t("addresses.payment")
+        = t("addresses.confirm")
+        = t("addresses.complete")
   .row
     .col-md-8.margin_top
       = form_for @order, url: order_path, method: :patch do |f|
@@ -22,7 +17,16 @@
           = f.radio_button :delivery_id, delivery.id
           #{delivery.name} + #{number_to_currency(delivery.price)}
           %br
-        %p= f.submit 'SAVE AND CONTINUE', class: "btn btn-default"
+        %p= f.submit t("addresses.submit"), class: "btn btn-default"
     .col-md-4.margin_top
-      %p ITEM TOTAL: #{number_to_currency(@order.total)}
-      %p ORDER TOTAL: #{number_to_currency(@order.subtotal(@order.discount))}
+      %table.table
+        %tr
+          %td.col-dm-1
+            = t("addresses.item_total")
+          %td.col-dm-1
+            #{number_to_currency(@cart.total)}
+        %tr
+          %td.col-dm-1
+            = t("addresses.oreder_total")
+          %td.col-dm-1
+            #{number_to_currency(@cart.subtotal(@cart.discount))}

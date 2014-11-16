@@ -1,23 +1,95 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  layout:
+    app_title: "The Bookstore"
+    home: "HOME"
+    shop: "SHOP"
+    cart: "Shopping Cart:"
+    orders: "Orders"
+    settings: "Settings"
+    sign_out: "Sign out"
+    sign_up: "Sign up"
+    sign_in: "Sign in"
+  books:
+    submit: "Add to Cart"
+    reviews: 'Reviews'
+    new_review: "Add review for this book"
+    by: "by"
+  categories: 
+    shop: "Shop"
+    shop_by_categories: "SHOP BY CATEGORIES"
+    categories: "Categories - "
+  cart:
+    book: "BOOK"
+    price: "PRICE"
+    quantity: "QUANTITY"
+    total: "TOTAL"
+    subtotal: "SUBTOTAL: "
+    empty: "EMPTY CART"
+    continue: "CONTINUE SHOPPING"
+    coupon: "Coupon code"
+    update: "UPDATE"
+    checkout: "CHECKUOT"
+  addresses:
+    checkout: "Checkout"
+    add: "ADDRESS"
+    delivered: "DELIVERY"
+    payment: "PAYMENT"
+    confirm: "CONFIRM"
+    complete: "COMPLETE"
+    billing_address: "BILLING ADDRESS"
+    shipping_address: "SHIPPING ADDRESS"
+    summary: "ORDER SUMMARY"
+    first_name: "First Name"
+    last_name:  "last Name"
+    street_address: "Street Address"
+    city: "City"
+    zip: "Zip Code"
+    phone: "Phone Number"
+    use_billing: "Use Billing Address"
+    submit: "SAVE AND CONTINUE"
+    item_total: "ITEM TOTAL: "
+    oreder_total: "ORDER TOTAL: "
+  payment:
+    credit_card: "CREDIT CARD"
+    card_code: "Card Code"
+    card_number: "Card Number"
+    extention_date: "Expiration Date: "
+    month: "Month"
+    year: "Year"
+  confirm:
+    confirm: "CONFIRM"
+    payment_info: "Payment Information"
+    shipping_address: "Shipping Address"
+    billing_address: "Billing Address"
+    shipments: "Shipments"
+    edit: "(edit)"
+    shipping: "SHIPPING: "
+    order_total: "ORDER TOTAL: "
+    submit: "PLACE ORDER"
+  complete:
+    order: "Order"
+    submit: "GO BACK TO STORE"
+  orders:  
+    title: "Orders"
+    in_progress: "IN PROGRESS"
+    waiting: WAITING FOR PROCESSING
+    in_queue: "IN QUEUE"
+    in_delivery: "IN DELIVERY"    
+    delivered: "DELIVERED"
+    submit: "GO TO CART"
+    number: "NUMBER"
+    completed_at: "COMPLETED AT"
+    view: "View"
+  order:
+    back: "<< Back to orders"
+    order: "Order"
+  settings:
+    title: "Settings"
+    email: "EMAIL"
+    pass: "PASSWORD"
+    remove: "REMOVE ACCOUNT"
+    old_password: "Old password"
+    new_password: "New password"
+    save: "SAVE"
+    destroy_submit: "PLEASE REMOVE MY ACCOUNT"
+    checkbox: "I understand that all data will be lost"

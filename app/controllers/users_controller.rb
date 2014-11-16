@@ -3,13 +3,13 @@ class UsersController < ApplicationController
   include SetAddress
   include CurrentOrder
 
-  before_action :set_cart, only: [:show]
+  before_action :set_order, only: [:show]
   before_action :set_address, only: [:settings_update_billing_address, :settings_update_shipping_address, :show]
 
   
   def show
     @user = User.find(current_user.id)
-    @cart = Cart.find(session[:cart_id])
+    @cart = Order.find(session[:cart_id])
   end
 
   def settings_update_billing_address

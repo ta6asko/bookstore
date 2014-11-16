@@ -2,16 +2,20 @@ class OrdersController < ApplicationController
   
   include CurrentOrder
   include SetAddress
+  
   before_action :destroy_line_items, only: [:destroy]
   after_action :up_order, only: [:complete]
 
-
   def index
-    @orders = current_user.orders
+    @in_progress = Order.find(session[:cart_id])
+    @in_queue = current_user.orders.where(progress: 'in_queue')
+    @in_delivery = current_user.orders.where(progress: 'in_delivery')
+    @delivered = current_user.orders.where(progress: 'delivered')
   end
 
   def show
-
+    @order = current_user.orders.find(params[:id])
+    @status = @order.set_progress(@order.progress)
   end
 
   def cart

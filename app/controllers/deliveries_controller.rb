@@ -4,7 +4,7 @@ class DeliveriesController < ApplicationController
   before_action :set_order, only: [:edit]
 
   def edit
-    @order = Order.find(session[:cart_id])
+    @cart = Order.find(session[:cart_id])
   end
 
 end

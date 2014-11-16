@@ -2,25 +2,35 @@
   .row
     .col-md-3
       %h3
-        Checkout
+        = t("addresses.checkout")
     .col-md-9
       %h4
-        ADDRESS
-        DELIVERY  
-        %u
-          PAYMENT
-        CONFIRM
-        COMPLETE
+        = t("addresses.add")
+        = t("addresses.delivered")
+        %u= t("addresses.payment")
+        = t("addresses.confirm")
+        = t("addresses.complete")
   .row
     %h4
       .col-md-12
-        EDIT CREDIT CARD
+        = t("payment.credit_card")
   .row
     .col-md-8.margin_top
       = form_for @order.payment do |f|
-        %p= f.text_field :number, placeholder: "Card Number"
-        Expiration Date:
-        %p= f.date_select :expiration_date, {order: [:month, :year], discard_day: true, prompt: {month: 'Month', year: 'Year'}}
-        %p= f.text_field :card_code, placeholder: "Card Code"
-        %p= f.submit 'SAVE AND CONTINUE', class: "btn btn-default"
+        %p= f.text_field :number, placeholder: t("payment.card_number")
+        = t("payment.extention_date")
+        %p= f.date_select :expiration_date, {order: [:month, :year], discard_day: true, prompt: {month: t("payment.month"), year: t("payment.year")}}
+        %p= f.text_field :card_code, placeholder: t("payment.card_code")
+        %p= f.submit t("addresses.submit"), class: "btn btn-default"
     .col-md-4.margin_top
+      %table.table
+        %tr
+          %td.col-dm-1
+            = t("addresses.item_total")
+          %td.col-dm-1
+            #{number_to_currency(@cart.total)}
+        %tr
+          %td.col-dm-1
+            = t("addresses.oreder_total")
+          %td.col-dm-1
+            #{number_to_currency(@cart.subtotal(@cart.discount))}

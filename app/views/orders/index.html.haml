@@ -1,46 +1,114 @@
 .container
   .row
-    .col-md-12
+    .col-md-12.table.table-striped
       %h3
-        Orders
-    .col-md-12.border_line
-      %h4
-        IN PROGRESS
+        = t("orders.title")
     .col-md-12
-      .col-md-5
-      .col-md-4
-        BOOK
-      .col-md-1
-        PRICE
-      .col-md-1
-        QTY
-      .col-md-1
-        TOTAL
-    .col-md-12.border_line
-      %h4
-        WAITING FOR PROCESSING
-    .row
-      .col-md-12
-        - @orders.each do |order| 
-          .col-md-12.dashed_line
-            .col-md-2
-              = image_tag(order.book.image, size: "150x100")
-            .col-md-7
+      %h4.border_line
+        = t("orders.in_progress") 
+      %table.table.table-striped
+        %tr
+          %th.col-md-2
+          %th.col-md-7
+            = t("cart.book")
+          %th.col-md-1
+            = t("cart.price")
+          %th.col-md-1
+            = t("cart.quantity")
+          %th.col-md-1
+            = t("cart.total")
+        - @in_progress.line_items.each do |item| 
+          %tr
+            %td.col-md-2
+              = image_tag(item.book.image, size: "150x100")
+            %td.col-md-7
               %h4
-                = order.book.title
-              = order.book.full_description.first(200) + '...'
-            .col-md-1
-              #{number_to_currency(order.book.price)}
-            .col-md-1
-              = order.quantity
-            .col-md-1
-              #{number_to_currency(order.total_price)}
-      .row
-        .col-md-12 
-      .col-md-12        
-    .col-md-12.border_line
-      %h4
-        IN DELIVERY
-    .col-md-12.border_line
-      %h4
-        DELIVERED
+                = item.book.title
+              = item.book.full_description.first(200) + '...'
+            %td.col-md-1
+              #{number_to_currency(item.book.price)}
+            %td.col-md-1
+              = item.quantity
+            %td.col-md-1
+              #{number_to_currency(item.total_price)}
+      %table.table
+        %tr
+          %td.col-md-9
+            = link_to t("orders.submit"), cart_orders_path, class: "btn btn-default"
+          %td.col-md-2
+            %p.float_r
+              = t("cart.subtotal")
+          %td.col-md-1
+            #{number_to_currency(@in_progress.subtotal(@in_progress.discount))}
+    .col-md-12.table.table-striped
+      %h4.border_line
+        = t("orders.waiting")  
+      %table.table.table-striped
+        %tr
+          %th.col-md-2
+            = t("orders.number")
+          %th.col-md-3
+            = t("orders.completed_at")
+          %th.col-md-2
+            = t("orders.title")
+          %th.col-md-1
+          %th.col-md-4
+        - @in_queue.each do |item|
+          %tr
+            %td.col-md-2
+              = link_to "R000#{item.id}", order_path(item.id)
+            %td.col-md-3
+              = item.created_at
+            %td.col-md-2
+              #{number_to_currency(item.subtotal(item.discount)+item.delivery.price)}
+            %td.col-md-1
+              = link_to t("orders.view"), order_path(item.id)
+            %td.col-md-4             
+    .col-md-12.table.table-striped
+      %h4.border_line
+        = t("orders.in_delivery")
+      %table.table.table-striped
+        %tr
+          %th.col-md-2
+            = t("orders.number")
+          %th.col-md-3
+            = t("orders.completed_at")
+          %th.col-md-2
+            = t("orders.title")
+          %th.col-md-1
+          %th.col-md-4
+        - @in_delivery.each do |item|
+          %tr
+            %td.col-md-2
+              = link_to "R000#{item.id}", order_path(item.id)
+            %td.col-md-3
+              = item.created_at
+            %td.col-md-2
+              #{number_to_currency(item.subtotal(item.discount)+item.delivery.price)}
+            %td.col-md-1
+              = link_to t("orders.view"), order_path(item.id)
+            %td.col-md-4  
+    .col-md-12.table.table-striped
+      %h4.border_line
+        = t("orders.delivered")
+      %table.table.table-striped
+        %tr
+          %th.col-md-2
+            = t("orders.number")
+          %th.col-md-3
+            = t("orders.completed_at")
+          %th.col-md-2
+            = t("orders.title")
+          %th.col-md-1
+          %th.col-md-4
+        - @delivered.each do |item|
+          %tr
+            %td.col-md-2
+              = link_to "R000#{item.id}", order_path(item.id)
+            %td.col-md-3
+              = item.created_at
+            %td.col-md-2
+              #{number_to_currency(item.subtotal(item.discount)+item.delivery.price)}
+            %td.col-md-1
+              = link_to t("orders.view"), order_path(item.id)
+            %td.col-md-4

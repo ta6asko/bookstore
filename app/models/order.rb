@@ -25,6 +25,34 @@ class Order < ActiveRecord::Base
   def total
     line_items.to_a.sum { |item| item.total_price }
   end  
-   
+  
+  def set_progress(progress)
+      if progress == 'in_progress'
+        @status = "In progress"
+      elsif progress == 'in_queue'
+        @status = "In queue"
+      elsif progress == 'in_delivery'
+        @status = "In delivery" 
+      elsif progress == 'delivered'
+        @status = "Delivered" 
+      end
+      @status
+    end 
+
+  rails_admin do
+    edit do
+      field :progress
+    end
+
+    show do
+      field :user
+      field :progress
+    end
+  end
+
+
+
+
+
 end
 

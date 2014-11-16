@@ -17,7 +17,7 @@
           .in_line
             = form_for @line_item, url: line_items_path(book_id: @books.last.id) do |f|
               .col-md-3= f.text_field :quantity, :value => '1'
-              .col-md-3= f.submit 'Add to Cart', class: "btn btn-default"
+              .col-md-3= f.submit t('books.submit'), class: "btn btn-default"
     - @books.each do |book|
       .item
         %h3.media-heading= book.title
@@ -35,6 +35,6 @@
           .in_line
             = form_for @line_item, url: line_items_path(book_id: @books.last.id) do |f|
               .col-md-3= f.text_field :quantity, :value => '1'
-              .col-md-3= f.submit 'Add to Cart', class: "btn btn-default"
+              .col-md-3= f.submit t('books.submit'), class: "btn btn-default"
   %a.carousel-control.left{"data-slide" => "prev", href: "#carousel"} ‹
   %a.carousel-control.right{"data-slide" => "next", href: "#carousel"} ›

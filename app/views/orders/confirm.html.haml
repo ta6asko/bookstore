@@ -2,24 +2,23 @@
   .row
     .col-md-3
       %h3
-        Checkout
+        = t("addresses.checkout")
     .col-md-9
       %h4
-        ADDRESS  
-        DELIVERY
-        PAYMENT
-        %u
-          CONFIRM
-        COMPLETE
+        = t("addresses.add")
+        = t("addresses.delivered")
+        = t("addresses.payment")
+        %u= t("addresses.confirm")
+        = t("addresses.complete")
   .row
     %h4
       .col-md-12
-        CONFIRM 
+        = t("confirm.confirm") 
   .row
     .col-md-3.margin_top
       %b
-        Shipping Address
-      = link_to "(edit)", edit_shipping_address_path(current_user.shipping_address)
+        = t("confirm.shipping_address")
+      = link_to t("confirm.edit"), edit_shipping_address_path(current_user.shipping_address)
       %br
       = current_user.shipping_address.first_name
       = current_user.shipping_address.last_name
@@ -34,8 +33,8 @@
       Phone + #{current_user.shipping_address.phone}
     .col-md-3.margin_top
       %b
-        Billing Address
-      = link_to "(edit)", edit_billing_address_path(current_user.billing_address)
+        = t("confirm.billing_address")
+      = link_to t("confirm.edit"), edit_billing_address_path(current_user.billing_address)
       %br
       = current_user.billing_address.first_name
       = current_user.billing_address.last_name
@@ -50,75 +49,64 @@
       Phone +#{current_user.billing_address.phone}
     .col-md-3.margin_top
       %b
-        Shipments
-      = link_to "(edit)", edit_delivery_path(@order)
+        = t("confirm.shipments")
+      = link_to t("confirm.edit"), edit_delivery_path(@order)
       %br
       = @order.delivery.name
     .col-md-3.margin_top
       %b
-        Payment Information
-      = link_to "(edit)", edit_payment_path(@order.payment)
+        = t("confirm.payment_info")
+      = link_to t("confirm.edit"), edit_payment_path(@order.payment)
       %br
       **** **** **** #{@order.payment.number.to_s.slice(-6..-3)}
       %br
       = @order.payment.expiration_date.strftime("%m/%Y")
       %br
 .row
-  .col-md-12.margin_confirm
-    .col-md-5
-    .col-md-4
-      BOOK
-    .col-md-1
-      PRICE
-    .col-md-1
-      QTY
-    .col-md-1
-      TOTAL
-  .row
-    .col-md-12.margin_top_10
-      - @order.line_items.each do |order| 
-        .col-md-12.margin_bot_10
-          .col-md-2
-            = image_tag(order.book.image, size: "150x100")
-          .col-md-7
+  .col-md-12.table.table-striped
+    %table.table.table-striped
+      %tr
+        %th.col-md-2
+        %th.col-md-7
+          = t("cart.book")
+        %th.col-md-1
+          = t("cart.price")
+        %th.col-md-1
+          = t("cart.quantity")
+        %th.col-md-1
+          = t("cart.total")
+      - @order.line_items.each do |item|      
+        %tr
+          %td.col-md-2
+            = image_tag(item.book.image, size: "150x100")
+          %td.col-md-7
             %h4
-              = order.book.title
-            = order.book.full_description.first(200) + '...'
-          .col-md-1
-            #{number_to_currency(order.book.price)}
-          .col-md-1
-            = order.quantity
-          .col-md-1
-            #{number_to_currency(order.total_price)}          
-    .col-md-12
-      .dashed_line.margin_top_20
-      .col-md-12.margin_top_5
-        .col-md-8
-        .col-md-2
-          .float_right
-            SUBTOTAL:
-        .col-md-1
-          .float_left
-            #{number_to_currency(@order.subtotal(@order.discount))}
-      .col-md-12
-        .col-md-8
-        .col-md-2
-          .float_right
-            SHIPPING:
-        .col-md-1
-          .float_left
-            #{number_to_currency(@order.delivery.price)}
-        .col-md-1
-    .col-md-12
-      .dashed_line.margin_top_20
-      .col-md-12.margin_top_5
-        .col-md-8
-        .col-md-2
-          .float_right
-            ORDER TOTAL:
-        .col-md-1
-          .float_left
-            #{number_to_currency(@order.subtotal(@order.discount)+@order.delivery.price)}
-  .col-md-12.margin_top_20
+              = item.book.title
+            = item.book.full_description.first(200) + '...'
+          %td.col-md-1
+            #{number_to_currency(item.book.price)}
+          %td.col-md-1
+            .cart_quantity= number_field_tag 'quantity', item.quantity, in: 1...20
+          %td.col-md-1
+            .in_line #{number_to_currency(item.total_price)}
+    %table.table
+      %tr
+        %td.col-md-9
+        %td.col-md-2
+          %p.float_r
+            = t("cart.subtotal")
+            %br
+            = t("confirm.shipping")
+        %td.col-md-1
+          #{number_to_currency(@order.subtotal(@order.discount))}
+          #{number_to_currency(@order.delivery.price)}
+      %tr
+        %td.col-md-9
+        %td.col-md-2
+          %p.float_r
+            = t("confirm.order_total")
+        %td.col-md-1
+          #{number_to_currency(@order.subtotal(@order.discount)+@order.delivery.price)}
+    .col-md-12.margin_top_20
     .col-md-9
-      = link_to 'PLACE ORDER', complete_orders_path, method: :get, class: "btn btn-default"
+      = link_to t("confirm.submit"), complete_orders_path, method: :get, class: "btn btn-default"

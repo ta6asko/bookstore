@@ -2,11 +2,12 @@
   .row
     .col-md-9
       %ol.breadcrumb
-        %li= link_to "HOME", books_path
-        %li= link_to "SHOP", categories_path
+        %li= link_to t('layout.home'), books_path
+        %li= link_to t('layout.shop'), categories_path
         %li.active #{@category.name}
       %h3
-        Categories - #{@category.name}
+        = t("categories.categories")
+        #{@category.name}
       .row
         .row
           %ul
@@ -17,11 +18,14 @@
                 %p.book_price #{number_to_currency(book.price)} 
         = paginate @books, :theme => 'twitter-bootstrap-3'
     .col-md-3
-      %h4  
-        SHOP BY CATEGORIES
-      %ul
-        - Category.all.each do |category|
-          %li
-            %p= link_to category.name, category_path(category)
+      %table.table.table-striped
+        %tr
+          %th
+            = t('categories.shop_by_categories')
+        %tr  
+          %td
+            - Category.all.each do |category|
+              %li
+                %p= link_to category.name, category_path(category)
 
    

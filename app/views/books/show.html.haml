@@ -7,31 +7,39 @@
       .col-md-12
         .col-md-4
           = image_tag(@book.image, size: "330x250", class: "cover")
-        .col-md-8
-          .row
-            .col-md-2
-              %h4
-                #{number_to_currency(@book.price)}
-            .col-md-6
-              = form_for @line_item, url: line_items_path(book_id: @book.id) do |f|
-                .col-md-3.item_count_input= f.text_field :quantity, :value => '1'
-                .col-md-3= f.submit 'Add to Cart', class: "btn btn-default"
-        .col-md-6
+        .col-md-7
+          %table.table.table-striped
+            %tr
+              %td.col-md-2
+                %h4
+                  #{number_to_currency(@book.price)}
+              %td.col-md-3
+              %td.col-md-2
+                = form_for @line_item, url: line_items_path(book_id: @book.id) do |f|
+                  .item_count_input.in_line= f.text_field :quantity, :value => '1'
+                  = f.submit t('books.submit'), class: "btn btn-default"
+        .col-md-7
           = @book.full_description.first(500) + '...'
-  .row
-    .col-md-12
-      .margin_top_20.stars
-        %h4
-          Reviews
-          = link_to 'Add review for this book', new_book_comment_path(@book)
-          %br
-        - @book.comments.each do |comment|
-          = rating_for comment, "title", :disable_after_rate => true
-          = comment.title
-          %br
-          = comment.user_name
-          %br
-          = comment.comment
-
-
+      .col-md-12
+        .col-md-1
+          %h4
+            = t('books.reviews')
+        .col-md-3
+          %h4
+            = link_to t('books.new_review'), new_book_comment_path(@book)
+        .col-md-8
+        %table.table.table-striped
+          - @book.comments.each do |comment|
+            %tr
+              %td
+                .col-md-12
+                  .col-md-12
+                    .in_line= rating_for comment, "title", :disable_after_rate => true
+                    .in_line= comment.title
+                    .in_line= comment.created_at.strftime('%d.%m.%Y')
+                  .col-md-12
+                    = t('books.by')
+                    = comment.user_name
+                  .col-md-12
+                    = comment.comment
 

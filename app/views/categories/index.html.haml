@@ -1,8 +1,8 @@
 .container
   .row
     .col-md-9
-      %h4
-        Shop
+      %h3
+        = t("categories.shop")
       .row
         %ul
           - @books.each do |book| 
@@ -11,9 +11,8 @@
               %p.book_title= link_to book.title, book_path(book) 
               %p.book_price #{number_to_currency(book.price)}
       = paginate @books, :theme => 'twitter-bootstrap-3'
-    .col-md-3
-      %h4  
-        SHOP BY CATEGORIES
+    .col-md-3 
+      = t('categories.shop_by_categories')
       %ul
         - Category.all.each do |category|
           %li

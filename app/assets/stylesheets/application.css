@@ -47,8 +47,6 @@
 }
 .dashed_line{
   border-bottom-style: dashed;
-  margin-left: 30px;
-  margin-right: 30px;
   margin-bottom: 10px;
 }
 .margin_top{
@@ -129,4 +127,14 @@ li {
 }
 .cart_coupon {
   width: 150px;
+}
+.top_bar {
+  margin-top: 30px;
+}
+.top_bar_links {
+    vertical-align: middle;
+}
+.border_right {
+  border-right: solid;
+  padding-right: 4px;
 }

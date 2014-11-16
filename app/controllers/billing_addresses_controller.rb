@@ -1,5 +1,8 @@
 class BillingAddressesController < ApplicationController
   
+  include SetAddress
+    
+  before_action :set_address, only: [:edit]
   before_action :check_auth
 
   def edit
@@ -10,6 +13,8 @@ class BillingAddressesController < ApplicationController
     if current_user.billing_address.update(billing_address_params)
       if current_user.billing_address.shipping == true
         current_user.shipping_address.update(shipping_address_params)
+        current_user.billing_address.shipping = false
+        current_user.billing_address.save
         redirect_to edit_delivery_path
       else
         redirect_to edit_shipping_address_path(current_user)

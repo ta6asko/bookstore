@@ -2,30 +2,41 @@
   .row
     .col-md-3
       %h3
-        Checkout
+        = t("addresses.checkout")
     .col-md-9
       %h4
-        %u
-          ADDRESS
-        DELIVERY
-        PAYMENT
-        CONFIRM
-        COMPLETE
+        %u= t("addresses.add")
+        = t("addresses.delivered")
+        = t("addresses.payment")
+        = t("addresses.confirm")
+        = t("addresses.complete")
   .row
     %h4
-      .col-md-12
-        EDIT SIPPING ADDRESS 
+      .col-md-4
+        = t("addresses.shipping_address")
+      .col-md-4
+      .col-md-4
+        = t("addresses.summary")
   .row
     .col-md-8.margin_top
-      = form_for current_user.shipping_address do |f| 
-        %p= f.text_field :first_name, placeholder: "First name"
-        %p= f.text_field :last_name, placeholder: "Last name"
-        %p= f.text_field :street_address, placeholder: "Street Address"
-        %p= f.text_field :city, placeholder: "City"
-        %p= f.collection_select :country_id, Country.all, :id, :name, placeholder: "Country"
-        %p= f.text_field :zip, placeholder: "Zip"
-        %p= f.telephone_field :phone, placeholder: "Phone"
-        %p= f.submit 'SAVE AND CONTINUE', class: "btn btn-default"
+      = form_for current_user.shipping_address do |f|
+        %p= f.text_field :first_name, placeholder: t("addresses.first_name")
+        %p= f.text_field :last_name, placeholder: t("addresses.last_name")
+        %p= f.text_field :street_address, placeholder: t("addresses.street_address")
+        %p= f.text_field :city, placeholder: t("addresses.city")
+        %p= f.collection_select :country_id, Country.all, :id, :name
+        %p= f.text_field :zip, placeholder: t("addresses.zip")
+        %p= f.telephone_field :phone, placeholder: t("addresses.phone")
+        %p= f.submit t("addresses.submit"), class: "btn btn-default"
     .col-md-4.margin_top
-      %p ITEM TOTAL: #{number_to_currency(@cart.total)}
-      %p ORDER TOTAL: #{number_to_currency(@cart.subtotal(@cart.discount))}
+      %table.table
+        %tr
+          %td.col-dm-1
+            = t("addresses.item_total")
+          %td.col-dm-1
+            #{number_to_currency(@cart.total)}
+        %tr
+          %td.col-dm-1
+            = t("addresses.oreder_total")
+          %td.col-dm-1
+            #{number_to_currency(@cart.subtotal(@cart.discount))}

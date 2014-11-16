@@ -2,61 +2,60 @@
   .col-md-12
     .row
       %h3
-        .col-md-12
-          Settings
+        = t("settings.title")
     .col-md-5.margin_top_20
       .row
         .solid_line
           %h4
-            BILLING ADDRESS
+            = t("addresses.billing_address")
       .row
         .row
           .col-md-5.margin_top_20
-            = form_for current_user.billing_address, url: user_settings_update_billing_address_path(current_user) do |f| 
-              %p= f.text_field :first_name, placeholder: "First name"
-              %p= f.text_field :last_name, placeholder: "Last name"
-              %p= f.text_field :street_address, placeholder: "Street Address"
-              %p= f.text_field :city, placeholder: "City"
-              %p= f.collection_select :country_id, Country.all, :id, :name, placeholder: "Country"
-              %p= f.text_field :zip, placeholder: "Zip"
-              %p= f.telephone_field :phone, placeholder: "Phone"
-              %p= f.submit 'SAVE', class: "btn btn-default"
+            = form_for current_user.billing_address, url: user_settings_update_billing_address_path(current_user) do |f|
+              %p= f.text_field :first_name, placeholder: t("addresses.first_name")
+              %p= f.text_field :last_name, placeholder: t("addresses.last_name")
+              %p= f.text_field :street_address, placeholder: t("addresses.street_address")
+              %p= f.text_field :city, placeholder: t("addresses.city")
+              %p= f.collection_select :country_id, Country.all, :id, :name
+              %p= f.text_field :zip, placeholder: t("addresses.zip")
+              %p= f.telephone_field :phone, placeholder: t("addresses.phone")
+              %p= f.submit t("settings.save"), class: "btn btn-default"
     .col-md-2
     .col-md-5.margin_top_20
       .row
         .solid_line
           %h4
-            SHIPPING ADDRESS
+            = t("addresses.shipping_address")
       .row
         .row
           .col-md-5.margin_top_20
             = form_for current_user.shipping_address, url: user_settings_update_shipping_address_path(current_user) do |f| 
-              %p= f.text_field :first_name, placeholder: "First name"
-              %p= f.text_field :last_name, placeholder: "Last name"
-              %p= f.text_field :street_address, placeholder: "Street Address"
-              %p= f.text_field :city, placeholder: "City"
-              %p= f.collection_select :country_id, Country.all, :id, :name, placeholder: "Country" 
-              %p= f.text_field :zip, placeholder: "Zip"
-              %p= f.telephone_field :phone, placeholder: "Phone"
-              %p= f.submit 'SAVE', class: "btn btn-default"
+              %p= f.text_field :first_name, placeholder: t("addresses.first_name")
+              %p= f.text_field :last_name, placeholder: t("addresses.last_name")
+              %p= f.text_field :street_address, placeholder: t("addresses.street_address")
+              %p= f.text_field :city, placeholder: t("addresses.city")
+              %p= f.collection_select :country_id, Country.all, :id, :name
+              %p= f.text_field :zip, placeholder: t("addresses.zip")
+              %p= f.telephone_field :phone, placeholder: t("addresses.phone")
+              %p= f.submit t("settings.save"), class: "btn btn-default"
   .col-md-12
     .col-md-5
       .row
         .solid_line
           %h4
-            EMAIL
+            = t("settings.email")
       .row
         .row
           .col-md-5.margin_top_20
             = form_for current_user, url: user_update_email_path(current_user) do |f| 
               %p= f.text_field :email
-              %p= f.submit 'SAVE', class: "btn btn-default"
+              %p= f.submit t("settings.save"), class: "btn btn-default"
     .col-md-2
     .col-md-5
       .row
         .solid_line
           %h4
-            PASSWORD
+            = t("settings.pass")
       .row
         .row
           .col-md-5.margin_top_20
@@ -65,17 +64,17 @@
               %p= f.password_field :current_password, placeholder: "type old password"
               New password
               %p= f.password_field :password, placeholder: "type new password"
-              %p= f.submit 'SAVE', class: "btn btn-default"
+              %p= f.submit t("settings.save"), class: "btn btn-default"
   .col-md-12
     .row
       .solid_line
         %h4
-          PASSWORD
+          = t("settings.remove")
   .row
     .col-md-12.height.margin_top_20
       = form_for current_user, url: user_destroy_user_path(current_user) do |f| 
-        = f.submit 'PLEASE REMOVE MY ACCOUNT', class: "btn btn-default"
+        = f.submit t("settings.destroy_submit"), class: "btn btn-default"
         = f.check_box :check_del
-        I understand that all data will be lost
+        = t("settings.checkbox")
 
 
