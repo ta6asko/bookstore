@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   
+  
+  get 'omniauth_callbacks/facebook'
+
+
   post '/rate' => 'rater#create', :as => 'rate'
   
   resources :payments do
@@ -12,17 +16,18 @@ Rails.application.routes.draw do
   resources :billing_addresses
   resources :line_items
   resources :categories
-  
-  devise_for :users do
-    get 'users/edit' => 'devise/registrations#edit', :as => 'edit_user_registration'    
-    put 'users/:id' => 'devise/registrations#update', :as => 'user_registration' 
-  end
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+
+  # devise_for :users do
+  #   get 'users/edit' => 'devise/registrations#edit', :as => 'edit_user_registration'    
+  #   put 'users/:id' => 'devise/registrations#update', :as => 'user_registration' 
+  # end
 
   resources :users do
     patch 'update_email'
     patch 'update_password'
     patch 'destroy_user'
-    patch 'settings_update_billing_address' 
+    patch 'settings_update_billing_address'   
     patch 'settings_update_shipping_address'
   end
 

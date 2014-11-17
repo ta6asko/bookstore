@@ -1,5 +1,5 @@
 class PaymentsController < ApplicationController 
-
+  load_and_authorize_resource
   include CurrentOrder
   
   before_action :set_order, only: [:edit]
