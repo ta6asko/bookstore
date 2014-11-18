@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  load_and_authorize_resource
+  # load_and_authorize_resource
   include CurrentOrder
   include SetAddress
   
@@ -27,7 +27,7 @@ class OrdersController < ApplicationController
   end
 
   def complete
-    @order = Order.find(session[:cart_id])
+    @order = current_user.orders.last
   end
 
   def update

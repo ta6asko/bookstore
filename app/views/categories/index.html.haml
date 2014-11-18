@@ -11,11 +11,13 @@
               %p.book_title= link_to book.title, book_path(book) 
               %p.book_price #{number_to_currency(book.price)}
       = paginate @books, :theme => 'twitter-bootstrap-3'
-    .col-md-3 
-      = t('categories.shop_by_categories')
-      %ul
-        - Category.all.each do |category|
-          %li
-            %p= link_to category.name, category_path(category)
-
-   
+    .col-md-3
+      %table.table.table-striped
+        %tr
+          %th
+            = t('categories.shop_by_categories')
+        %tr  
+          %td
+            - Category.all.each do |category|
+              %li
+                %p= link_to category.name, category_path(category)

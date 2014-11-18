@@ -1,7 +1,8 @@
 class PaymentsController < ApplicationController 
-  load_and_authorize_resource
+  # load_and_authorize_resource
   include CurrentOrder
-  
+
+
   before_action :set_order, only: [:edit]
   before_action :set_payment, only: [:edit]
 
@@ -16,8 +17,11 @@ class PaymentsController < ApplicationController
 
   def update
     @order = Order.find(session[:cart_id])
-    @payment = @order.payment.update(payment_params)
-    redirect_to confirm_orders_path
+    if @order.payment.update(payment_params)
+      redirect_to confirm_orders_path
+    else
+      render "edit"
+    end
   end
 
   private
