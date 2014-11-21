@@ -1,16 +1,13 @@
 class Book < ActiveRecord::Base
   
   has_and_belongs_to_many :authors
-
-  has_many :positions
   has_many :line_items
   has_many :comments
-  
   belongs_to :category
-  
-  validates :price, numericality: { greater_then: 0, allow_nil: true }
-  validates :title, :short_description, :full_description, presence: true 
+
   validates :title, uniqueness: true
+  validates :price, numericality: { greater_then: 0 }
+  validates_presence_of :title, :full_description, :price 
 
   mount_uploader :image, AvatarUploader
 
