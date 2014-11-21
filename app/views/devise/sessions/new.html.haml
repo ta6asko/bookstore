@@ -1,0 +1,17 @@
+.container
+  .row
+    .log_in_img
+      %p.log_in_img= link_to image_tag("facebook.png", size: "70x70"), user_omniauth_authorize_path(:facebook)
+      %br
+      %p.log_in_img or
+      %p.log_in_img
+        = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+          %p.log_in_img= f.email_field :email, autofocus: true
+          %p.log_in_img= f.password_field :password, autocomplete: "off"
+          - if devise_mapping.rememberable?
+            %p.log_in_img
+              = f.submit "Log in", class: "btn btn-default"
+              = f.check_box :remember_me
+              = f.label :remember_me
+              
+        

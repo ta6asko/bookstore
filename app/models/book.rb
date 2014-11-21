@@ -38,21 +38,21 @@ class Book < ActiveRecord::Base
   
 
 
- rails_admin do
-    edit do
-      field :title
-      field :full_description
-      field :image
-      field :price
-      field :category
-    end
+  # rails_admin do
+  #   edit do
+  #     field :title
+  #     field :full_description
+  #     field :image
+  #     field :price
+  #     field :category
+  #   end
 
-    show do
-      field :title
-      field :full_description
-      field :image
-      field :price
-      field :category
-    end
-  end
+  #   show do
+  #     field :title
+  #     field :full_description
+  #     field :image
+  #     field :price
+  #     field :category
+  #   end
+  # end
 end

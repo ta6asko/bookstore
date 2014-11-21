@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  
+  load_and_authorize_resource
   def index
     @book = Book.find(params[:book_id])
     @comment = @book.comments.last

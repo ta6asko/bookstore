@@ -177,6 +177,10 @@ ActiveRecord::Schema.define(version: 20141110151902) do
 
   create_table "users", force: true do |t|
     t.boolean  "check_del"
+    t.string   "username"
+    t.string   "nickname"
+    t.string   "provider"
+    t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "email",                  default: "", null: false

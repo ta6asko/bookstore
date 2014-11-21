@@ -1,0 +1,17 @@
+.container
+  .row
+    .log_in_img
+      %p.log_in_img= link_to image_tag("facebook.png", size: "70x70"), user_omniauth_authorize_path(:facebook)
+      %br
+      %p.log_in_img or
+      %p.log_in_img
+        = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+          %p.log_in_img= devise_error_messages!
+          %p.log_in_img= f.email_field :email, autofocus: true
+          - if @validatable
+            %i
+              %p.log_in_img
+                (#{@minimum_password_length} characters minimum)
+          %p.log_in_img= f.password_field :password, autocomplete: "off"
+          %p.log_in_img= f.password_field :password_confirmation, autocomplete: "off"
+          %p.log_in_img= f.submit "Sign up", class: "btn btn-default"

@@ -99,6 +99,7 @@
             = t("confirm.shipping")
         %td.col-md-1
           #{number_to_currency(@order.subtotal(@order.discount))}
+          %br
           #{number_to_currency(@order.delivery.price)}
       %tr
         %td.col-md-9
