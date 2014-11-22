@@ -1,7 +1,8 @@
 FactoryGirl.define do
   factory :line_item do
-    book nil
-cart nil
+    price 100
+    quantity 4
+    book
+    order
   end
-
 end

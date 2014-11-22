@@ -1,23 +1,39 @@
 require 'rails_helper'
 
 describe BillingAddress do
-  let(:billing_address) { BillingAddress.create }
+  let(:billing_address) { create(:billing_address) }
 
   it { should belong_to(:user) }
   it { should belong_to(:country) }
-  # it { should validate_numericality_of(:phone).is_equal_to(12) }
-  # it { should validate_numericality_of(:zip).is_equal_to(5) }
   
   it "validates_presence_of first_name on update" do
-    billing_address.first_name = '12'
+    billing_address.first_name = nil
     billing_address.save
     expect(billing_address).not_to be_valid
   end
-
-  # it { should validate_presence_of(:last_name) }
-  # it { should validate_presence_of(:street_address) }
-  # it { should validate_presence_of(:city) }
-  # it { should validate_presence_of(:zip) }
-  # it { should validate_presence_of(:phone) }
-
+  it "validates_presence_of last_name on update" do
+    billing_address.last_name = nil
+    billing_address.save
+    expect(billing_address).not_to be_valid
+  end
+  it "validates_presence_of street_address on update" do
+    billing_address.street_address = nil
+    billing_address.save
+    expect(billing_address).not_to be_valid
+  end
+  it "validates_presence_of city on update" do
+    billing_address.city = nil
+    billing_address.save
+    expect(billing_address).not_to be_valid
+  end
+  it "validates_presence_of zip on update" do
+    billing_address.zip = nil
+    billing_address.save
+    expect(billing_address).not_to be_valid
+  end
+  it "validates_presence_of phone on update" do
+    billing_address.phone = nil
+    billing_address.save
+    expect(billing_address).not_to be_valid
+  end
 end

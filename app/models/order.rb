@@ -1,9 +1,9 @@
 class Order < ActiveRecord::Base
 
   belongs_to :delivery
+  belongs_to :user
   has_one    :payment
   has_many   :line_items, dependent: :destroy
-  belongs_to :user
 
   def add_book(book_id, count)
     current_item = line_items.find_by(book_id: book_id)
@@ -50,10 +50,5 @@ class Order < ActiveRecord::Base
       field :progress
     end
   end
-
-
-
-
-
 end
 

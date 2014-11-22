@@ -1,7 +1,7 @@
 class Coupon < ActiveRecord::Base
   
   validates_presence_of :number, :discount
-  validates :discount, numericality: { greater_then: 0, allow_nil: true }
-  validates :number, uniqueness: true
+  validates_numericality_of :discount
+  validates_uniqueness_of :number
 
 end

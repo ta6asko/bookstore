@@ -3,5 +3,5 @@ class Country < ActiveRecord::Base
   has_many :shipping_addresses
 
   validates_presence_of :name
-  validates :name, uniqueness: true
+  validates_uniqueness_of :name
 end

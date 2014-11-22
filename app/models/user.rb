@@ -5,9 +5,10 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
   
   has_many :orders
+  has_many :comments
   has_one :billing_address
   has_one :shipping_address
-  has_many :comments
+  
   ratyrate_rater
 
   def self.find_for_facebook_oauth access_token
