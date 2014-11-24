@@ -129,9 +129,9 @@ ActiveRecord::Schema.define(version: 20141110151902) do
   end
 
   create_table "payments", force: true do |t|
-    t.decimal  "number"
+    t.string   "number"
     t.date     "expiration_date"
-    t.integer  "card_code"
+    t.string   "card_code"
     t.integer  "order_id"
     t.datetime "created_at"
     t.datetime "updated_at"

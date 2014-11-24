@@ -4,11 +4,10 @@ describe Payment do
   let(:payment) { create(:payment) }
 
   it { should belong_to(:order) }
-  it { should validate_presence_of(:number) }
-  it { should validate_presence_of(:card_code) }
-  it { should validate_presence_of(:expiration_date) }
-  it { should validate_numericality_of(:number).is_equal_to(16) }
-  it { should validate_numericality_of(:card_code).is_equal_to(3) }
+  it { should validate_numericality_of(:number) }
+  it { should validate_numericality_of(:card_code) }
+  it { should ensure_length_of(:number).is_equal_to(16) }
+  it { should ensure_length_of(:card_code).is_equal_to(3) }
 
   it "validates_presence_of number on update" do
     payment.number = nil
