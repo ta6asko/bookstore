@@ -1,6 +1,6 @@
 class ShippingAddressesController < ApplicationController
-  # load_and_authorize_resource
-  include SetAddress
+  load_and_authorize_resource
+
   def edit
     @cart = Order.find(session[:cart_id])
   end

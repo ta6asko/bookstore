@@ -1,7 +1,6 @@
 class OrdersController < ApplicationController
-  # load_and_authorize_resource
+  load_and_authorize_resource
   include CurrentOrder
-  include SetAddress
   
   before_action :destroy_line_items, only: [:destroy]
   after_action :up_order, only: [:complete]
@@ -18,6 +17,12 @@ class OrdersController < ApplicationController
     @status = @order.set_progress(@order.progress)
   end
 
+  def update
+    @order = Order.find(session[:cart_id])
+    @order.update(params.require(:order).permit(:delivery_id))
+    redirect_to edit_payment_path
+  end
+
   def cart
     @order = Order.find(session[:cart_id])
   end
@@ -28,12 +33,6 @@ class OrdersController < ApplicationController
 
   def complete
     @order = current_user.orders.last
-  end
-
-  def update
-    @order = Order.find(session[:cart_id])
-    @order.update(params.require(:order).permit(:delivery_id))
-    redirect_to edit_payment_path
   end
 
   def destroy

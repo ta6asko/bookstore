@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  # load_and_authorize_resource
+  load_and_authorize_resource
   include CurrentOrder
   before_action :set_order
 

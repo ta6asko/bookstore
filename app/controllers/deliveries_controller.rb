@@ -1,7 +1,10 @@
 class DeliveriesController < ApplicationController
+  
   include CurrentOrder
-  # load_and_authorize_resource
-  before_action :set_order, only: [:edit]
+
+  load_and_authorize_resource
+
+  before_action :set_order
 
   def edit
     @cart = Order.find(session[:cart_id])

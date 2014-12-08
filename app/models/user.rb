@@ -11,6 +11,13 @@ class User < ActiveRecord::Base
   
   ratyrate_rater
 
+  after_create :set_address
+
+  def set_address
+    create_billing_address 
+    create_shipping_address  
+  end
+   
   def self.find_for_facebook_oauth access_token
     if user = User.where(:url => access_token.info.urls.Facebook).first
       user

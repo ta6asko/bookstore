@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   
-  
   get 'omniauth_callbacks/facebook'
 
 
@@ -18,10 +17,7 @@ Rails.application.routes.draw do
   resources :categories
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
-  # devise_for :users do
-  #   get 'users/edit' => 'devise/registrations#edit', :as => 'edit_user_registration'    
-  #   put 'users/:id' => 'devise/registrations#update', :as => 'user_registration' 
-  # end
+  devise_for :admins
 
   resources :users do
     patch 'update_email'

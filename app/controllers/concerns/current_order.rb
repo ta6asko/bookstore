@@ -4,6 +4,8 @@ module CurrentOrder
   private
 
     def set_order
+      if user_signed_in?
+        order = Order.create
       @order = Order.find(session[:cart_id])
       rescue ActiveRecord::RecordNotFound
         @order = Order.create

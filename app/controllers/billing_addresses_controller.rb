@@ -1,10 +1,6 @@
 class BillingAddressesController < ApplicationController
-  
-  # load_and_authorize_resource
-  include SetAddress
-    
-  before_action :set_address, only: [:edit]
-  before_action :authenticate_user!
+
+  load_and_authorize_resource
 
   def edit
     @cart = Order.find(session[:cart_id])

@@ -46,9 +46,8 @@
               = form_tag check_coupon_orders_path, method: :get do |f|
                 = text_field_tag :search, params[:search], placeholder: t("cart.coupon"), class: 'cart_coupon'
                 .in_line= submit_tag t("cart.update"), :name => nil, class: "btn btn-default"
-            - if @order.line_items.any?
-              - if user_signed_in?
-                .in_line= button_to t("cart.checkout"), edit_billing_address_path(current_user), method: :get, class: "btn btn-default"
+            - if @order.line_items.any? && user_signed_in?
+              .in_line= button_to t("cart.checkout"), edit_billing_address_path(current_user), method: :get, class: "btn btn-default"
             - else
               .in_line= button_to t("cart.checkout"), new_user_registration_path, method: :get, class: "btn btn-default"
 

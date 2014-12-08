@@ -10,7 +10,10 @@ RailsAdmin.config do |config|
 
   ## == Cancan ==
   # config.authorize_with :cancan
-
+  config.authenticate_with do
+    warden.authenticate! scope: :admin
+  end
+  config.current_user_method(&:current_admin)
   ## == PaperTrail ==
   # config.audit_with :paper_trail, 'User', 'PaperTrail::Version' # PaperTrail >= 3.0.0
 
