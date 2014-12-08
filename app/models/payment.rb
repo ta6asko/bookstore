@@ -1,6 +1,6 @@
 class Payment < ActiveRecord::Base
   
-  belongs_to :order
+  belongs_to :user
 
   validates_presence_of     :number, :card_code, :expiration_date, :on => :update
   validates_numericality_of :number

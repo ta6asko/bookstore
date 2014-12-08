@@ -15,7 +15,7 @@ class Ability
     end
     can [:create, :destroy], LineItem
     can [:cart, :destroy], Order
-    can [:index, :show, :confirm, :complete, :check_coupon], Order do |order|
+    can [:index, :show, :update, :confirm, :complete, :check_coupon], Order do |order|
       order.try(:user) == user
     end
     can [:index, :new, :create], Comment do |comment|

@@ -8,14 +8,20 @@ class User < ActiveRecord::Base
   has_many :comments
   has_one :billing_address
   has_one :shipping_address
+  has_one :payment
   
   ratyrate_rater
 
   after_create :set_address
+  after_create :set_payment
 
   def set_address
     create_billing_address 
     create_shipping_address  
+  end
+
+  def set_payment
+    create_payment
   end
    
   def self.find_for_facebook_oauth access_token

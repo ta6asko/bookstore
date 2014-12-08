@@ -150,7 +150,7 @@ ActiveRecord::Schema.define(version: 20141129103219) do
     t.string   "number"
     t.date     "expiration_date"
     t.string   "card_code"
-    t.integer  "order_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
