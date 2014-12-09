@@ -26,9 +26,9 @@
             %br
             .float_r= t("addresses.oreder_total")
           %td.col-dm-1
-            #{number_to_currency(@cart.total)}
+            #{number_to_currency(@order.total)}
             %br
-            #{number_to_currency(@cart.subtotal(@cart.discount))}
+            #{number_to_currency(@order.subtotal(@order.discount))}
         %tr
           %td.col-dm-1
           %td.col-dm-1

@@ -1,12 +1,10 @@
 class OrdersController < ApplicationController
-  load_and_authorize_resource
-  include CurrentOrder
   
-  before_action :destroy_line_items, only: [:destroy]
+  load_and_authorize_resource
+  
   after_action :up_order, only: [:complete]
 
   def index
-    @in_progress = Order.find(session[:cart_id])
     @in_queue = current_user.orders.where(progress: 'in_queue')
     @in_delivery = current_user.orders.where(progress: 'in_delivery')
     @delivered = current_user.orders.where(progress: 'delivered')
@@ -18,29 +16,26 @@ class OrdersController < ApplicationController
   end
 
   def update
-    @order = Order.find(session[:cart_id])
-    @order.update(params.require(:order).permit(:delivery_id))
+    @order.update(order_params)
     redirect_to edit_payment_path
   end
 
   def cart
-    @order = Order.find(session[:cart_id])
   end
 
   def confirm
-    @order = Order.find(session[:cart_id])
   end
 
   def complete
-    @order = current_user.orders.last
+    @order.user_id = current_user.id if user_signed_in?
   end
 
-  def destroy
-    redirect_to categories_path, notice: 'Теперь ваша корзина пуста!' 
+  def empty_cart
+    @order.line_items.destroy_all
+    redirect_to categories_path, notice: 'Теперь ваша корзина пуста!'
   end
 
   def check_coupon  
-    @order = Order.find(session[:cart_id])
     @coupon = Coupon.find_by(number: params[:search].to_i)
     if @coupon
       @order.discount += @coupon.discount
@@ -53,6 +48,10 @@ class OrdersController < ApplicationController
   end
 
   private
+
+  def order_params
+    params.require(:order).permit(:delivery_id)
+  end
 
   def invalid_cart
     logger.error "Attempt to access invalid cart #{params[:id]}"

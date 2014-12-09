@@ -1,12 +1,14 @@
 class ShippingAddressesController < ApplicationController
+  
   load_and_authorize_resource
+  include CurrentOrder
 
+  before_action :set_order
+  
   def edit
-    @cart = Order.find(session[:cart_id])
   end
 
   def update
-    @cart = Order.find(session[:cart_id])
     if current_user.shipping_address.update(shipping_address_params)
       redirect_to edit_delivery_path
     else

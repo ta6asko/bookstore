@@ -17,7 +17,7 @@
             = t("cart.quantity")
           %th.col-md-1
             = t("cart.total")
-        - @in_progress.line_items.each do |item| 
+        - @order.line_items.each do |item| 
           %tr
             %td.col-md-2
               = image_tag(item.book.image, size: "150x100")
@@ -39,7 +39,7 @@
             %p.float_r
               = t("cart.subtotal")
           %td.col-md-1
-            #{number_to_currency(@in_progress.subtotal(@in_progress.discount))}
+            #{number_to_currency(@order.subtotal(@order.discount))}
     .col-md-12.table.table-striped
       %h4.border_line
         = t("orders.waiting")  

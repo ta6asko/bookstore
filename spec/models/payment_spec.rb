@@ -3,12 +3,7 @@ require 'rails_helper'
 describe Payment do
   let(:payment) { create(:payment) }
 
-  it { should belong_to(:order) }
-  it { should validate_numericality_of(:number) }
-  it { should validate_numericality_of(:card_code) }
-  it { should ensure_length_of(:number).is_equal_to(16) }
-  it { should ensure_length_of(:card_code).is_equal_to(3) }
-
+  it { should belong_to(:user) }
   it "validates_presence_of number on update" do
     payment.number = nil
     payment.save
@@ -21,6 +16,26 @@ describe Payment do
   end
   it "validates_presence_of card_code on update" do
     payment.card_code = nil
+    payment.save
+    expect(payment).not_to be_valid
+  end
+  it "validate_numericality_of number on update" do
+    payment.number = 'asd'
+    payment.save
+    expect(payment).not_to be_valid
+  end
+  it "validate_numericality_of card_code on update" do
+    payment.card_code = 'asd'
+    payment.save
+    expect(payment).not_to be_valid
+  end
+    it "validate_numericality_of number on update" do
+    payment.number = 123456789123456
+    payment.save
+    expect(payment).not_to be_valid
+  end
+  it "validate_numericality_of card_code on update" do
+    payment.card_code = 12
     payment.save
     expect(payment).not_to be_valid
   end

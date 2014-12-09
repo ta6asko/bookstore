@@ -56,11 +56,11 @@
     .col-md-3.margin_top
       %b
         = t("confirm.payment_info")
-      = link_to t("confirm.edit"), edit_payment_path(@order.payment)
+      = link_to t("confirm.edit"), edit_payment_path(current_user.payment)
       %br
-      **** **** **** #{@order.payment.number.to_s.slice(-6..-3)}
+      **** **** **** #{current_user.payment.number.to_s.slice(-6..-3)}
       %br
-      = @order.payment.expiration_date.strftime("%m/%Y")
+      = current_user.payment.expiration_date.strftime("%m/%Y")
       %br
 .row
   .col-md-12.table.table-striped
@@ -108,5 +108,5 @@
         %td.col-md-1
           #{number_to_currency(@order.subtotal(@order.discount)+@order.delivery.price)}
     .col-md-12.margin_top_20
-    .col-md-9
+    .col-md-9.height
       = link_to t("confirm.submit"), complete_orders_path, method: :get, class: "btn btn-default"

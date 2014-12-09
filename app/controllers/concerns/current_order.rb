@@ -20,9 +20,5 @@ module CurrentOrder
         @order.save
         session[:cart_id] = nil
     end
-
-    def destroy_line_items
-      @order = Order.find(session[:cart_id])
-      @order.line_items.destroy_all
-    end
+    
 end

@@ -3,11 +3,9 @@ class BillingAddressesController < ApplicationController
   load_and_authorize_resource
 
   def edit
-    @cart = Order.find(session[:cart_id])
   end
 
   def update
-    @cart = Order.find(session[:cart_id])
     if current_user.billing_address.update(billing_address_params)
       if current_user.billing_address.shipping == true
         current_user.shipping_address.update(shipping_address_params)

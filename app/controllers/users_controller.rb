@@ -1,14 +1,10 @@
 class UsersController < ApplicationController
+  
   load_and_authorize_resource
 
-  include CurrentOrder
-
-  before_action :set_order, only: [:show]
-  before_action :set_address, only: [:settings_update_billing_address, :settings_update_shipping_address, :show]
+  before_action :set_user, only: [:show, :update_password, :destroy_user]
 
   def show
-    @user = User.find(current_user.id)
-    @cart = Order.find(session[:cart_id])
   end
 
   def settings_update_billing_address
@@ -31,7 +27,6 @@ class UsersController < ApplicationController
   end
 
   def update_password
-    @user = User.find(current_user.id)
     if @user.update_with_password(user_params)
       sign_in @user, :bypass => true  
       redirect_to user_path(current_user), notice: "Password has successfully changed" 
@@ -41,7 +36,6 @@ class UsersController < ApplicationController
   end
 
   def destroy_user
-    @user = User.find(current_user.id)
     @user.update(params[:user].permit(:check_del))
     if @user.check_del
       @user.destroy
@@ -53,6 +47,10 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def set_user
+    @user = User.find(current_user.id)
+  end
 
   def user_params
     params.required(:user).permit(:password, :current_password)

@@ -16,7 +16,7 @@
         = t("payment.credit_card")
   .row
     .col-md-8.margin_top
-      = form_for @order.payment do |f|
+      = form_for current_user.payment do |f|
         %p= f.text_field :number, placeholder: t("payment.card_number")
         = t("payment.extention_date")
         %p= f.date_select :expiration_date, {order: [:month, :year], discard_day: true, prompt: {month: t("payment.month"), year: t("payment.year")}}

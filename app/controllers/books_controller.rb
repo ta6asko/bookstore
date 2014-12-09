@@ -1,10 +1,6 @@
 class BooksController < ApplicationController
   
   load_and_authorize_resource
-  
-  include CurrentOrder
-  
-  before_action :set_order
 
   def index
   	@books = Book.all

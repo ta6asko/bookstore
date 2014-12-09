@@ -13,7 +13,8 @@ Rails.application.routes.draw do
 
   resources :shipping_addresses
   resources :billing_addresses
-  resources :line_items
+  resources :line_items 
+      
   resources :categories
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
@@ -52,6 +53,7 @@ Rails.application.routes.draw do
       get 'index'
       get 'show'
       get 'cart'
+      delete 'empty_cart'
     end
   end
  

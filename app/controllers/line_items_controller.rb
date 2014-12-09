@@ -1,7 +1,6 @@
 class LineItemsController < ApplicationController
-  include CurrentOrder
+  
   load_and_authorize_resource
-  before_action :set_order, only: [:create]
 
   def create
     book = Book.find(params[:book_id]) 
