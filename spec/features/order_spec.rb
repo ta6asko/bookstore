@@ -20,9 +20,17 @@ feature "Order" do
   end
 
   scenario "User can add books to cart" do
+    visit book_path(@book)
+    click_button I18n.t('books.submit')
+    expect(page).to have_content I18n.t("cart.quantity")
+    expect(page).not_to have_content I18n.t('X')
   end
 
   scenario "User can empty cart" do
+    visit cart_orders_path
+    click_link I18n.t("cart.empty")
+    expect(page).to have_content I18n.t('categories.shop_by_categories')
+    expect(page).not_to have_content I18n.t('X')
   end
 
   scenario "User can continue shopping" do
