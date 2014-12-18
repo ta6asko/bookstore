@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   
-  load_and_authorize_resource
+  # load_and_authorize_resource
 
   before_action :set_user, only: [:show, :update_password, :destroy_user]
   before_action :authenticate_user!

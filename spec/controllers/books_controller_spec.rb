@@ -21,7 +21,7 @@ describe BooksController do
   end
 
   context "GET #show" do
-    before (:each) do
+    before do
       get :show, id: @book.id 
     end
 

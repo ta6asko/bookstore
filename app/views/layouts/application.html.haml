@@ -19,25 +19,48 @@
     
 
   %body
-    %table.table.table-striped
-      %tr.info
-        %th.col-md-3
-          %h4
-            %b= link_to t('layout.app_title'), books_path
-        %th.col-md-3
-          %h4.in_line.border_right= link_to t('layout.home'), books_path
+    .container
+      .col-md-3
+        %h4
+          %b= link_to t('layout.app_title'), books_path
+      .col-md-3
+        %h4.in_line= link_to t('layout.home'), books_path
+        %h4.in_line= link_to t('layout.shop'), categories_path
+      .col-md-3
+        %h4.in_line= link_to t('layout.cart'), cart_orders_path
+        - if @order.line_items.count == 0
+          .in_line
+            (empty)
+        -else
+          .in_line
+            (#{@order.line_items.count})
+      .col-md-3
+        - if user_signed_in?
+          %h4.in_line= link_to t('layout.Settings'), user_path(current_user)
+          %h4.in_line= link_to t('layout.Orders'), orders_path
+          %h4.in_line= link_to t('layout.sign_out'), destroy_user_session_path, :method => :delete
+        - else
+          %h4.in_line= link_to t('layout.sign_in'), new_user_session_path
+          %h4.in_line= link_to t('layout.sign_up'), new_user_registration_path
+      -# %table.table.table-striped
+      -#   %tr.info
+      -#     %th.col-md-3
+      -#       %h4
+      -#         %b= link_to t('layout.app_title'), books_path
+      -#     %th.col-md-3
+      -#       %h4.in_line.border_right= link_to t('layout.home'), books_path
 
-          %h4.in_line= link_to t('layout.shop'), categories_path
-        %th.col-md-3
-          %h4= link_to t('layout.cart'), cart_orders_path
-        %th.col-md-3
-          - if user_signed_in?
-            .margin_top.in_line.border_right= link_to t('layout.Settings'), user_path(current_user)
-            .margin_top.in_line.border_right= link_to t('layout.Orders'), orders_path
-            .margin_top.in_line= link_to t('layout.sign_out'), destroy_user_session_path, :method => :delete
-          - else
-            .margin_top.in_line.border_right= link_to t('layout.sign_in'), new_user_session_path
-            .margin_top.in_line= link_to t('layout.sign_up'), new_user_registration_path
+      -#       %h4.in_line= link_to t('layout.shop'), categories_path
+      -#     %th.col-md-3
+      -#       %h4= link_to t('layout.cart'), cart_orders_path
+      -#     %th.col-md-3
+      -#       - if user_signed_in?
+      -#         .margin_top.in_line.border_right= link_to t('layout.Settings'), user_path(current_user)
+      -#         .margin_top.in_line.border_right= link_to t('layout.Orders'), orders_path
+      -#         .margin_top.in_line= link_to t('layout.sign_out'), destroy_user_session_path, :method => :delete
+      -#       - else
+      -#         .margin_top.in_line.border_right= link_to t('layout.sign_in'), new_user_session_path
+      -#         .margin_top.in_line= link_to t('layout.sign_up'), new_user_registration_path
     .container
       .row
         = bootstrap_flash

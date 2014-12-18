@@ -10,7 +10,7 @@ describe ShippingAddressesController do
 
   context "GET #edit" do
     context 'being signed in' do
-      before (:each) do
+      before do
         sign_in @user
         get :edit, id: @shipping_address.id
       end
@@ -45,7 +45,7 @@ describe ShippingAddressesController do
 
   context "PATCH #update" do 
     context 'being signed in' do
-      before (:each) do
+      before do
         sign_in @user
       end
 
