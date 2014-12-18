@@ -19,5 +19,6 @@ production:
   encoding: unicode
   database: bookstore_production
   pool: 5
+  host: localhost
   username: postgres
   password: root
