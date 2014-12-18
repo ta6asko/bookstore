@@ -1,19 +1,18 @@
 class CommentsController < ApplicationController
   
   load_and_authorize_resource
-
+  before_action :authenticate_user!
+  before_action :set_book
+  
   def index
-    @book = Book.find(params[:book_id])
     @comment = @book.comments.last
   end
   
   def new
     @comment = Comment.new
-    @book = Book.find(params[:book_id])
   end
 
   def create
-    @book = Book.find(params[:book_id])
     @comment = @book.comments.create(comment_params)
     if @comment.save
       redirect_to book_comments_path
@@ -23,6 +22,10 @@ class CommentsController < ApplicationController
   end
 
   private
+
+    def set_book
+      @book = Book.find(params[:book_id])
+    end  
 
     def comment_params
       params[:comment].permit(:user_name, :title, :comment)

@@ -36,5 +36,7 @@
             = form_for @line_item, url: line_items_path(book_id: @books.last.id) do |f|
               .col-md-3= f.text_field :quantity, :value => '1'
               .col-md-3= f.submit t('books.submit'), class: "btn btn-default"
-  %a.carousel-control.left{"data-slide" => "prev", href: "#carousel"} ‹
-  %a.carousel-control.right{"data-slide" => "next", href: "#carousel"} ›
+  %a.carousel-control.left{"data-slide" => "prev", href: "#carousel"} <
+  %a.carousel-control.right{"data-slide" => "next", href: "#carousel"} >
+.span6.offset3.center
+  %h4 Welcome to our amazing Bookstore! Choose anything you wish, we'll ship it anywhere!

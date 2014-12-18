@@ -1,15 +1,11 @@
 class LineItemsController < ApplicationController
   
   load_and_authorize_resource
-
+  
   def create
     book = Book.find(params[:book_id]) 
     @line_item = @order.add_book(book.id, params[:line_item][:quantity])
-    if @line_item.save
-      redirect_to cart_orders_path
-    else
-      render action: 'new'
-    end
+    redirect_to cart_orders_path if @line_item.save
   end
 
   def destroy

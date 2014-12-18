@@ -8,4 +8,12 @@ FactoryGirl.define do
     phone            Faker::PhoneNumber.phone_number  
     shipping false
   end
+
+  factory :invalid_address, parent: :billing_address do |f| 
+    f.street_address nil 
+  end
+
+  factory :shipping_true, parent: :billing_address do |f|
+    f.shipping true
+  end
 end

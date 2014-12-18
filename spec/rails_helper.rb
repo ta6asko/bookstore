@@ -28,7 +28,7 @@ RSpec.configure do |config|
 
   # This part turns off the default RSpec database cleansing strategy.
   config.use_transactional_fixtures = false
-   
+  config.include Devise::TestHelpers, :type => :controller 
   config.before(:suite) do
     # This says that before the entire test suite runs, clear the test database out completely.
     # This gets rid of any garbage left over from interrupted or poorly-written tests - a common source of surprising test behavior.

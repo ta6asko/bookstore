@@ -12,9 +12,7 @@ class Ability
     can [:show, :confirm, :complete, :check_coupon], Order do |order|
       order.try(:user) == user
     end
-    can [:index, :new, :create], Comment do |comment|
-      comment.try(:user) == user
-    end
+    can [:index, :new, :create], Comment 
     can [:show, :settings_update_billing_address, :settings_update_shipping_address, :update_email, :update_password, :destroy_user], Users do |us|
       us.try(:user) == user
     end   

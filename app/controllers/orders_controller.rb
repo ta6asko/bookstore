@@ -3,6 +3,7 @@ class OrdersController < ApplicationController
   load_and_authorize_resource
   
   after_action :up_order, only: [:complete]
+  before_action :authenticate_user!, only: [:index, :show, :update, :confirm, :complete]
 
   def index
     @in_queue = current_user.orders.where(progress: 'in_queue')
@@ -27,7 +28,8 @@ class OrdersController < ApplicationController
   end
 
   def complete
-    @order.user_id = current_user.id if user_signed_in?
+    @order.user_id = current_user.id 
+    @order.save
   end
 
   def empty_cart
