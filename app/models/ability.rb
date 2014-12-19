@@ -8,12 +8,12 @@ class Ability
     can [:index, :show], [Book, Category]
     can [:edit], Delivery 
     can [:create, :destroy], LineItem
-    can [:cart, :empty_cart, :update, :index], Order
+    can [:cart, :empty_cart, :update, :index, :show], Order
     can [:show, :confirm, :complete, :check_coupon], Order do |order|
       order.try(:user) == user
     end
     can [:index, :new, :create], Comment 
-    can [:show, :settings_update_billing_address, :settings_update_shipping_address, :update_email, :update_password, :destroy_user], Users do |us|
+    can [:settings_update_billing_address, :settings_update_shipping_address, :update_email, :update_password, :destroy_user], Users do |us|
       us.try(:user) == user
     end   
   end

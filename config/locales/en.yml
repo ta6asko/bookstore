@@ -29,6 +29,7 @@ en:
     coupon: "Coupon code"
     update: "UPDATE"
     checkout: "CHECKUOT"
+    del: "X"
   addresses:
     checkout: "Checkout"
     add: "ADDRESS"
