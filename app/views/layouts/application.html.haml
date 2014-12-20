@@ -42,25 +42,6 @@
         - else
           %h4.in_line= link_to t('layout.sign_in'), new_user_session_path
           %h4.in_line= link_to t('layout.sign_up'), new_user_registration_path
-      -# %table.table.table-striped
-      -#   %tr.info
-      -#     %th.col-md-3
-      -#       %h4
-      -#         %b= link_to t('layout.app_title'), books_path
-      -#     %th.col-md-3
-      -#       %h4.in_line.border_right= link_to t('layout.home'), books_path
-
-      -#       %h4.in_line= link_to t('layout.shop'), categories_path
-      -#     %th.col-md-3
-      -#       %h4= link_to t('layout.cart'), cart_orders_path
-      -#     %th.col-md-3
-      -#       - if user_signed_in?
-      -#         .margin_top.in_line.border_right= link_to t('layout.Settings'), user_path(current_user)
-      -#         .margin_top.in_line.border_right= link_to t('layout.Orders'), orders_path
-      -#         .margin_top.in_line= link_to t('layout.sign_out'), destroy_user_session_path, :method => :delete
-      -#       - else
-      -#         .margin_top.in_line.border_right= link_to t('layout.sign_in'), new_user_session_path
-      -#         .margin_top.in_line= link_to t('layout.sign_up'), new_user_registration_path
     .container
       .row
         = bootstrap_flash
