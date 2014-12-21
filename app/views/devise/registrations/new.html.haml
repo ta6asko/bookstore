@@ -15,3 +15,6 @@
           %p.log_in_img= f.password_field :password, autocomplete: "off"
           %p.log_in_img= f.password_field :password_confirmation, autocomplete: "off"
           %p.log_in_img= f.submit "Sign up", class: "btn btn-default"
+          %p.log_in_img.sign_in 
+            Have an account? 
+            = link_to t('layout.sign_in'), new_user_session_path

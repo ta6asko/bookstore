@@ -13,5 +13,7 @@
               = f.submit "Log in", class: "btn btn-default"
               = f.check_box :remember_me
               = f.label :remember_me
-              
+              %p.log_in_img.sign_up
+                Don't have an account? 
+                = link_to t('layout.sign_up'), new_user_registration_path
         

@@ -8,7 +8,7 @@
             by #{author.first_name} #{author.last_name}
         .media-body
           = image_tag(@books.last.image, size: "200x150", class: "media-object")
-          %p= @books.last.full_description
+          %p= @books.last.full_description.first(450) + '...'
         .col-md-12  
           .col-md-3
           .col-md-1
@@ -26,7 +26,7 @@
             by #{author.first_name} #{author.last_name}
         .media-body
           = image_tag(book.image, size: "200x150", class: "media-object")
-          %p= book.full_description
+          %p= book.full_description.first(450) + '...'
         .col-md-12
           .col-md-3
           .col-md-1
@@ -39,4 +39,4 @@
   %a.carousel-control.left{"data-slide" => "prev", href: "#carousel"} <
   %a.carousel-control.right{"data-slide" => "next", href: "#carousel"} >
 .span6.offset3.center
-  %h4 Welcome to our amazing Bookstore! Choose anything you wish, we'll ship it anywhere!
+  %h4.welcome Welcome to our amazing Bookstore! Choose anything you wish, we'll ship it anywhere!

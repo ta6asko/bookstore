@@ -19,7 +19,7 @@
                   .item_count_input.in_line= f.text_field :quantity, :value => '1'
                   = f.submit t('books.submit'), class: "btn btn-default"
         .col-md-7
-          = @book.full_description.first(500) + '...'
+          = @book.full_description.first(700) + '...'
       .col-md-12
         .col-md-1
           %h4

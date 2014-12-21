@@ -19,7 +19,7 @@
     
 
   %body
-    .container
+    .container.margin_top
       .col-md-3
         %h4
           %b= link_to t('layout.app_title'), books_path
@@ -36,8 +36,8 @@
             (#{@order.line_items.count})
       .col-md-3
         - if user_signed_in?
-          %h4.in_line= link_to t('layout.Settings'), user_path(current_user)
-          %h4.in_line= link_to t('layout.Orders'), orders_path
+          %h4.in_line= link_to t('layout.settings'), edit_user_path(current_user)
+          %h4.in_line= link_to t('layout.orders'), orders_path
           %h4.in_line= link_to t('layout.sign_out'), destroy_user_session_path, :method => :delete
         - else
           %h4.in_line= link_to t('layout.sign_in'), new_user_session_path

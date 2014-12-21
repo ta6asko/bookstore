@@ -19,4 +19,10 @@ feature "Book" do
     click_link(@category.name)
     expect(page).to have_content I18n.t("categories.categories")
   end
+
+  scenario "Pressing the link 'HOME' in the nav bar" do
+    visit root_path
+    click_link I18n.t('layout.shop')
+    expect(page).to have_content I18n.t('categories.shop_by_categories')
+  end
 end

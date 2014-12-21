@@ -49,7 +49,7 @@ en:
     use_billing: "Use Billing Address"
     submit: "SAVE AND CONTINUE"
     item_total: "ITEM TOTAL: "
-    oreder_total: "ORDER TOTAL: "
+    order_total: "ORDER TOTAL: "
   payment:
     credit_card: "CREDIT CARD"
     card_code: "Card Code"

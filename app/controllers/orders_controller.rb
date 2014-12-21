@@ -25,6 +25,7 @@ class OrdersController < ApplicationController
   end
 
   def confirm
+    @shipping_address = current_user.shipping_address
   end
 
   def complete

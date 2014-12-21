@@ -3,7 +3,7 @@
     .col-md-12.table.table-striped
       %h3
         = t("orders.title")
-    .col-md-12
+    .col-md-12.in_progress
       %h4.border_line
         = t("orders.in_progress") 
       %table.table.table-striped
@@ -43,7 +43,7 @@
     .col-md-12.table.table-striped
       %h4.border_line
         = t("orders.waiting")  
-      %table.table.table-striped
+      %table.table.table-striped.in_queue
         %tr
           %th.col-md-2
             = t("orders.number")
@@ -67,7 +67,7 @@
     .col-md-12.table.table-striped
       %h4.border_line
         = t("orders.in_delivery")
-      %table.table.table-striped
+      %table.table.table-striped.in_delivery
         %tr
           %th.col-md-2
             = t("orders.number")
@@ -91,7 +91,7 @@
     .col-md-12.table.table-striped
       %h4.border_line
         = t("orders.delivered")
-      %table.table.table-striped
+      %table.table.table-striped.delivered
         %tr
           %th.col-md-2
             = t("orders.number")

@@ -1,18 +1,19 @@
 require 'features/features_spec_helper'
  
 feature "Order" do
-  let(:user) { create(:user) }
-  
   before do
-    login_as(user, scope: :user)
+    @user = create(:user)
+    login_as(@user, scope: :user)
     @book = create(:book)
     @delivery = create(:delivery)
-    @order = create(:order, user_id: user.id, delivery_id: @delivery.id)
-    @order1 = create(:order, user_id: user.id)
-    @country = create(:country)
-    user.shipping_address.update(country_id: @country.id)
-    user.billing_address.update(country_id: @country.id)
     @coupon = create(:coupon)
+    @order1 = create(:order, progress: 'in_queue', user_id: @user.id, delivery_id: @delivery.id)
+    @order2 = create(:order, progress: 'in_delivery', user_id: @user.id, delivery_id: @delivery.id)
+    @order3 = create(:order, progress: 'delivered', user_id: @user.id, delivery_id: @delivery.id)
+    @country = create(:country)
+    @user.payment.update(number: 1234567891234567, card_code: 123, expiration_date: "2015-02-01")
+    @shipping_address = @user.shipping_address.update(first_name: "1", last_name: '1', street_address: '1', city: '1', zip: '1', phone: '1', country_id: @country.id)
+    @billing_address = @user.billing_address.update(first_name: "1", last_name: '1', street_address: '1', city: '1', zip: '1', phone: '1', country_id: @country.id)
   end
 
   scenario "User can view his shopping cart" do
@@ -69,43 +70,131 @@ feature "Order" do
     expect(page).not_to have_content I18n.t("cart.del")
   end
 
-  # scenario "User can move to edit shipping address" do
-  #   visit cart_orders_path
+  # scenario "User can change count of chosen books" do
+  #   visit root_path
   #   @cart = Order.find_by user_id: nil
-  #   visit confirm_orders_path
-  #   click_link edit_shipping_address_path(current_user.shipping_address)
-  #   # expect(page).to have_content I18n.t("cart.subtotal")
-  #   # expect(page).not_to have_content I18n.t("cart.del")
+  #   @line_item = create(:line_item, book_id: @book.id, order_id: @cart.id)
+  #   visit cart_orders_path
+  #   fill_in 'quantity'
+  #   visit cart_orders_path
+  #   expect(page).to have_content 
   # end
 
-  # scenario "User can move to edit billing address" do
+  scenario "User can move to edit shipping address" do
+    visit categories_path
+    @order = Order.find_by user_id: nil
+    @order.update(delivery_id: @delivery.id)
+    visit confirm_orders_path
+    first('.edit_shipping').click_link I18n.t("confirm.edit") 
+    expect(page).to have_content I18n.t("addresses.shipping_address")
+    expect(page).not_to have_content I18n.t("confirm.shipments")
+  end
 
+  scenario "User can move to edit billing address" do
+    visit categories_path
+    @order = Order.find_by user_id: nil
+    @order.update(delivery_id: @delivery.id)
+    visit confirm_orders_path
+    first('.edit_billing').click_link I18n.t("confirm.edit") 
+    expect(page).to have_content I18n.t("addresses.billing_address")
+    expect(page).not_to have_content I18n.t("confirm.shipments")
+  end
+
+  scenario "User can move to edit delyvery type" do
+    visit categories_path
+    @order = Order.find_by user_id: nil
+    @order.update(delivery_id: @delivery.id)
+    visit confirm_orders_path
+    first('.edit_delivery').click_link I18n.t("confirm.edit") 
+    expect(page).to have_content 'UPS Two Day'
+    expect(page).not_to have_content I18n.t("confirm.shipments")
+  end
+
+  scenario "User can move to edit payment data" do
+    visit categories_path
+    @order = Order.find_by user_id: nil
+    @order.update(delivery_id: @delivery.id)
+    visit confirm_orders_path
+    first('.edit_payment').click_link I18n.t("confirm.edit") 
+    expect(page).to have_content I18n.t("payment.credit_card")
+    expect(page).not_to have_content I18n.t("confirm.shipments")
+  end
+
+  # scenario "User can change count of chosen books in confirm_path" do
+  #   visit root_path
+  #   @cart = Order.find_by user_id: nil
+  #   @line_item = create(:line_item, book_id: @book.id, order_id: @cart.id)
+  #   visit cart_orders_path
+  #   fill_in 'quantity'
+  #   visit cart_orders_path
+  #   expect(page).to have_content 
   # end
 
-  # scenario "User can move to edit delyvery type" do
+  scenario "User can confirm order" do
+    visit categories_path
+    @order = Order.find_by user_id: nil
+    @order.update(delivery_id: @delivery.id)
+    visit confirm_orders_path
+    click_link I18n.t("confirm.submit") 
+    expect(page).to have_content "R000"
+    expect(page).not_to have_content I18n.t("addresses.checkout")
+  end
 
-  # end
-
-  # scenario "User can move to edit payment data" do
-
-  # end
-
-  # scenario "User can confirm order" do
-
-  # end
-
-  # scenario "User can move back to shop after confirm order" do
-
-  # end
+  scenario "User can move back to shop after confirm order" do
+    visit categories_path
+    @order = Order.find_by user_id: nil
+    @order.update(delivery_id: @delivery.id)
+    visit complete_orders_path
+    click_link I18n.t("complete.submit") 
+    expect(page).to have_content I18n.t("categories.shop")
+    expect(page).not_to have_content "R000"
+  end
 
   scenario "User can move to cart from orders list" do
     visit orders_path
-    click_link I18n.t("orders.view")
-    expect(page).to have_content I18n.t("order.back")
-    expect(page).not_to have_content I18n.t("orders.title")
+    click_link I18n.t("orders.submit") 
+    expect(page).to have_css('#search')
   end
 
-  scenario "User can view order" do
+  scenario "User can view order in queue" do
+    visit orders_path
+    first('.in_queue').click_link I18n.t("orders.view")
+    expect(page).to have_content I18n.t("order.back")
+    expect(page).not_to have_content I18n.t("orders.submit")
+  end
 
+  scenario "User can view order in delivery" do
+    visit orders_path
+    first('.in_delivery').click_link I18n.t("orders.view")
+    expect(page).to have_content I18n.t("order.back")
+    expect(page).not_to have_content I18n.t("orders.submit")
+  end
+
+  scenario "User can view delivered order" do
+    visit orders_path
+    first('.delivered').click_link I18n.t("orders.view")
+    expect(page).to have_content I18n.t("order.back")
+    expect(page).not_to have_content I18n.t("orders.submit")
+  end
+
+  scenario "User can move back to orders list from order details" do
+    visit order_path(@order1)
+    click_link I18n.t("order.back")
+    expect(page).to have_content I18n.t("orders.submit")
+    expect(page).not_to have_content I18n.t("order.back")
+  end
+
+  scenario "Pressing the link 'Shopping Cart' in the nav bar" do
+    visit root_path
+    click_link I18n.t('layout.cart')
+    expect(page).to have_button I18n.t("cart.empty")
+    expect(page).not_to have_css(".welcome")
+  end
+
+  scenario "Pressing the link 'Orders' in the nav bar" do
+    visit root_path
+    click_link I18n.t('layout.orders')
+    expect(page).to have_content I18n.t("orders.title")
+    expect(page).not_to have_content I18n.t('categories.shop_by_categories')
   end
 end

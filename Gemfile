@@ -25,16 +25,22 @@ gem 'pg'
 gem 'rails-i18n', '~> 4.0.0' # For 4.0.x
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring',        group: :development
+
 gem 'omniauth'
 gem 'omniauth-facebook'
+
 gem 'rails_admin'
 gem "cancancan"
+
 gem 'kaminari'
 gem 'kaminari-bootstrap', '~> 3.0.1'
 gem 'bootstrap-kaminari-views'
+
 gem 'carrierwave'
-gem 'bootstrap-slider-rails'
 gem 'mini_magick'
+
+gem 'bootstrap-slider-rails'
+
 gem 'foundation-rails'
 gem "therubyracer"
 gem 'bootstrap-sass'
@@ -44,6 +50,7 @@ gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootst
 gem 'jquery-ui-rails'
 gem 'ratyrate'
 gem 'jquery-turbolinks'
+
 gem 'rails_12factor', group: :production
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
