@@ -18,3 +18,9 @@
 //= require_tree .
 //= require jquery.raty.js
 //= require jquery-ui
+
+$(document).ready(function() {
+  $('.cart_quantity').on("change",'#line_item_quantity', function() {
+    $(this).parents(".edit_line_item").find('.hide_quantity').click();
+  });
+});

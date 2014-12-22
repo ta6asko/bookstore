@@ -1,6 +1,12 @@
 class LineItemsController < ApplicationController
   
   load_and_authorize_resource
+
+  def update
+    @line_item = LineItem.find(params[:id])
+    @line_item.update(line_item_params)
+    redirect_to cart_orders_path
+  end
   
   def create
     book = Book.find(params[:book_id]) 
@@ -17,6 +23,6 @@ class LineItemsController < ApplicationController
   private
 
     def line_item_params
-      params.require(:line_item).permit(:book_id)
+      params.require(:line_item).permit(:quantity)
     end
 end

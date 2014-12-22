@@ -23,7 +23,10 @@
             %td.col-md-1
               #{number_to_currency(item.book.price)}
             %td.col-md-1
-              .cart_quantity= number_field_tag 'quantity', item.quantity, in: 1...20
+              
+              = form_for item, url: line_item_path(item), method: :patch do |f|
+                .cart_quantity= f.number_field :quantity, in: 1...20
+                = f.submit "", class: "hide_quantity"
             %td.col-md-1
               .in_line #{number_to_currency(item.total_price)}
               .in_line= button_to t("cart.del"), line_item_path(item.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-xs"

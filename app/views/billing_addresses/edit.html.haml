@@ -44,6 +44,10 @@
         %tr
           %td.col-dm-1
           %td.col-dm-1
-            
+  - if current_user.billing_address.errors.any?
+    #error_explanation.alert.alert-danger{:role => "alert"}
+      %ul
+        - current_user.billing_address.errors.full_messages.each do |msg|
+          %li= msg            
           
       

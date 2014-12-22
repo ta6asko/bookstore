@@ -73,7 +73,9 @@
    /*@extend .carousel-control*/
 }
 
-
+.hide_quantity{
+  display: none;
+}
 
 #carousel{
   width: 900px;

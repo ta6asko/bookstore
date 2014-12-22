@@ -7,7 +7,7 @@ class Ability
     can [:edit, :update], Payment
     can [:index, :show], [Book, Category]
     can [:edit], Delivery 
-    can [:create, :destroy], LineItem
+    can [:create, :update, :destroy], LineItem
     can [:cart, :empty_cart, :update, :index, :show], Order
     can [:confirm, :complete, :check_coupon], Order do |order|
       order.try(:user) == user

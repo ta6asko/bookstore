@@ -22,6 +22,7 @@ class OrdersController < ApplicationController
   end
 
   def cart
+
   end
 
   def confirm

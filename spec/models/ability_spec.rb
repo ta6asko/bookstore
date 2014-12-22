@@ -1,7 +1,7 @@
-require 'spec_helper'
+require 'rails_helper'
 require "cancan/matchers"
 
-describe  do
+describe User do
 
   let(:user) { create(:user) }
   let(:order) { create(:order) }
@@ -19,6 +19,7 @@ describe  do
   it { should be_able_to :show, build(:category) }
   it { should be_able_to :edit, build(:delivery) }
   it { should be_able_to :create, build(:line_item) }
+  it { should be_able_to :update, build(:line_item) }
   it { should be_able_to :destroy, build(:line_item) }
   it { should be_able_to :index, build(:order) }
   it { should be_able_to :show, build(:order) }
@@ -31,10 +32,10 @@ describe  do
   it { should be_able_to :index, build(:comment) }
   it { should be_able_to :new, build(:comment) }
   it { should be_able_to :create, build(:comment) }
-  it { should be_able_to :settings_update_billing_address, build(:user) }
-  it { should be_able_to :settings_update_shipping_address, build(:user) }
-  it { should be_able_to :update_email, build(:user) }
-  it { should be_able_to :update_password, build(:user) }
-  it { should be_able_to :destroy_user, build(:user) }
-  it { should be_able_to :edit, build(:user) }
+  it { should be_able_to :settings_update_billing_address, user }
+  it { should be_able_to :settings_update_shipping_address, user }
+  it { should be_able_to :update_email, user }
+  it { should be_able_to :update_password, user }
+  it { should be_able_to :destroy_user, user }
+  it { should be_able_to :edit, user }
 end
