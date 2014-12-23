@@ -16,7 +16,7 @@
               %td.col-md-3
               %td.col-md-2
                 = form_for @line_item, url: line_items_path(book_id: @book.id) do |f|
-                  .item_count_input.in_line== f.number_field :quantity, in: 1...20
+                  .item_count_input.in_line= f.number_field :quantity, in: 1...20
                   = f.submit t('books.submit'), class: "btn btn-default"
         .col-md-7
           = @book.full_description.first(700) + '...'
@@ -34,7 +34,7 @@
               %td
                 .col-md-12
                   .col-md-12
-                    .in_line= rating_for comment, "title", :disable_after_rate => true
+                    .in_line= rating_for comment, "title", :disable_after_rate => true, star_path: '/assets'
                     .in_line= comment.title
                     .in_line= comment.created_at.strftime('%d.%m.%Y')
                   .col-md-12

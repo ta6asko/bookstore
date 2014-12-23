@@ -2,6 +2,6 @@
   .row
     .col-md-12
       Rating: 
-      = rating_for @comment, "title", :disable_after_rate => true     
+      = rating_for @comment, "title", :disable_after_rate => true, star_path: '/assets'     
     .col-md-12
       = link_to 'Save', book_path(@book), class: "btn btn-default"
