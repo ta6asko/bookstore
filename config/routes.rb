@@ -5,22 +5,22 @@ Rails.application.routes.draw do
 
   post '/rate' => 'rater#create', :as => 'rate'
   
-  resources :payments do
-    collection do
-      get 'set_payment'
+  resources :payments, only: [:edit, :update] 
+  resources :shipping_addresses, only: [:edit, :update] 
+  resources :billing_addresses, only: [:edit, :update]
+  resources :line_items, only: [:create, :update, :destroy]
+  resources :categories, only: [:index, :show] 
+  resources :deliveries, only: [:edit] 
+
+  resources :books, only: [:index, :show] do
+    resources :comments, only: [:index, :new, :create] do
+      collection do
+        get 'set_comment'
+      end
     end
-  end
+  end  
 
-  resources :shipping_addresses
-  resources :billing_addresses
-  resources :line_items 
-      
-  resources :categories
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
-
-  devise_for :admins
-
-  resources :users do
+  resources :users, only: [:edit]  do
     patch 'update_email'
     patch 'update_password'
     patch 'destroy_user'
@@ -28,23 +28,7 @@ Rails.application.routes.draw do
     patch 'settings_update_shipping_address'
   end
 
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  
-  resources :books do
-    resources :comments do
-      collection do
-        get 'set_comment'
-      end
-    end
-  end  
-
-  resources :deliveries do
-    collection do
-      get 'set_delivery'
-    end
-  end
-
-  resources :orders do
+  resources :orders, only: [:index, :show, :update]  do
     collection do
       get 'set_cart_to_user'
       get 'check_coupon'
@@ -56,8 +40,11 @@ Rails.application.routes.draw do
       delete 'empty_cart'
     end
   end
+  
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  devise_for :admins
+
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
  
   root 'books#index'
-
-  
 end

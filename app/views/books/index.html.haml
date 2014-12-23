@@ -16,7 +16,7 @@
               #{number_to_currency(@books.last.price)}
           .in_line
             = form_for @line_item, url: line_items_path(book_id: @books.last.id) do |f|
-              .col-md-3= f.text_field :quantity, :value => '1'
+              .col-md-3= f.number_field :quantity, in: 1...20
               .col-md-3= f.submit t('books.submit'), class: "btn btn-default"
     - @books.each do |book|
       .item
@@ -34,7 +34,7 @@
               #{number_to_currency(@books.last.price)}
           .in_line
             = form_for @line_item, url: line_items_path(book_id: @books.last.id) do |f|
-              .col-md-3= f.text_field :quantity, :value => '1'
+              .col-md-3= f.number_field :quantity, in: 1...20
               .col-md-3= f.submit t('books.submit'), class: "btn btn-default"
   %a.carousel-control.left{"data-slide" => "prev", href: "#carousel"} <
   %a.carousel-control.right{"data-slide" => "next", href: "#carousel"} >
