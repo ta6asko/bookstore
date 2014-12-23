@@ -218,6 +218,7 @@ describe OrdersController do
     end
 
     it "redirects to cart_orders_path if coupon invalid" do
+      @coupon = create(:coupon)
       response.should redirect_to cart_orders_path
       expect(flash[:notice]).to eq "Invalid coupon number"
     end

@@ -2,17 +2,15 @@ require 'controllers/controllers_spec_helper'
 
 describe LineItemsController do
   before do
-    # binding.pry
-
     @order = create(:order)
     @book = create(:book)
-    # @line_item = create(:line_item)
+    @line_item = create(:line_item)
     redefine_cancan_abilities
   end
 
   context "POST #create" do
     before do
-      post :create, line_item: Factory.attributes_for(book_id: @book.id, order_id: @order.id)
+      post :update, id: @line_item.id, line_item: attributes_for(:line_item, quantity: 4, book_id: @book.id, order_id: @order.id)
     end
       
     it "redirects to the cart_orders_path if line_item is valid" do
