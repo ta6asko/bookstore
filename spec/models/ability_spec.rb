@@ -7,17 +7,21 @@ describe User do
   let(:order) { create(:order) }
   subject(:ability) { Ability.new(user) }
 
-  it { should be_able_to :edit, build(:billing_address) }
-  it { should be_able_to :update, build(:billing_address) }
-  it { should be_able_to :edit, build(:shipping_address) }
-  it { should be_able_to :update, build(:shipping_address) }
-  it { should be_able_to :edit, build(:payment) }
-  it { should be_able_to :update, build(:payment) }
   it { should be_able_to :index, build(:book) }
   it { should be_able_to :show, build(:book) }
   it { should be_able_to :index, build(:category) }
   it { should be_able_to :show, build(:category) }
   it { should be_able_to :edit, build(:delivery) }
+  it { should be_able_to :edit, build(:billing_address, user_id: user.id) }
+  it { should_not be_able_to :edit, build(:billing_address) }
+  it { should be_able_to :update, build(:billing_address, user_id: user.id) }
+  it { should_not be_able_to :update, build(:billing_address) }
+  it { should be_able_to :edit, build(:shipping_address, user_id: user.id) }
+  it { should_not be_able_to :edit, build(:shipping_address) }
+  it { should be_able_to :update, build(:shipping_address, user_id: user.id) }
+  it { should_not be_able_to :update, build(:shipping_address) }
+  it { should be_able_to :edit, build(:payment, user_id: user.id) }
+  it { should_not be_able_to :edit, build(:payment) }
   it { should be_able_to :create, build(:line_item) }
   it { should be_able_to :update, build(:line_item) }
   it { should be_able_to :destroy, build(:line_item) }
