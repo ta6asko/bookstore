@@ -42,7 +42,7 @@ Rails.application.routes.draw do
   end
   
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
-  devise_for :admins
+  devise_for :admins, :skip => [:registrations] 
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
  

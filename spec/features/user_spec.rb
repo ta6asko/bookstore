@@ -1,6 +1,6 @@
 require 'features/features_spec_helper'
  
-feature "Order" do
+feature "User" do
   before do
     @user = create(:user)
     login_as(@user, scope: :user)
@@ -138,10 +138,10 @@ feature "Order" do
     expect(page).to have_content "Welcome! You have signed up successfully."
   end
 
-  # scenario "omniauth-facebook" do
-  #   logout(:user)
-  #   visit new_user_session_path
-  #   find("img[@alt='Facebook']").click
-  #   expect(page).to have_content "Successfully authenticated from Facebook account."
-  # end
+  scenario "omniauth-facebook" do
+    logout(:user)
+    visit new_user_session_path
+    find("img[@alt='Facebook']").click
+    expect(page).to have_content "Successfully authenticated from Facebook account."
+  end
 end
