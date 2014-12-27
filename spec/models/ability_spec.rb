@@ -12,16 +12,17 @@ describe User do
     it { expect(ability).to be_able_to :show, build(:book) }
     it { expect(ability).to be_able_to :index, build(:category) }
     it { expect(ability).to be_able_to :show, build(:category) }
-    it { expect(ability).to be_able_to :edit, build(:delivery) }
     it { expect(ability).to be_able_to :edit, build(:billing_address, user_id: user.id) }
     it { expect(ability).to be_able_to :update, build(:billing_address, user_id: user.id) }
     it { expect(ability).to be_able_to :edit, build(:shipping_address, user_id: user.id) }
     it { expect(ability).to be_able_to :update, build(:shipping_address, user_id: user.id) }
     it { expect(ability).to be_able_to :edit, build(:payment, user_id: user.id) }
+    it { expect(ability).to be_able_to :update, build(:payment, user_id: user.id) }
+    it { expect(ability).to be_able_to :edit, build(:delivery) }
     it { expect(ability).to be_able_to :create, build(:line_item) }
     it { expect(ability).to be_able_to :update, build(:line_item) }
     it { expect(ability).to be_able_to :destroy, build(:line_item) }
-    it { expect(ability).to be_able_to :index, build(:order) }
+    it { expect(ability).to be_able_to :index, build(:order, user_id: user.id) }
     it { expect(ability).to be_able_to :show, build(:order) }
     it { expect(ability).to be_able_to :update, build(:order) }
     it { expect(ability).to be_able_to :empty_cart, build(:order) }
@@ -46,5 +47,13 @@ describe User do
     it { expect(ability).not_to be_able_to :edit, build(:shipping_address) }
     it { expect(ability).not_to be_able_to :update, build(:shipping_address) }
     it { expect(ability).not_to be_able_to :edit, build(:payment) }
+    it { expect(ability).not_to be_able_to :update, build(:payment) }
+    it { expect(ability).not_to be_able_to :index, build(:order) }
+    it { expect(ability).not_to be_able_to :edit, build(:user) }
+    it { expect(ability).not_to be_able_to :settings_update_billing_address, build(:user) }
+    it { expect(ability).not_to be_able_to :settings_update_shipping_address, build(:user) }
+    it { expect(ability).not_to be_able_to :update_email, build(:user) }
+    it { expect(ability).not_to be_able_to :update_password, build(:user) }
+    it { expect(ability).not_to be_able_to :destroy_user, build(:user) }
   end
 end

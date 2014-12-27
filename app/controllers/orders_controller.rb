@@ -12,7 +12,7 @@ class OrdersController < ApplicationController
   end
 
   def show
-    @order = current_user.orders.find(params[:id])
+    @order = Order.find(params[:id])
     @status = @order.set_progress(@order.progress)
   end
 

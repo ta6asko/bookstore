@@ -13,11 +13,7 @@ Rails.application.routes.draw do
   resources :deliveries, only: [:edit] 
 
   resources :books, only: [:index, :show] do
-    resources :comments, only: [:index, :new, :create] do
-      collection do
-        get 'set_comment'
-      end
-    end
+    resources :comments, only: [:index, :new, :create] 
   end  
 
   resources :users, only: [:edit]  do
@@ -30,12 +26,9 @@ Rails.application.routes.draw do
 
   resources :orders, only: [:index, :show, :update]  do
     collection do
-      get 'set_cart_to_user'
       get 'check_coupon'
       get 'confirm'
       get 'complete'
-      get 'index'
-      get 'show'
       get 'cart'
       delete 'empty_cart'
     end

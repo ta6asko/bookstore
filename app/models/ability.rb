@@ -3,19 +3,13 @@ class Ability
 
   def initialize(user)
     can [:index, :show], [Book, Category]
-    can [:edit, :update], BillingAddress do |address|
-      address.try(:user) == user
-    end
-    can [:edit, :update], ShippingAddress do |address|
-      address.try(:user) == user
-    end
-    can [:edit, :update], Payment do |address|
-      address.try(:user) == user
+    can [:edit, :update], [BillingAddress, ShippingAddress, Payment] do |f|
+      f.try(:user) == user
     end
     can [:edit], Delivery 
     can [:create, :update, :destroy], LineItem 
-    can [:cart, :empty_cart, :update, :index, :show], Order
-    can [:confirm, :complete, :check_coupon], Order do |order|
+    can [:show, :cart, :empty_cart, :update, :confirm, :complete, :check_coupon], Order
+    can [:index], Order do |order|
       order.try(:user) == user
     end
     can [:index, :new, :create], Comment  
