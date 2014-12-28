@@ -8,8 +8,8 @@ class Ability
     end
     can [:edit], Delivery 
     can [:create, :update, :destroy], LineItem 
-    can [:show, :cart, :empty_cart, :update, :confirm, :complete, :check_coupon], Order
-    can [:index], Order do |order|
+    can [:index, :cart, :empty_cart, :update, :confirm, :complete, :check_coupon], Order
+    can [:show], Order do |order|
       order.try(:user) == user
     end
     can [:index, :new, :create], Comment  

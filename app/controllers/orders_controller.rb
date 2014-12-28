@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   
   load_and_authorize_resource
+  before_action :set_order, skip: [:show]
   
   after_action :up_order, only: [:complete]
   before_action :authenticate_user!, only: [:index, :show, :update, :confirm, :complete]

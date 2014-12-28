@@ -1,7 +1,7 @@
 .container
   .row
     .log_in_img
-      %p.log_in_img= link_to image_tag("facebook.png", size: "70x70"), user_omniauth_authorize_path(:facebook)
+      %p.log_in_img= link_to image_tag("facebook.png", size: "70x70"), user_omniauth_authorize_path(:facebook), class: "facebook"
       %br
       %p.log_in_img or
       %p.log_in_img

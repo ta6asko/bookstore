@@ -6,7 +6,7 @@ feature "User" do
     login_as(@user, scope: :user)
     @country = create(:country)
     @book = create(:book)
-  end
+  end 
 
   scenario "User can edit billing address in settings" do
     visit edit_user_path(@user)
@@ -137,11 +137,18 @@ feature "User" do
     expect(page).not_to have_content "Have an account?"
     expect(page).to have_content "Welcome! You have signed up successfully."
   end
-
+  
   scenario "omniauth-facebook" do
     logout(:user)
     visit new_user_session_path
-    find("img[@alt='Facebook']").click
+    first(".facebook").click
+    expect(page).to have_content "Successfully authenticated from Facebook account."
+  end
+  
+  scenario "omniauth-facebook" do
+    logout(:user)
+    visit new_user_registration_path
+    first(".facebook").click
     expect(page).to have_content "Successfully authenticated from Facebook account."
   end
 end
