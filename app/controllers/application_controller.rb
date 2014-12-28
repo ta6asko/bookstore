@@ -18,7 +18,11 @@ def store_location
 end
 
 def after_sign_in_path_for(user)
-  session[:previous_url] || root_path
+  if session[:previous_url] == new_admin_session_path
+    rails_admin_path
+  else 
+    session[:previous_url] 
+  end
 end
 
 def configure_permitted_parameters
